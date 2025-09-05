@@ -1,0 +1,301 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PodDB Pro Design System - IMDb Inspired Theme
+All colors MUST be HSL for consistency and theming support.
+*/
+
+@layer base {
+  :root {
+    /* IMDb-inspired color palette - DARK THEME */
+    --background: 210 11% 6%; /* Deep black background */
+    --foreground: 0 0% 98%; /* Clean white text */
+    
+    /* Card backgrounds and surfaces */
+    --card: 210 11% 8%; /* Slightly lighter than background */
+    --card-foreground: 0 0% 98%;
+    
+    /* Podcast database brand colors */
+    --primary: 45 100% 51%; /* IMDb yellow */
+    --primary-foreground: 210 11% 6%;
+    --primary-hover: 45 100% 45%;
+    
+    /* Secondary brand elements */
+    --secondary: 210 11% 15%; /* Dark gray for secondary elements */
+    --secondary-foreground: 0 0% 90%;
+    
+    /* Accent colors for highlights and interactions */
+    --accent: 45 100% 51%; /* Consistent with primary */
+    --accent-foreground: 210 11% 6%;
+    --accent-hover: 45 100% 58%;
+    
+    /* Muted elements and subtle backgrounds */
+    --muted: 210 11% 12%;
+    --muted-foreground: 0 0% 65%;
+    
+    /* Interactive elements */
+    --border: 210 11% 20%;
+    --input: 210 11% 15%;
+    --ring: 45 100% 51%;
+    
+    /* Destructive actions */
+    --destructive: 0 65% 51%;
+    --destructive-foreground: 0 0% 98%;
+    
+    /* Popover elements */
+    --popover: 210 11% 8%;
+    --popover-foreground: 0 0% 98%;
+    
+    /* Success and status colors */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 98%;
+    
+    /* Professional gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(45 100% 51%), hsl(45 100% 65%));
+    --gradient-dark: linear-gradient(135deg, hsl(210 11% 6%), hsl(210 11% 10%));
+    --gradient-card: linear-gradient(135deg, hsl(210 11% 8%), hsl(210 11% 12%));
+    
+    /* Professional shadows */
+    --shadow-card: 0 4px 6px -1px hsl(210 11% 0% / 0.1), 0 2px 4px -1px hsl(210 11% 0% / 0.06);
+    --shadow-elevated: 0 10px 15px -3px hsl(210 11% 0% / 0.1), 0 4px 6px -2px hsl(210 11% 0% / 0.05);
+    --shadow-hero: 0 25px 50px -12px hsl(210 11% 0% / 0.25);
+    --shadow-glow: 0 0 40px hsl(45 100% 51% / 0.15);
+    
+    /* Animation and transition variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    --radius: 0.75rem;
+  }
+  
+  html.light {
+    /* LIGHT THEME variables */
+    --background: 0 0% 98%; 
+    --foreground: 210 11% 6%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 210 11% 6%;
+    
+    --primary: 45 100% 51%;
+    --primary-foreground: 210 11% 6%;
+    --primary-hover: 45 100% 45%;
+    
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 210 11% 15%;
+    
+    --accent: 0 0% 96%;
+    --accent-foreground: 210 11% 9%;
+    --accent-hover: 0 0% 93%;
+    
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
+    
+    --border: 0 0% 89%;
+    --input: 0 0% 92%;
+    --ring: 45 100% 51%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 11% 6%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Professional typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+@layer components {
+  /* Hero elements with special styling */
+  .hero-gradient {
+    background: var(--gradient-primary);
+  }
+
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 4px hsl(210 11% 0% / 0.3);
+  }
+
+  /* Professional button variants */
+  .btn-hero {
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent hover:bg-secondary text-foreground border border-border transition-all duration-300;
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Animated underlines for links */
+  .link-underline {
+    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+  }
+
+  /* Glowing effects for special elements */
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Professional form inputs */
+  .input-professional {
+    @apply bg-input border-border text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300;
+  }
+
+  /* 
+   * CONSISTENT LINK STYLING SYSTEM
+   * Use these classes for all social media, platform, and navigation links
+   * to maintain visual consistency across your entire app.
+   */
+  .link-consistent {
+    @apply flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors duration-200 p-1.5 rounded-md hover:bg-muted/50;
+  }
+
+  .link-consistent-text {
+    @apply text-xs font-medium capitalize;
+  }
+
+  /* Variations for different use cases */
+  .link-consistent-sm {
+    @apply flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors duration-200 p-1 rounded-md hover:bg-muted/50;
+  }
+
+  .link-consistent-lg {
+    @apply flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-200 p-2 rounded-md hover:bg-muted/50;
+  }
+
+  .link-consistent-outline {
+    @apply flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors duration-200 p-1.5 rounded-md border border-border hover:bg-muted/50;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px hsl(45 100% 51% / 0.2);
+  }
+  to {
+    box-shadow: 0 0 40px hsl(45 100% 51% / 0.4);
+  }
+}
+
+/* Responsive design helpers */
+@media (max-width: 768px) {
+  .hero-text {
+    @apply text-center;
+  }
+  
+  .card-grid {
+    @apply grid-cols-1;
+  }
+}
+
+@media (min-width: 769px) {
+  .card-grid {
+    @apply grid-cols-2 lg:grid-cols-3;
+  }
+}

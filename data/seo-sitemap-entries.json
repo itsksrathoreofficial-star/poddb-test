@@ -1,0 +1,1082 @@
+[
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.9
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.9
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.9
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.9
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.9
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.9
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=History",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=History",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=History",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=History",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=History",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=History",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Education",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Education",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Education",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Education",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Education",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Education",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Knowledge",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Knowledge",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Knowledge",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Knowledge",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Knowledge",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Knowledge",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Cultural",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Cultural",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Cultural",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Cultural",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Cultural",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Cultural",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Regional",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Regional",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Regional",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Regional",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Regional",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Regional",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&language=en",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&language=en",
+    "lastmod": "2025-09-03T16:59:50.478Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.8
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=History&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=History&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=History&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=History&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=History&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=History&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=History&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=History&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=History&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=History&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=History&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=History&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=History&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=History&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=History&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=History&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=History&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=History&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=History&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=History&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=History&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=History&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=History&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=History&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Education&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Education&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Education&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Education&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Education&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Education&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Education&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Education&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Education&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Education&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Education&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Education&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Education&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Education&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Education&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Education&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Education&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Education&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Education&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Education&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Education&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Education&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Education&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Education&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Knowledge&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Knowledge&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Knowledge&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Knowledge&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Knowledge&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Knowledge&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Knowledge&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Knowledge&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Knowledge&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Knowledge&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Knowledge&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Knowledge&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Knowledge&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Knowledge&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Knowledge&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Knowledge&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Knowledge&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Knowledge&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Knowledge&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Knowledge&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Knowledge&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Knowledge&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Knowledge&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Knowledge&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Cultural&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Cultural&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Cultural&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Cultural&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Cultural&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Cultural&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Cultural&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Cultural&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Cultural&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Cultural&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Cultural&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Cultural&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Cultural&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Cultural&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Cultural&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Cultural&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Cultural&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Cultural&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Cultural&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Cultural&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Cultural&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Cultural&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Cultural&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Cultural&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Regional&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Regional&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Regional&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Regional&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Regional&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Regional&language=en",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Regional&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Regional&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Regional&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Regional&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Regional&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Regional&language=Hindi",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Regional&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Regional&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Regional&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Regional&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Regional&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Regional&language=Hindi%20h",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=weekly&category=Regional&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=monthly&category=Regional&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=podcasts&period=overall&category=Regional&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=weekly&category=Regional&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=monthly&category=Regional&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  },
+  {
+    "url": "http://localhost:3000/rankings?type=episodes&period=overall&category=Regional&language=Rajasthani",
+    "lastmod": "2025-09-03T16:59:50.479Z",
+    "changefreq": "daily",
+    "priority": 0.7
+  }
+]

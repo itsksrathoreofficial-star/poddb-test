@@ -1,0 +1,104 @@
+import { Metadata } from 'next';
+import { generateHomeSEOData, HomeSEOConfig } from '@/lib/home-seo-generator';
+import HomePageClient from './HomePageClient';
+import { createClient } from '@/integrations/supabase/server';
+
+interface HomePageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+// Enable static generation with ISR
+export const dynamic = 'force-static';
+export const revalidate = 3600; // Revalidate every hour
+
+// Pre-generate static params for common search params
+export async function generateStaticParams() {
+  const commonParams = [
+    { type: 'platform' },
+    { type: 'database' },
+    { type: 'directory' },
+    { type: 'discovery' },
+    { type: 'analytics' },
+  ];
+  
+  return commonParams;
+}
+
+export async function generateMetadata({ searchParams }: HomePageProps): Promise<Metadata> {
+  const searchParamsResolved = await searchParams;
+  const config: HomeSEOConfig = {
+    type: (searchParamsResolved.type as 'platform' | 'database' | 'directory' | 'discovery' | 'analytics') || 'platform',
+    category: searchParamsResolved.category as string,
+    language: searchParamsResolved.language as string,
+    location: searchParamsResolved.location as string,
+    feature: searchParamsResolved.feature as string,
+  };
+
+  try {
+    const seoData = await generateHomeSEOData(config);
+    
+    return {
+      title: seoData.title,
+      description: seoData.description,
+      keywords: seoData.keywords.join(', '),
+      openGraph: {
+        title: seoData.title,
+        description: seoData.description,
+        url: seoData.canonicalUrl,
+        siteName: 'PodDB Pro',
+        type: 'website',
+        images: [
+          {
+            url: '/og-home.jpg',
+            width: 1200,
+            height: 630,
+            alt: seoData.title,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: seoData.title,
+        description: seoData.description,
+        images: ['/og-home.jpg'],
+      },
+      alternates: {
+        canonical: seoData.canonicalUrl,
+      },
+    };
+  } catch (error) {
+    console.error('Error generating home SEO metadata:', error);
+    
+    return {
+      title: 'PodDB Pro - Biggest Podcast Database',
+      description: 'Discover the world\'s largest podcast database with thousands of podcasts.',
+    };
+  }
+}
+
+// Pre-fetch homepage data at build time
+async function getHomepageData() {
+  try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+    const { data, error } = await supabase.rpc('get_homepage_data' as any);
+    if (error) {
+      console.warn('Warning: Could not fetch homepage data during build:', error.message);
+      return null;
+    }
+    return data;
+  } catch (error: any) {
+    console.warn('Warning: Supabase client not available during build:', error.message);
+    return null;
+  }
+}
+
+export default async function Home({ searchParams }: HomePageProps) {
+  // Pre-fetch data at build time for better performance
+  const homepageData = await getHomepageData();
+  const searchParamsResolved = await searchParams;
+  
+  return <HomePageClient searchParams={searchParamsResolved} initialData={homepageData} />;
+}

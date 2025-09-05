@@ -1,0 +1,1736 @@
+[
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "url": "/rankings?type=podcasts&period=weekly",
+    "priority": 0.9,
+    "title": "Elite Content - Current Week Rankings",
+    "description": "Discover the top performing podcasts. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "url": "/rankings?type=podcasts&period=monthly",
+    "priority": 0.9,
+    "title": "Best Programs - Latest Rankings",
+    "description": "Discover the top performing podcasts. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "url": "/rankings?type=podcasts&period=overall",
+    "priority": 0.9,
+    "title": "Outstanding Programs - All-Time Rankings",
+    "description": "Discover the most popular podcasts. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "url": "/rankings?type=episodes&period=weekly",
+    "priority": 0.9,
+    "title": "Elite Episodes - Current Week Rankings",
+    "description": "Discover the top performing episodes. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "url": "/rankings?type=episodes&period=monthly",
+    "priority": 0.9,
+    "title": "Top Episodes - Current Month Rankings",
+    "description": "Discover the top performing episodes. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "url": "/rankings?type=episodes&period=overall",
+    "priority": 0.9,
+    "title": "Best Episodes - Historical Rankings",
+    "description": "Discover the most popular episodes. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "History",
+    "url": "/rankings?type=podcasts&period=weekly&category=History",
+    "priority": 0.8,
+    "title": "Best Programs in History - Latest Rankings",
+    "description": "Discover the top performing podcasts in the History category. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "History",
+    "url": "/rankings?type=podcasts&period=monthly&category=History",
+    "priority": 0.8,
+    "title": "Outstanding Programs in History - Latest Rankings",
+    "description": "Discover the top performing podcasts in the History category. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "History",
+    "url": "/rankings?type=podcasts&period=overall&category=History",
+    "priority": 0.8,
+    "title": "Elite Podcasts in History - Ever Rankings",
+    "description": "Discover the most popular podcasts in the History category. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "History",
+    "url": "/rankings?type=episodes&period=weekly&category=History",
+    "priority": 0.8,
+    "title": "Elite Episodes in History - Latest Rankings",
+    "description": "Discover the top performing episodes in the History category. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "History",
+    "url": "/rankings?type=episodes&period=monthly&category=History",
+    "priority": 0.8,
+    "title": "Leading Episodes in History - Monthly Rankings",
+    "description": "Discover the top performing episodes in the History category. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "History",
+    "url": "/rankings?type=episodes&period=overall&category=History",
+    "priority": 0.8,
+    "title": "Top Episodes in History - Historical Rankings",
+    "description": "Discover the most popular episodes in the History category. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Education",
+    "url": "/rankings?type=podcasts&period=weekly&category=Education",
+    "priority": 0.8,
+    "title": "Top Podcasts in Education - Weekly Rankings",
+    "description": "Discover the top performing podcasts in the Education category. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Education",
+    "url": "/rankings?type=podcasts&period=monthly&category=Education",
+    "priority": 0.8,
+    "title": "Best Content in Education - Monthly Rankings",
+    "description": "Discover the top performing podcasts in the Education category. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Education",
+    "url": "/rankings?type=podcasts&period=overall&category=Education",
+    "priority": 0.8,
+    "title": "Premier Content in Education - All Time Rankings",
+    "description": "Discover the most popular podcasts in the Education category. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Education",
+    "url": "/rankings?type=episodes&period=weekly&category=Education",
+    "priority": 0.8,
+    "title": "Premier Episodes in Education - Latest Rankings",
+    "description": "Discover the top performing episodes in the Education category. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Education",
+    "url": "/rankings?type=episodes&period=monthly&category=Education",
+    "priority": 0.8,
+    "title": "Elite Episodes in Education - Monthly Rankings",
+    "description": "Discover the top performing episodes in the Education category. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Education",
+    "url": "/rankings?type=episodes&period=overall&category=Education",
+    "priority": 0.8,
+    "title": "Outstanding Episodes in Education - Historical Rankings",
+    "description": "Discover the most popular episodes in the Education category. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Knowledge",
+    "url": "/rankings?type=podcasts&period=weekly&category=Knowledge",
+    "priority": 0.8,
+    "title": "Top Programs in Knowledge - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the Knowledge category. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Knowledge",
+    "url": "/rankings?type=podcasts&period=monthly&category=Knowledge",
+    "priority": 0.8,
+    "title": "Top Content in Knowledge - Monthly Rankings",
+    "description": "Discover the top performing podcasts in the Knowledge category. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Knowledge",
+    "url": "/rankings?type=podcasts&period=overall&category=Knowledge",
+    "priority": 0.8,
+    "title": "Leading Programs in Knowledge - Overall Rankings",
+    "description": "Discover the most popular podcasts in the Knowledge category. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Knowledge",
+    "url": "/rankings?type=episodes&period=weekly&category=Knowledge",
+    "priority": 0.8,
+    "title": "Leading Episodes in Knowledge - Weekly Rankings",
+    "description": "Discover the top performing episodes in the Knowledge category. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Knowledge",
+    "url": "/rankings?type=episodes&period=monthly&category=Knowledge",
+    "priority": 0.8,
+    "title": "Premier Episodes in Knowledge - This Month Rankings",
+    "description": "Discover the top performing episodes in the Knowledge category. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Knowledge",
+    "url": "/rankings?type=episodes&period=overall&category=Knowledge",
+    "priority": 0.8,
+    "title": "Elite Episodes in Knowledge - Overall Rankings",
+    "description": "Discover the most popular episodes in the Knowledge category. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Cultural",
+    "url": "/rankings?type=podcasts&period=weekly&category=Cultural",
+    "priority": 0.8,
+    "title": "Best Programs in Cultural - This Week Rankings",
+    "description": "Discover the top performing podcasts in the Cultural category. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Cultural",
+    "url": "/rankings?type=podcasts&period=monthly&category=Cultural",
+    "priority": 0.8,
+    "title": "Top Podcasts in Cultural - Current Month Rankings",
+    "description": "Discover the top performing podcasts in the Cultural category. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Cultural",
+    "url": "/rankings?type=podcasts&period=overall&category=Cultural",
+    "priority": 0.8,
+    "title": "Best Shows in Cultural - Ever Rankings",
+    "description": "Discover the most popular podcasts in the Cultural category. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Cultural",
+    "url": "/rankings?type=episodes&period=weekly&category=Cultural",
+    "priority": 0.8,
+    "title": "Leading Episodes in Cultural - Latest Rankings",
+    "description": "Discover the top performing episodes in the Cultural category. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Cultural",
+    "url": "/rankings?type=episodes&period=monthly&category=Cultural",
+    "priority": 0.8,
+    "title": "Top Episodes in Cultural - This Month Rankings",
+    "description": "Discover the top performing episodes in the Cultural category. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Cultural",
+    "url": "/rankings?type=episodes&period=overall&category=Cultural",
+    "priority": 0.8,
+    "title": "Outstanding Episodes in Cultural - Overall Rankings",
+    "description": "Discover the most popular episodes in the Cultural category. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Regional",
+    "url": "/rankings?type=podcasts&period=weekly&category=Regional",
+    "priority": 0.8,
+    "title": "Premier Podcasts in Regional - Latest Rankings",
+    "description": "Discover the top performing podcasts in the Regional category. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Regional",
+    "url": "/rankings?type=podcasts&period=monthly&category=Regional",
+    "priority": 0.8,
+    "title": "Top Series in Regional - Current Month Rankings",
+    "description": "Discover the top performing podcasts in the Regional category. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Regional",
+    "url": "/rankings?type=podcasts&period=overall&category=Regional",
+    "priority": 0.8,
+    "title": "Leading Series in Regional - Ever Rankings",
+    "description": "Discover the most popular podcasts in the Regional category. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Regional",
+    "url": "/rankings?type=episodes&period=weekly&category=Regional",
+    "priority": 0.8,
+    "title": "Premier Episodes in Regional - Weekly Rankings",
+    "description": "Discover the top performing episodes in the Regional category. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Regional",
+    "url": "/rankings?type=episodes&period=monthly&category=Regional",
+    "priority": 0.8,
+    "title": "Best Episodes in Regional - Monthly Rankings",
+    "description": "Discover the top performing episodes in the Regional category. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Regional",
+    "url": "/rankings?type=episodes&period=overall&category=Regional",
+    "priority": 0.8,
+    "title": "Premier Episodes in Regional - Overall Rankings",
+    "description": "Discover the most popular episodes in the Regional category. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=weekly&language=en",
+    "priority": 0.8,
+    "title": "Elite Content in en - Current Week Rankings",
+    "description": "Discover the top performing podcasts available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=monthly&language=en",
+    "priority": 0.8,
+    "title": "Outstanding Podcasts in en - Monthly Rankings",
+    "description": "Discover the top performing podcasts available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=overall&language=en",
+    "priority": 0.8,
+    "title": "Elite Content in en - Ever Rankings",
+    "description": "Discover the most popular podcasts available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=weekly&language=en",
+    "priority": 0.8,
+    "title": "Leading Episodes in en - This Week Rankings",
+    "description": "Discover the top performing episodes available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=monthly&language=en",
+    "priority": 0.8,
+    "title": "Top Episodes in en - This Month Rankings",
+    "description": "Discover the top performing episodes available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=overall&language=en",
+    "priority": 0.8,
+    "title": "Top Episodes in en - Ever Rankings",
+    "description": "Discover the most popular episodes available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=weekly&language=Hindi",
+    "priority": 0.8,
+    "title": "Outstanding Podcasts in Hindi - Latest Rankings",
+    "description": "Discover the top performing podcasts available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=monthly&language=Hindi",
+    "priority": 0.8,
+    "title": "Premier Content in Hindi - Latest Rankings",
+    "description": "Discover the top performing podcasts available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=overall&language=Hindi",
+    "priority": 0.8,
+    "title": "Leading Shows in Hindi - All-Time Rankings",
+    "description": "Discover the most popular podcasts available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=weekly&language=Hindi",
+    "priority": 0.8,
+    "title": "Elite Episodes in Hindi - Weekly Rankings",
+    "description": "Discover the top performing episodes available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=monthly&language=Hindi",
+    "priority": 0.8,
+    "title": "Premier Episodes in Hindi - Monthly Rankings",
+    "description": "Discover the top performing episodes available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=overall&language=Hindi",
+    "priority": 0.8,
+    "title": "Elite Episodes in Hindi - All Time Rankings",
+    "description": "Discover the most popular episodes available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=weekly&language=Hindi%20h",
+    "priority": 0.8,
+    "title": "Outstanding Shows in Hindi h - Weekly Rankings",
+    "description": "Discover the top performing podcasts available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=monthly&language=Hindi%20h",
+    "priority": 0.8,
+    "title": "Top Shows in Hindi h - This Month Rankings",
+    "description": "Discover the top performing podcasts available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=overall&language=Hindi%20h",
+    "priority": 0.8,
+    "title": "Outstanding Series in Hindi h - Overall Rankings",
+    "description": "Discover the most popular podcasts available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=weekly&language=Hindi%20h",
+    "priority": 0.8,
+    "title": "Outstanding Episodes in Hindi h - Weekly Rankings",
+    "description": "Discover the top performing episodes available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=monthly&language=Hindi%20h",
+    "priority": 0.8,
+    "title": "Top Episodes in Hindi h - This Month Rankings",
+    "description": "Discover the top performing episodes available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=overall&language=Hindi%20h",
+    "priority": 0.8,
+    "title": "Elite Episodes in Hindi h - Overall Rankings",
+    "description": "Discover the most popular episodes available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=weekly&language=Rajasthani",
+    "priority": 0.8,
+    "title": "Best Content in Rajasthani - Current Week Rankings",
+    "description": "Discover the top performing podcasts available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=monthly&language=Rajasthani",
+    "priority": 0.8,
+    "title": "Best Podcasts in Rajasthani - Current Month Rankings",
+    "description": "Discover the top performing podcasts available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=overall&language=Rajasthani",
+    "priority": 0.8,
+    "title": "Best Series in Rajasthani - Ever Rankings",
+    "description": "Discover the most popular podcasts available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=weekly&language=Rajasthani",
+    "priority": 0.8,
+    "title": "Elite Episodes in Rajasthani - Latest Rankings",
+    "description": "Discover the top performing episodes available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=monthly&language=Rajasthani",
+    "priority": 0.8,
+    "title": "Elite Episodes in Rajasthani - This Month Rankings",
+    "description": "Discover the top performing episodes available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=overall&language=Rajasthani",
+    "priority": 0.8,
+    "title": "Premier Episodes in Rajasthani - Overall Rankings",
+    "description": "Discover the most popular episodes available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "History",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=weekly&category=History&language=en",
+    "priority": 0.7,
+    "title": "Leading Shows in History in en - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the History category available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "History",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=monthly&category=History&language=en",
+    "priority": 0.7,
+    "title": "Premier Content in History in en - This Month Rankings",
+    "description": "Discover the top performing podcasts in the History category available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "History",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=overall&category=History&language=en",
+    "priority": 0.7,
+    "title": "Outstanding Content in History in en - All-Time Rankings",
+    "description": "Discover the most popular podcasts in the History category available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "History",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=weekly&category=History&language=en",
+    "priority": 0.7,
+    "title": "Leading Episodes in History in en - Latest Rankings",
+    "description": "Discover the top performing episodes in the History category available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "History",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=monthly&category=History&language=en",
+    "priority": 0.7,
+    "title": "Elite Episodes in History in en - Monthly Rankings",
+    "description": "Discover the top performing episodes in the History category available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "History",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=overall&category=History&language=en",
+    "priority": 0.7,
+    "title": "Premier Episodes in History in en - Ever Rankings",
+    "description": "Discover the most popular episodes in the History category available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "History",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=weekly&category=History&language=Hindi",
+    "priority": 0.7,
+    "title": "Premier Podcasts in History in Hindi - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the History category available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "History",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=monthly&category=History&language=Hindi",
+    "priority": 0.7,
+    "title": "Leading Shows in History in Hindi - Latest Rankings",
+    "description": "Discover the top performing podcasts in the History category available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "History",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=overall&category=History&language=Hindi",
+    "priority": 0.7,
+    "title": "Outstanding Podcasts in History in Hindi - Overall Rankings",
+    "description": "Discover the most popular podcasts in the History category available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "History",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=weekly&category=History&language=Hindi",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in History in Hindi - Weekly Rankings",
+    "description": "Discover the top performing episodes in the History category available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "History",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=monthly&category=History&language=Hindi",
+    "priority": 0.7,
+    "title": "Leading Episodes in History in Hindi - Monthly Rankings",
+    "description": "Discover the top performing episodes in the History category available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "History",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=overall&category=History&language=Hindi",
+    "priority": 0.7,
+    "title": "Premier Episodes in History in Hindi - Overall Rankings",
+    "description": "Discover the most popular episodes in the History category available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "History",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=weekly&category=History&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Outstanding Shows in History in Hindi h - Weekly Rankings",
+    "description": "Discover the top performing podcasts in the History category available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "History",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=monthly&category=History&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Premier Programs in History in Hindi h - Monthly Rankings",
+    "description": "Discover the top performing podcasts in the History category available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "History",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=overall&category=History&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Outstanding Programs in History in Hindi h - All Time Rankings",
+    "description": "Discover the most popular podcasts in the History category available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "History",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=weekly&category=History&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Elite Episodes in History in Hindi h - Latest Rankings",
+    "description": "Discover the top performing episodes in the History category available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "History",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=monthly&category=History&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in History in Hindi h - Current Month Rankings",
+    "description": "Discover the top performing episodes in the History category available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "History",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=overall&category=History&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Best Episodes in History in Hindi h - Overall Rankings",
+    "description": "Discover the most popular episodes in the History category available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "History",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=weekly&category=History&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Outstanding Content in History in Rajasthani - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the History category available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "History",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=monthly&category=History&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Elite Series in History in Rajasthani - Current Month Rankings",
+    "description": "Discover the top performing podcasts in the History category available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "History",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=overall&category=History&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Outstanding Programs in History in Rajasthani - All-Time Rankings",
+    "description": "Discover the most popular podcasts in the History category available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "History",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=weekly&category=History&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Top Episodes in History in Rajasthani - Current Week Rankings",
+    "description": "Discover the top performing episodes in the History category available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "History",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=monthly&category=History&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Best Episodes in History in Rajasthani - Latest Rankings",
+    "description": "Discover the top performing episodes in the History category available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "History",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=overall&category=History&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Premier Episodes in History in Rajasthani - All-Time Rankings",
+    "description": "Discover the most popular episodes in the History category available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Education",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=weekly&category=Education&language=en",
+    "priority": 0.7,
+    "title": "Top Podcasts in Education in en - Weekly Rankings",
+    "description": "Discover the top performing podcasts in the Education category available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Education",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=monthly&category=Education&language=en",
+    "priority": 0.7,
+    "title": "Best Content in Education in en - This Month Rankings",
+    "description": "Discover the top performing podcasts in the Education category available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Education",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=overall&category=Education&language=en",
+    "priority": 0.7,
+    "title": "Best Shows in Education in en - Ever Rankings",
+    "description": "Discover the most popular podcasts in the Education category available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Education",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=weekly&category=Education&language=en",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Education in en - Latest Rankings",
+    "description": "Discover the top performing episodes in the Education category available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Education",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=monthly&category=Education&language=en",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Education in en - This Month Rankings",
+    "description": "Discover the top performing episodes in the Education category available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Education",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=overall&category=Education&language=en",
+    "priority": 0.7,
+    "title": "Best Episodes in Education in en - Ever Rankings",
+    "description": "Discover the most popular episodes in the Education category available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Education",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=weekly&category=Education&language=Hindi",
+    "priority": 0.7,
+    "title": "Premier Shows in Education in Hindi - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the Education category available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Education",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=monthly&category=Education&language=Hindi",
+    "priority": 0.7,
+    "title": "Best Series in Education in Hindi - Current Month Rankings",
+    "description": "Discover the top performing podcasts in the Education category available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Education",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=overall&category=Education&language=Hindi",
+    "priority": 0.7,
+    "title": "Elite Series in Education in Hindi - All-Time Rankings",
+    "description": "Discover the most popular podcasts in the Education category available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Education",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=weekly&category=Education&language=Hindi",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Education in Hindi - Current Week Rankings",
+    "description": "Discover the top performing episodes in the Education category available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Education",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=monthly&category=Education&language=Hindi",
+    "priority": 0.7,
+    "title": "Premier Episodes in Education in Hindi - Latest Rankings",
+    "description": "Discover the top performing episodes in the Education category available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Education",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=overall&category=Education&language=Hindi",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Education in Hindi - Historical Rankings",
+    "description": "Discover the most popular episodes in the Education category available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Education",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=weekly&category=Education&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Outstanding Podcasts in Education in Hindi h - Latest Rankings",
+    "description": "Discover the top performing podcasts in the Education category available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Education",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=monthly&category=Education&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Leading Series in Education in Hindi h - Latest Rankings",
+    "description": "Discover the top performing podcasts in the Education category available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Education",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=overall&category=Education&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Outstanding Programs in Education in Hindi h - All-Time Rankings",
+    "description": "Discover the most popular podcasts in the Education category available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Education",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=weekly&category=Education&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Top Episodes in Education in Hindi h - Weekly Rankings",
+    "description": "Discover the top performing episodes in the Education category available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Education",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=monthly&category=Education&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Education in Hindi h - Current Month Rankings",
+    "description": "Discover the top performing episodes in the Education category available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Education",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=overall&category=Education&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Top Episodes in Education in Hindi h - Historical Rankings",
+    "description": "Discover the most popular episodes in the Education category available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Education",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=weekly&category=Education&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Outstanding Programs in Education in Rajasthani - Weekly Rankings",
+    "description": "Discover the top performing podcasts in the Education category available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Education",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=monthly&category=Education&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Top Programs in Education in Rajasthani - This Month Rankings",
+    "description": "Discover the top performing podcasts in the Education category available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Education",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=overall&category=Education&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Leading Programs in Education in Rajasthani - Ever Rankings",
+    "description": "Discover the most popular podcasts in the Education category available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Education",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=weekly&category=Education&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Education in Rajasthani - Weekly Rankings",
+    "description": "Discover the top performing episodes in the Education category available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Education",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=monthly&category=Education&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Premier Episodes in Education in Rajasthani - Current Month Rankings",
+    "description": "Discover the top performing episodes in the Education category available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Education",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=overall&category=Education&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Premier Episodes in Education in Rajasthani - Overall Rankings",
+    "description": "Discover the most popular episodes in the Education category available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Knowledge",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=weekly&category=Knowledge&language=en",
+    "priority": 0.7,
+    "title": "Outstanding Content in Knowledge in en - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the Knowledge category available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Knowledge",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=monthly&category=Knowledge&language=en",
+    "priority": 0.7,
+    "title": "Premier Content in Knowledge in en - Monthly Rankings",
+    "description": "Discover the top performing podcasts in the Knowledge category available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Knowledge",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=overall&category=Knowledge&language=en",
+    "priority": 0.7,
+    "title": "Outstanding Podcasts in Knowledge in en - Ever Rankings",
+    "description": "Discover the most popular podcasts in the Knowledge category available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Knowledge",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=weekly&category=Knowledge&language=en",
+    "priority": 0.7,
+    "title": "Leading Episodes in Knowledge in en - Weekly Rankings",
+    "description": "Discover the top performing episodes in the Knowledge category available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Knowledge",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=monthly&category=Knowledge&language=en",
+    "priority": 0.7,
+    "title": "Leading Episodes in Knowledge in en - Current Month Rankings",
+    "description": "Discover the top performing episodes in the Knowledge category available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Knowledge",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=overall&category=Knowledge&language=en",
+    "priority": 0.7,
+    "title": "Best Episodes in Knowledge in en - Historical Rankings",
+    "description": "Discover the most popular episodes in the Knowledge category available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Knowledge",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=weekly&category=Knowledge&language=Hindi",
+    "priority": 0.7,
+    "title": "Top Programs in Knowledge in Hindi - This Week Rankings",
+    "description": "Discover the top performing podcasts in the Knowledge category available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Knowledge",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=monthly&category=Knowledge&language=Hindi",
+    "priority": 0.7,
+    "title": "Elite Programs in Knowledge in Hindi - Current Month Rankings",
+    "description": "Discover the top performing podcasts in the Knowledge category available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Knowledge",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=overall&category=Knowledge&language=Hindi",
+    "priority": 0.7,
+    "title": "Elite Shows in Knowledge in Hindi - All-Time Rankings",
+    "description": "Discover the most popular podcasts in the Knowledge category available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Knowledge",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=weekly&category=Knowledge&language=Hindi",
+    "priority": 0.7,
+    "title": "Best Episodes in Knowledge in Hindi - This Week Rankings",
+    "description": "Discover the top performing episodes in the Knowledge category available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Knowledge",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=monthly&category=Knowledge&language=Hindi",
+    "priority": 0.7,
+    "title": "Premier Episodes in Knowledge in Hindi - Latest Rankings",
+    "description": "Discover the top performing episodes in the Knowledge category available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Knowledge",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=overall&category=Knowledge&language=Hindi",
+    "priority": 0.7,
+    "title": "Top Episodes in Knowledge in Hindi - All Time Rankings",
+    "description": "Discover the most popular episodes in the Knowledge category available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Knowledge",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=weekly&category=Knowledge&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Top Content in Knowledge in Hindi h - This Week Rankings",
+    "description": "Discover the top performing podcasts in the Knowledge category available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Knowledge",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=monthly&category=Knowledge&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Top Podcasts in Knowledge in Hindi h - Current Month Rankings",
+    "description": "Discover the top performing podcasts in the Knowledge category available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Knowledge",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=overall&category=Knowledge&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Premier Series in Knowledge in Hindi h - All Time Rankings",
+    "description": "Discover the most popular podcasts in the Knowledge category available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Knowledge",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=weekly&category=Knowledge&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Elite Episodes in Knowledge in Hindi h - This Week Rankings",
+    "description": "Discover the top performing episodes in the Knowledge category available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Knowledge",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=monthly&category=Knowledge&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Leading Episodes in Knowledge in Hindi h - Current Month Rankings",
+    "description": "Discover the top performing episodes in the Knowledge category available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Knowledge",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=overall&category=Knowledge&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Premier Episodes in Knowledge in Hindi h - All Time Rankings",
+    "description": "Discover the most popular episodes in the Knowledge category available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Knowledge",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=weekly&category=Knowledge&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Outstanding Content in Knowledge in Rajasthani - This Week Rankings",
+    "description": "Discover the top performing podcasts in the Knowledge category available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Knowledge",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=monthly&category=Knowledge&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Best Series in Knowledge in Rajasthani - Monthly Rankings",
+    "description": "Discover the top performing podcasts in the Knowledge category available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Knowledge",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=overall&category=Knowledge&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Leading Programs in Knowledge in Rajasthani - Overall Rankings",
+    "description": "Discover the most popular podcasts in the Knowledge category available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Knowledge",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=weekly&category=Knowledge&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Best Episodes in Knowledge in Rajasthani - Latest Rankings",
+    "description": "Discover the top performing episodes in the Knowledge category available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Knowledge",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=monthly&category=Knowledge&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Leading Episodes in Knowledge in Rajasthani - Monthly Rankings",
+    "description": "Discover the top performing episodes in the Knowledge category available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Knowledge",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=overall&category=Knowledge&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Top Episodes in Knowledge in Rajasthani - All Time Rankings",
+    "description": "Discover the most popular episodes in the Knowledge category available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Cultural",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=weekly&category=Cultural&language=en",
+    "priority": 0.7,
+    "title": "Top Programs in Cultural in en - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the Cultural category available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Cultural",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=monthly&category=Cultural&language=en",
+    "priority": 0.7,
+    "title": "Top Series in Cultural in en - Current Month Rankings",
+    "description": "Discover the top performing podcasts in the Cultural category available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Cultural",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=overall&category=Cultural&language=en",
+    "priority": 0.7,
+    "title": "Premier Series in Cultural in en - Ever Rankings",
+    "description": "Discover the most popular podcasts in the Cultural category available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Cultural",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=weekly&category=Cultural&language=en",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Cultural in en - Weekly Rankings",
+    "description": "Discover the top performing episodes in the Cultural category available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Cultural",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=monthly&category=Cultural&language=en",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Cultural in en - Latest Rankings",
+    "description": "Discover the top performing episodes in the Cultural category available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Cultural",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=overall&category=Cultural&language=en",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Cultural in en - Ever Rankings",
+    "description": "Discover the most popular episodes in the Cultural category available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Cultural",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=weekly&category=Cultural&language=Hindi",
+    "priority": 0.7,
+    "title": "Outstanding Series in Cultural in Hindi - Latest Rankings",
+    "description": "Discover the top performing podcasts in the Cultural category available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Cultural",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=monthly&category=Cultural&language=Hindi",
+    "priority": 0.7,
+    "title": "Top Shows in Cultural in Hindi - Current Month Rankings",
+    "description": "Discover the top performing podcasts in the Cultural category available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Cultural",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=overall&category=Cultural&language=Hindi",
+    "priority": 0.7,
+    "title": "Leading Podcasts in Cultural in Hindi - Ever Rankings",
+    "description": "Discover the most popular podcasts in the Cultural category available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Cultural",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=weekly&category=Cultural&language=Hindi",
+    "priority": 0.7,
+    "title": "Premier Episodes in Cultural in Hindi - Current Week Rankings",
+    "description": "Discover the top performing episodes in the Cultural category available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Cultural",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=monthly&category=Cultural&language=Hindi",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Cultural in Hindi - Monthly Rankings",
+    "description": "Discover the top performing episodes in the Cultural category available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Cultural",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=overall&category=Cultural&language=Hindi",
+    "priority": 0.7,
+    "title": "Elite Episodes in Cultural in Hindi - All Time Rankings",
+    "description": "Discover the most popular episodes in the Cultural category available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Cultural",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=weekly&category=Cultural&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Outstanding Podcasts in Cultural in Hindi h - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the Cultural category available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Cultural",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=monthly&category=Cultural&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Premier Series in Cultural in Hindi h - Monthly Rankings",
+    "description": "Discover the top performing podcasts in the Cultural category available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Cultural",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=overall&category=Cultural&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Top Content in Cultural in Hindi h - Overall Rankings",
+    "description": "Discover the most popular podcasts in the Cultural category available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Cultural",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=weekly&category=Cultural&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Top Episodes in Cultural in Hindi h - This Week Rankings",
+    "description": "Discover the top performing episodes in the Cultural category available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Cultural",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=monthly&category=Cultural&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Best Episodes in Cultural in Hindi h - Monthly Rankings",
+    "description": "Discover the top performing episodes in the Cultural category available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Cultural",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=overall&category=Cultural&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Cultural in Hindi h - All Time Rankings",
+    "description": "Discover the most popular episodes in the Cultural category available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Cultural",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=weekly&category=Cultural&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Outstanding Content in Cultural in Rajasthani - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the Cultural category available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Cultural",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=monthly&category=Cultural&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Outstanding Podcasts in Cultural in Rajasthani - This Month Rankings",
+    "description": "Discover the top performing podcasts in the Cultural category available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Cultural",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=overall&category=Cultural&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Elite Series in Cultural in Rajasthani - Historical Rankings",
+    "description": "Discover the most popular podcasts in the Cultural category available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Cultural",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=weekly&category=Cultural&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Leading Episodes in Cultural in Rajasthani - This Week Rankings",
+    "description": "Discover the top performing episodes in the Cultural category available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Cultural",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=monthly&category=Cultural&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Top Episodes in Cultural in Rajasthani - Monthly Rankings",
+    "description": "Discover the top performing episodes in the Cultural category available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Cultural",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=overall&category=Cultural&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Best Episodes in Cultural in Rajasthani - Overall Rankings",
+    "description": "Discover the most popular episodes in the Cultural category available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Regional",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=weekly&category=Regional&language=en",
+    "priority": 0.7,
+    "title": "Premier Series in Regional in en - Latest Rankings",
+    "description": "Discover the top performing podcasts in the Regional category available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Regional",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=monthly&category=Regional&language=en",
+    "priority": 0.7,
+    "title": "Best Programs in Regional in en - Current Month Rankings",
+    "description": "Discover the top performing podcasts in the Regional category available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Regional",
+    "language": "en",
+    "url": "/rankings?type=podcasts&period=overall&category=Regional&language=en",
+    "priority": 0.7,
+    "title": "Leading Podcasts in Regional in en - Historical Rankings",
+    "description": "Discover the most popular podcasts in the Regional category available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Regional",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=weekly&category=Regional&language=en",
+    "priority": 0.7,
+    "title": "Premier Episodes in Regional in en - Current Week Rankings",
+    "description": "Discover the top performing episodes in the Regional category available in en. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Regional",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=monthly&category=Regional&language=en",
+    "priority": 0.7,
+    "title": "Leading Episodes in Regional in en - Current Month Rankings",
+    "description": "Discover the top performing episodes in the Regional category available in en. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Regional",
+    "language": "en",
+    "url": "/rankings?type=episodes&period=overall&category=Regional&language=en",
+    "priority": 0.7,
+    "title": "Elite Episodes in Regional in en - Historical Rankings",
+    "description": "Discover the most popular episodes in the Regional category available in en. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Regional",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=weekly&category=Regional&language=Hindi",
+    "priority": 0.7,
+    "title": "Best Programs in Regional in Hindi - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the Regional category available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Regional",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=monthly&category=Regional&language=Hindi",
+    "priority": 0.7,
+    "title": "Best Shows in Regional in Hindi - Current Month Rankings",
+    "description": "Discover the top performing podcasts in the Regional category available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Regional",
+    "language": "Hindi",
+    "url": "/rankings?type=podcasts&period=overall&category=Regional&language=Hindi",
+    "priority": 0.7,
+    "title": "Outstanding Podcasts in Regional in Hindi - Overall Rankings",
+    "description": "Discover the most popular podcasts in the Regional category available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Regional",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=weekly&category=Regional&language=Hindi",
+    "priority": 0.7,
+    "title": "Outstanding Episodes in Regional in Hindi - This Week Rankings",
+    "description": "Discover the top performing episodes in the Regional category available in Hindi. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Regional",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=monthly&category=Regional&language=Hindi",
+    "priority": 0.7,
+    "title": "Leading Episodes in Regional in Hindi - Latest Rankings",
+    "description": "Discover the top performing episodes in the Regional category available in Hindi. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Regional",
+    "language": "Hindi",
+    "url": "/rankings?type=episodes&period=overall&category=Regional&language=Hindi",
+    "priority": 0.7,
+    "title": "Leading Episodes in Regional in Hindi - All-Time Rankings",
+    "description": "Discover the most popular episodes in the Regional category available in Hindi. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Regional",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=weekly&category=Regional&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Outstanding Series in Regional in Hindi h - Weekly Rankings",
+    "description": "Discover the top performing podcasts in the Regional category available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Regional",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=monthly&category=Regional&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Best Series in Regional in Hindi h - Monthly Rankings",
+    "description": "Discover the top performing podcasts in the Regional category available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Regional",
+    "language": "Hindi h",
+    "url": "/rankings?type=podcasts&period=overall&category=Regional&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Best Podcasts in Regional in Hindi h - Historical Rankings",
+    "description": "Discover the most popular podcasts in the Regional category available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Regional",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=weekly&category=Regional&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Leading Episodes in Regional in Hindi h - Latest Rankings",
+    "description": "Discover the top performing episodes in the Regional category available in Hindi h. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Regional",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=monthly&category=Regional&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Leading Episodes in Regional in Hindi h - This Month Rankings",
+    "description": "Discover the top performing episodes in the Regional category available in Hindi h. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Regional",
+    "language": "Hindi h",
+    "url": "/rankings?type=episodes&period=overall&category=Regional&language=Hindi%20h",
+    "priority": 0.7,
+    "title": "Top Episodes in Regional in Hindi h - All-Time Rankings",
+    "description": "Discover the most popular episodes in the Regional category available in Hindi h. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "weekly",
+    "category": "Regional",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=weekly&category=Regional&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Outstanding Content in Regional in Rajasthani - Current Week Rankings",
+    "description": "Discover the top performing podcasts in the Regional category available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "monthly",
+    "category": "Regional",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=monthly&category=Regional&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Best Shows in Regional in Rajasthani - Monthly Rankings",
+    "description": "Discover the top performing podcasts in the Regional category available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "podcasts",
+    "period": "overall",
+    "category": "Regional",
+    "language": "Rajasthani",
+    "url": "/rankings?type=podcasts&period=overall&category=Regional&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Top Shows in Regional in Rajasthani - Overall Rankings",
+    "description": "Discover the most popular podcasts in the Regional category available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite show with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "weekly",
+    "category": "Regional",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=weekly&category=Regional&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Leading Episodes in Regional in Rajasthani - Latest Rankings",
+    "description": "Discover the top performing episodes in the Regional category available in Rajasthani. Our weekly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "monthly",
+    "category": "Regional",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=monthly&category=Regional&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Premier Episodes in Regional in Rajasthani - Latest Rankings",
+    "description": "Discover the top performing episodes in the Regional category available in Rajasthani. Our monthly rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  },
+  {
+    "type": "episodes",
+    "period": "overall",
+    "category": "Regional",
+    "language": "Rajasthani",
+    "url": "/rankings?type=episodes&period=overall&category=Regional&language=Rajasthani",
+    "priority": 0.7,
+    "title": "Premier Episodes in Regional in Rajasthani - Overall Rankings",
+    "description": "Discover the most popular episodes in the Regional category available in Rajasthani. Our overall rankings are based on real YouTube engagement data including views, likes, and comments. Find your next favorite episode with our comprehensive rankings. Updated daily."
+  }
+]
