@@ -82,7 +82,7 @@ export default function ContentManagementTab({ allPodcasts, fetchAllPodcasts }: 
         } else if (activeTab === 'people' && allPeople.length === 0) {
             fetchAllPeople();
         }
-    }, [activeTab]);
+    }, [activeTab, allEpisodes.length, allPeople.length]);
 
     const handleGenerateSingleSeo = (item: any, type: 'podcasts' | 'episodes' | 'people') => {
         setGeneratingSeo(item.id);

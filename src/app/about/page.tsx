@@ -187,7 +187,7 @@ export default async function AboutPage() {
           </h1>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            We're building the future of podcast discovery, management, and analytics. 
+            We&apos;re building the future of podcast discovery, management, and analytics. 
             Join thousands of creators and listeners who trust PodDB Pro.
           </p>
 

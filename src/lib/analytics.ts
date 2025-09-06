@@ -627,12 +627,12 @@ class AnalyticsService {
 
       // Check if supabase is available
       if (typeof supabase !== 'undefined') {
-        await supabase
+        await (supabase as any)
           .from('analytics_sessions')
           .update({
             session_end: sessionEndTime,
             duration_seconds: durationSeconds,
-          } as any)
+          })
           .eq('id', this.sessionId);
 
         // Calculate final session metrics

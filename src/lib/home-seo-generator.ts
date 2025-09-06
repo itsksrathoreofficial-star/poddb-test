@@ -18,7 +18,7 @@ export interface HomeSEOData {
 
 // Home page SEO combinations
 const HOME_SEO_COMBINATIONS = {
-  types: ['platform', 'database', 'directory', 'discovery', 'analytics'],
+  types: ['platform', 'database', 'directory', 'discovery', 'analytics'] as const,
   features: ['imdb', 'house', 'biggest', 'largest', 'best', 'top', 'ultimate', 'premier', 'leading'],
   categories: [
     'business', 'technology', 'education', 'health', 'entertainment', 'news', 'sports', 

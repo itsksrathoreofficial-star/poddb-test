@@ -27,7 +27,7 @@ export function Footer() {
               <Image src={logoSrc} alt="PodDB Pro Logo" width={150} height={50} className="object-contain" sizes="100vw" />
             </Link>
             <p className="text-muted-foreground text-sm max-w-md">
-              PodDB is the world's most comprehensive and authoritative source for podcast information. We are building the IMDb for the podcasting industry, powered by a dedicated community of contributors.
+              PodDB is the world&apos;s most comprehensive and authoritative source for podcast information. We are building the IMDb for the podcasting industry, powered by a dedicated community of contributors.
             </p>
           </div>
 

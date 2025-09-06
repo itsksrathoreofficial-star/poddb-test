@@ -36,10 +36,29 @@ export async function submitPodcastAction(payload: SubmitPodcastPayload) {
   const supabaseAdmin = createAdminClient();
 
   try {
-    // Step 1: Separate team members from podcast data
+    // Step 1: Check for duplicate playlist ID before inserting
+    if (payload.podcast.youtube_playlist_id) {
+      const { data: existingPodcast, error: duplicateError } = await supabaseAdmin
+        .from('podcasts')
+        .select('id, title, slug, submission_status')
+        .eq('youtube_playlist_id', payload.podcast.youtube_playlist_id)
+        .single();
+
+      if (duplicateError && duplicateError.code !== 'PGRST116') { // PGRST116 = no rows found
+        console.error('Error checking duplicate playlist:', duplicateError);
+        throw new Error('Failed to check for duplicate playlist');
+      }
+
+      if (existingPodcast) {
+        const statusText = existingPodcast.submission_status === 'approved' ? 'approved' : 'pending review';
+        throw new Error(`This playlist has already been submitted! The podcast "${existingPodcast.title}" is ${statusText}.`);
+      }
+    }
+
+    // Step 2: Separate team members from podcast data
     const { team_members, ...podcastData } = payload.podcast;
 
-    // Step 2: Insert the podcast data and get the new podcast's ID
+    // Step 3: Insert the podcast data and get the new podcast's ID
     const { data: podcast, error: podcastError } = await supabaseAdmin
       .from('podcasts')
       .insert(podcastData)
@@ -55,14 +74,14 @@ export async function submitPodcastAction(payload: SubmitPodcastPayload) {
         throw new Error('Failed to create podcast, no data returned.');
     }
 
-    // Step 3: Prepare episodes data with the new podcast_id
+    // Step 4: Prepare episodes data with the new podcast_id
     if (payload.episodes && payload.episodes.length > 0) {
       const episodesData = payload.episodes.map(episode => ({
         ...episode,
         podcast_id: podcast.id,
       }));
 
-      // Step 4: Insert the episodes data
+      // Step 5: Insert the episodes data
       const { error: episodesError } = await supabaseAdmin
         .from('episodes')
         .insert(episodesData);
@@ -72,7 +91,7 @@ export async function submitPodcastAction(payload: SubmitPodcastPayload) {
       }
     }
 
-    // Step 5: Process team members
+    // Step 6: Process team members
     if (team_members && team_members.length > 0) {
       for (const member of team_members) {
         // Find or create the person

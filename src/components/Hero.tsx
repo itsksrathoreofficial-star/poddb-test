@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { useAuth } from '@/components/AuthProvider';
 import Link from 'next/link';
 import heroImage from '@/assets/hero-bg.jpeg';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/integrations/supabase/client';
 import { Skeleton } from './ui/skeleton';
@@ -69,9 +70,10 @@ export function Hero() {
     <section className="relative min-h-[90vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src={heroImage.src}
           alt="PodDB Pro - Professional Podcast Database"
+          fill
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/70" />
@@ -83,7 +85,7 @@ export function Hero() {
           {/* Main Headline */}
           <div className="space-y-4">
             <h1 className="text-5xl md:text-7xl font-bold text-shadow">
-              The World's Largest
+              The World&apos;s Largest
               <span className="text-primary block mt-2">Podcast Database</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">

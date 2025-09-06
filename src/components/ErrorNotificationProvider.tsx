@@ -209,12 +209,12 @@ export function ErrorNotificationProvider({ children }: ErrorNotificationProvide
 
   const markAsRead = async (notificationId: string) => {
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('error_notifications')
-        .update({ 
-          is_read: true, 
-          read_at: new Date().toISOString() 
-        } as any)
+        .update({
+          is_read: true,
+          read_at: new Date().toISOString()
+        })
         .eq('id', notificationId);
 
       if (error) throw error;
@@ -234,12 +234,12 @@ export function ErrorNotificationProvider({ children }: ErrorNotificationProvide
 
   const markAllAsRead = async () => {
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('error_notifications')
         .update({ 
           is_read: true, 
           read_at: new Date().toISOString() 
-        } as any)
+        })
         .eq('admin_user_id', user?.id as any)
         .eq('is_read', false);
 

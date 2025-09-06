@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 
 import { useAuth } from '@/components/AuthProvider';
 import { useRouter } from 'next/navigation';
@@ -14,6 +14,7 @@ import { Separator } from '@/components/ui/separator';
 import { Dialog } from '@/components/ui/dialog';
 import { toast } from '@/components/ui/sonner';
 import { Upload, Plus, X, CheckCircle, Youtube, Users, AlertCircle, Loader2, Search, Image as ImageIcon, Globe, Calendar, MapPin, User, Eye } from 'lucide-react';
+import Image from 'next/image';
 import { supabase } from '@/integrations/supabase/client';
 import { EpisodeManager } from '@/components/EpisodeManager';
 import { TeamManager } from '@/components/TeamManager';
@@ -31,7 +32,7 @@ import { getContributionData } from '@/app/actions/get-contribution-data';
 import { uploadPhotoToCloudinary, uploadFileToCloudinary } from '@/app/actions/cloudinary-upload';
 import { createPreviewUpdateAction } from '@/app/actions/preview-updates';
 
-export default function Contribute() {
+function ContributeContent() {
   const { user } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -160,6 +161,39 @@ export default function Contribute() {
     scrollToTop();
   };
 
+  const checkDuplicatePlaylist = async (playlistUrl: string) => {
+    try {
+      // Extract playlist ID from URL
+      const playlistIdMatch = playlistUrl.match(/[?&]list=([\w-]+)/);
+      if (!playlistIdMatch) {
+        return { isDuplicate: false, existingPodcast: null };
+      }
+      
+      const playlistId = playlistIdMatch[1];
+      
+      // Check if playlist ID already exists in database
+      const { data, error } = await supabase
+        .from('podcasts')
+        .select('id, title, slug, submission_status')
+        .eq('youtube_playlist_id', playlistId)
+        .single();
+
+      if (error && error.code !== 'PGRST116') { // PGRST116 = no rows found
+        console.error('Error checking duplicate playlist:', error);
+        return { isDuplicate: false, existingPodcast: null };
+      }
+
+      if (data) {
+        return { isDuplicate: true, existingPodcast: data };
+      }
+
+      return { isDuplicate: false, existingPodcast: null };
+    } catch (error) {
+      console.error('Error checking duplicate playlist:', error);
+      return { isDuplicate: false, existingPodcast: null };
+    }
+  };
+
   const fetchPodcastInfo = async () => {
     if (!youtubeUrl.trim()) {
       toast.error("Please enter a YouTube playlist URL");
@@ -176,6 +210,22 @@ export default function Contribute() {
     setLoading(true);
     setFetchError('');
     try {
+      // Check for duplicate playlist ID before fetching YouTube data
+      const duplicateCheck = await checkDuplicatePlaylist(youtubeUrl);
+      if (duplicateCheck.isDuplicate) {
+        const existingPodcast = duplicateCheck.existingPodcast;
+        const statusText = (existingPodcast as any)?.submission_status === 'approved' ? 'approved' : 'pending review';
+        toast.error(`This playlist has already been submitted! The podcast "${(existingPodcast as any)?.title}" is ${statusText}.`, {
+          duration: 10000,
+          action: (existingPodcast as any)?.slug ? {
+            label: 'View Podcast',
+            onClick: () => window.open(`/podcasts/${(existingPodcast as any).slug}`, '_blank')
+          } : undefined
+        });
+        setLoading(false);
+        return;
+      }
+
       console.log('Fetching YouTube data for:', youtubeUrl);
       
       const { data, error } = await supabase.functions.invoke('fetch-youtube-data', {
@@ -775,7 +825,7 @@ export default function Contribute() {
           <div>
             <h1 className="text-4xl font-bold">Contribute a Podcast</h1>
             <p className="text-muted-foreground text-lg">
-              Help grow the world's largest podcast database by submitting your favorite shows
+              Help grow the world&apos;s largest podcast database by submitting your favorite shows
             </p>
           </div>
         </div>
@@ -839,7 +889,7 @@ export default function Contribute() {
           <Alert>
             <CheckCircle className="h-4 w-4" />
             <AlertDescription>
-              Successfully fetched information for "{podcastData.title}" with {episodes.length} episodes ({episodes.filter(ep => ep.duration >= 300).length} over 5 minutes)
+              Successfully fetched information for &quot;{podcastData.title}&quot; with {episodes.length} episodes ({episodes.filter(ep => ep.duration >= 300).length} over 5 minutes)
             </AlertDescription>
           </Alert>
         )}
@@ -889,9 +939,11 @@ export default function Contribute() {
                     <div className="space-y-4">
                       <Label className="text-sm font-medium">Cover Image</Label>
                       <div className="aspect-square rounded-lg overflow-hidden bg-muted max-w-xs relative group">
-                        <img
+                        <Image
                           src={podcastProfilePhoto ? URL.createObjectURL(podcastProfilePhoto) : (podcastData.cover_image_url || '/placeholder.svg')}
                           alt="Podcast cover"
+                          width={300}
+                          height={300}
                           className="w-full h-full object-cover"
                         />
                         {/* Hover overlay with upload option */}
@@ -1676,9 +1728,11 @@ export default function Contribute() {
                       <div className="relative group">
                         <div className="w-24 h-24 rounded-full overflow-hidden bg-muted border-2 border-border">
                           {podcastData?.profile_image_url ? (
-                            <img
+                            <Image
                               src={podcastData.profile_image_url}
                               alt="Profile"
+                              width={96}
+                              height={96}
                               className="w-full h-full object-cover"
                             />
                           ) : (
@@ -1828,9 +1882,11 @@ export default function Contribute() {
                               onClick={() => handlePodcastSelect(podcast)}
                               className="w-full p-3 text-left hover:bg-muted flex items-center space-x-3 border-b border-border last:border-b-0"
                             >
-                              <img
+                              <Image
                                 src={podcast.cover_image_url || '/placeholder.svg'}
                                 alt={podcast.title}
+                                width={40}
+                                height={40}
                                 className="w-10 h-10 rounded object-cover"
                               />
                               <div>
@@ -1852,9 +1908,11 @@ export default function Contribute() {
                       <div className="p-4 bg-muted/30 rounded-lg">
                         <h4 className="font-medium mb-2">Selected Podcast: {selectedPodcast.title}</h4>
                         <div className="flex items-center space-x-3">
-                          <img
+                          <Image
                             src={selectedPodcast.cover_image_url || '/placeholder.svg'}
                             alt={selectedPodcast.title}
+                            width={64}
+                            height={64}
                             className="w-16 h-16 rounded object-cover"
                           />
                           <div>
@@ -1997,7 +2055,7 @@ export default function Contribute() {
             <p>• Ensure the YouTube playlist contains only episodes from the same podcast</p>
             <p>• Provide accurate and complete information about the podcast</p>
             <p>• All submissions will be reviewed by our moderation team before going live</p>
-            <p>• You'll receive a notification once your submission is approved or if changes are needed</p>
+            <p>• You&apos;ll receive a notification once your submission is approved or if changes are needed</p>
           </CardContent>
         </Card>
       </div>
@@ -2010,5 +2068,20 @@ export default function Contribute() {
         />
       </Dialog>
     </div>
+  );
+}
+
+export default function Contribute() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>Loading contribute page...</span>
+        </div>
+      </div>
+    }>
+      <ContributeContent />
+    </Suspense>
   );
 }

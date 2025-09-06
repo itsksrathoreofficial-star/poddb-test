@@ -49,7 +49,7 @@ export default function ContactPage() {
                     <Mail className="mx-auto h-12 w-12 text-primary mb-4" />
                     <CardTitle className="text-3xl">Contact Support</CardTitle>
                     <CardDescription>
-                        Have a question or need help? Fill out the form below and we'll get back to you.
+                        Have a question or need help? Fill out the form below and we&apos;ll get back to you.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>

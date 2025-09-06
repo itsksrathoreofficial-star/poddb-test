@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { AlertTriangle, Home, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -16,7 +17,7 @@ export default function NotFound() {
             Page Not Found
           </CardTitle>
           <CardDescription className="text-lg">
-            The page you're looking for doesn't exist or has been moved.
+            The page you&apos;re looking for doesn&apos;t exist or has been moved.
           </CardDescription>
         </CardHeader>
         
@@ -28,7 +29,7 @@ export default function NotFound() {
               <li>• Check the URL for typos</li>
               <li>• Go back to the previous page</li>
               <li>• Return to the home page</li>
-              <li>• Use the search function to find what you're looking for</li>
+              <li>• Use the search function to find what you&apos;re looking for</li>
             </ul>
           </div>
 

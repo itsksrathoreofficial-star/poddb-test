@@ -67,16 +67,16 @@ export default function VerificationPolicyPage() {
                 <strong>Navigate to Your Profile:</strong> Log in and go to your <Link href="/profile">Profile Page</Link>.
               </li>
               <li>
-                <strong>Go to the 'Verification' Tab:</strong> Click on the "Verification" tab to open the application form.
+                <strong>Go to the &apos;Verification&apos; Tab:</strong> Click on the &quot;Verification&quot; tab to open the application form.
               </li>
               <li>
-                <strong>Select What to Verify:</strong> Choose whether you want to verify a podcast you've submitted or your own creator profile.
+                <strong>Select What to Verify:</strong> Choose whether you want to verify a podcast you&apos;ve submitted or your own creator profile.
               </li>
               <li>
                 <strong>Choose the Specific Item:</strong> Select the exact podcast or profile from the dropdown list. The item must already exist on PodDB.
               </li>
               <li>
-                <strong>Provide Supporting Information:</strong> In the "Notes" section, provide links and information that help us confirm your identity and association with the item you're verifying. Good examples include:
+                <strong>Provide Supporting Information:</strong> In the &quot;Notes&quot; section, provide links and information that help us confirm your identity and association with the item you&apos;re verifying. Good examples include:
                 <ul>
                   <li>A link to your official website that lists the podcast.</li>
                   <li>Links to official social media profiles (e.g., Twitter, Instagram).</li>
@@ -84,7 +84,7 @@ export default function VerificationPolicyPage() {
                 </ul>
               </li>
               <li>
-                <strong>Submit Your Request:</strong> Once you've filled out the form, click "Submit Request". Our team will review it.
+                <strong>Submit Your Request:</strong> Once you&apos;ve filled out the form, click &quot;Submit Request&quot;. Our team will review it.
               </li>
             </ol>
           </CardContent>
@@ -99,7 +99,7 @@ export default function VerificationPolicyPage() {
               After you submit your request, our team will manually review your application and the provided information. This process can take several business days.
             </p>
             <p>
-              You can track the status of your request in the "Your Verification Requests" section on your profile's verification tab. We will notify you once a decision has been made.
+              You can track the status of your request in the &quot;Your Verification Requests&quot; section on your profile&apos;s verification tab. We will notify you once a decision has been made.
             </p>
             <p>
               Please note that PodDB reserves the right to remove verification at any time if an account violates our terms of service or community guidelines. Submitting false information during the verification process will result in your request being denied and may lead to further action.

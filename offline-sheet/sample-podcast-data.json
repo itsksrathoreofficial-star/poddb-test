@@ -1,0 +1,101 @@
+{
+  "instructions": {
+    "hindi": "AI को यह JSON template दें और निम्नलिखित जानकारी भरने को कहें:",
+    "english": "Give this JSON template to AI and ask to fill the following information:",
+    "required_fields": {
+      "podcast_basic_info": [
+        "title - Podcast का नाम (Hindi/English में)",
+        "description - Podcast का विवरण (कम से कम 100 शब्द)",
+        "categories - 3 categories तक (Technology, Business, Education, etc.)",
+        "languages - भाषाएं (en, hi, etc.)",
+        "location - स्थान (City, Country)",
+        "official_website - आधिकारिक वेबसाइट URL",
+        "youtube_playlist_url - YouTube playlist का पूरा URL",
+        "youtube_playlist_id - Playlist ID (URL से निकालें)"
+      ],
+      "host_team_info": [
+        "team_members - Hosts और team members की जानकारी",
+        "name - नाम",
+        "roles - भूमिकाएं (Host, Co-host, Producer, Editor, etc.)",
+        "bio - व्यक्तिगत विवरण (कम से कम 50 शब्द)",
+        "social_links - सोशल मीडिया लिंक्स"
+      ],
+      "platform_links": [
+        "spotify, apple, jiosaavn, amazon - Podcast platform links",
+        "other platforms - अन्य platforms के लिंक्स"
+      ],
+      "social_media": [
+        "instagram, youtube, x, facebook, linkedin, threads, pinterest - सोशल मीडिया लिंक्स",
+        "other - अन्य सोशल मीडिया platforms"
+      ]
+    },
+    "auto_fetched": "Episodes की सारी जानकारी YouTube से automatically fetch हो जाएगी, इसलिए episodes array को खाली छोड़ें"
+  },
+  "podcast": {
+    "id": "AI से UUID generate करवाएं",
+    "title": "AI से podcast का नाम generate करवाएं",
+    "description": "AI से podcast का detailed description generate करवाएं (कम से कम 100 शब्द)",
+    "cover_image_url": "YouTube playlist से cover image URL आएगा",
+    "additional_images": [],
+    "logo_metadata": {
+      "title": "Podcast Logo Title",
+      "keywords": "podcast, logo, brand keywords",
+      "person": "Designer/Artist Name",
+      "credit": "Credit information"
+    },
+    "additional_images_metadata": [],
+    "youtube_playlist_url": "AI से YouTube playlist URL generate करवाएं",
+    "youtube_playlist_id": "AI से playlist ID extract करवाएं",
+    "categories": ["AI से 3 categories तक generate करवाएं"],
+    "languages": ["en", "hi"],
+    "location": "AI से location generate करवाएं (City, Country format में)",
+    "official_website": "AI से website URL generate करवाएं",
+    "platform_links": {
+      "spotify": "AI से Spotify link generate करवाएं",
+      "apple": "AI से Apple Podcasts link generate करवाएं",
+      "jiosaavn": "AI से JioSaavn link generate करवाएं",
+      "amazon": "AI से Amazon Music link generate करवाएं",
+      "other": [
+        {
+          "title": "Platform Name",
+          "url": "Platform URL"
+        }
+      ]
+    },
+    "social_links": {
+      "instagram": "AI से Instagram link generate करवाएं",
+      "youtube": "AI से YouTube channel link generate करवाएं",
+      "x": "AI से X (Twitter) link generate करवाएं",
+      "facebook": "AI से Facebook page link generate करवाएं",
+      "linkedin": "AI से LinkedIn page link generate करवाएं",
+      "threads": "AI से Threads link generate करवाएं",
+      "pinterest": "AI से Pinterest link generate करवाएं",
+      "other": [
+        {
+          "title": "Other Platform Name",
+          "url": "Other Platform URL"
+        }
+      ]
+    },
+    "team_members": [
+      {
+        "id": "AI से UUID generate करवाएं",
+        "name": "AI से host/team member का नाम generate करवाएं",
+        "roles": ["Host", "Producer"],
+        "bio": "AI से व्यक्तिगत bio generate करवाएं (कम से कम 50 शब्द)",
+        "photo_urls": [],
+        "social_links": {
+          "instagram": "AI से social media links generate करवाएं",
+          "youtube": "AI से social media links generate करवाएं",
+          "x": "AI से social media links generate करवाएं",
+          "facebook": "AI से social media links generate करवाएं",
+          "linkedin": "AI से social media links generate करवाएं",
+          "threads": "AI से social media links generate करवाएं",
+          "pinterest": "AI से social media links generate करवाएं",
+          "other": []
+        }
+      }
+    ]
+}
+}
+ 

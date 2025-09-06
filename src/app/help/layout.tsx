@@ -3,7 +3,7 @@
 import { Search } from 'lucide-react';
 import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import HelpCenterPage from './page';
 
 export default function HelpLayout({

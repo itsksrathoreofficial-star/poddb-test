@@ -93,7 +93,7 @@ export default function AiSeoTab({
 
     useEffect(() => {
         fetchSeoJobs();
-    }, []);
+    }, [fetchSeoJobs]);
 
     const handleQueueSeoJobs = () => {
         startTransition(async () => {

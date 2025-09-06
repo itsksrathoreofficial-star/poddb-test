@@ -90,7 +90,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 Oops! Something went wrong
               </CardTitle>
               <CardDescription className="text-lg">
-                We're sorry, but something unexpected happened on this page.
+                We&apos;re sorry, but something unexpected happened on this page.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -102,7 +102,7 @@ export class ErrorBoundary extends Component<Props, State> {
                       Error Report Sent
                     </p>
                     <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-1">
-                      We've automatically reported this error to our team. We'll fix it as soon as possible.
+                      We&apos;ve automatically reported this error to our team. We&apos;ll fix it as soon as possible.
                     </p>
                     {this.state.errorId && (
                       <p className="text-xs text-yellow-600 dark:text-yellow-400 mt-2 font-mono">

@@ -298,7 +298,7 @@ export default async function TermsPage() {
               <h2 className="text-2xl font-bold mb-4">Questions About Terms?</h2>
               <p className="text-muted-foreground mb-6">
                 If you have any questions about these Terms and Conditions, 
-                please don't hesitate to contact our legal team.
+                please don&apos;t hesitate to contact our legal team.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

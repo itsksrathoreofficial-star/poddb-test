@@ -64,39 +64,52 @@ export default function AudioPlayerBar() {
                 }
             }
         };
-    }, [currentTrack]);
+    }, [currentTrack, player]);
 
     const loadPlayer = (videoId: string) => {
+        // Reset player state first
+        setPlayer(null);
+        setIsReady(false);
+        
         if (player) {
             try {
                 player.destroy();
             } catch (e) {
                 console.error("Error destroying previous player instance", e);
             }
-            setPlayer(null);
-            setIsReady(false);
         }
-        if (playerRef.current) {
-            new window.YT.Player(playerRef.current, {
-                height: '0',
-                width: '0',
-                videoId: videoId,
-                playerVars: { 'autoplay': 1, 'controls': 0, 'origin': window.location.origin },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
+        
+        if (playerRef.current && window.YT) {
+            try {
+                new window.YT.Player(playerRef.current, {
+                    height: '0',
+                    width: '0',
+                    videoId: videoId,
+                    playerVars: { 'autoplay': 1, 'controls': 0, 'origin': window.location.origin },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating YouTube player:', error);
+            }
         }
     };
 
     const onPlayerReady = (event: any) => {
         const playerInstance = event.target;
-        setPlayer(playerInstance);
-        setDuration(playerInstance.getDuration());
-        setIsReady(true);
-        if (isPlaying) {
-            playerInstance.playVideo();
+        if (playerInstance && typeof playerInstance.getDuration === 'function') {
+            setPlayer(playerInstance);
+            setDuration(playerInstance.getDuration());
+            setIsReady(true);
+            if (isPlaying && typeof playerInstance.playVideo === 'function') {
+                try {
+                    playerInstance.playVideo();
+                } catch (error) {
+                    console.error('Error playing video on ready:', error);
+                }
+            }
         }
     };
 
@@ -105,8 +118,15 @@ export default function AudioPlayerBar() {
             if (!isPlaying) play(currentTrack!);
             clearInterval(intervalRef.current);
             intervalRef.current = setInterval(() => {
-                const currentTime = event.target.getCurrentTime();
-                setProgress(currentTime);
+                try {
+                    if (event.target && typeof event.target.getCurrentTime === 'function') {
+                        const currentTime = event.target.getCurrentTime();
+                        setProgress(currentTime);
+                    }
+                } catch (error) {
+                    console.error('Error getting current time:', error);
+                    clearInterval(intervalRef.current);
+                }
             }, 500);
         } else if (event.data === window.YT.PlayerState.PAUSED) {
             if (isPlaying) pause();
@@ -118,19 +138,27 @@ export default function AudioPlayerBar() {
 
     useEffect(() => {
         if (isReady && player && typeof player.playVideo === 'function' && typeof player.pauseVideo === 'function') {
-            if (isPlaying) {
-                player.playVideo();
-            } else {
-                player.pauseVideo();
+            try {
+                if (isPlaying) {
+                    player.playVideo();
+                } else {
+                    player.pauseVideo();
+                }
+            } catch (error) {
+                console.error('Error controlling YouTube player:', error);
             }
         }
     }, [isPlaying, isReady, player]);
 
     const handleSeek = (value: number[]) => {
-        if (!isReady) return;
+        if (!isReady || !player || typeof player.seekTo !== 'function') return;
         const newTime = value[0];
-        player.seekTo(newTime, true);
-        setProgress(newTime);
+        try {
+            player.seekTo(newTime, true);
+            setProgress(newTime);
+        } catch (error) {
+            console.error('Error seeking in YouTube player:', error);
+        }
     };
 
     const formatTime = (time: number) => {

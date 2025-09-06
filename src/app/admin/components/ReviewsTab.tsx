@@ -211,7 +211,7 @@ export default function ReviewsTab() {
     if (selectedTarget && reviewCount > 0) {
       initializeReviewForms();
     }
-  }, [reviewCount, selectedTarget, selectedTargetType, scheduleType, randomDays]);
+  }, [reviewCount, selectedTarget, selectedTargetType, scheduleType, randomDays, initializeReviewForms]);
 
   const handleCreateReviews = async () => {
     if (!selectedTarget) {

@@ -283,7 +283,7 @@ export default async function HelpPage() {
             <div>
               <h2 className="text-3xl font-bold text-foreground mb-4">Still Need Help?</h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Can't find what you're looking for? Send us a message and we'll get back to you within 24 hours.
+                Can&apos;t find what you&apos;re looking for? Send us a message and we&apos;ll get back to you within 24 hours.
               </p>
             </div>
             

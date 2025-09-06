@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Upload, X, Image as ImageIcon, User, Images } from 'lucide-react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { uploadToCloudinary } from '@/lib/cloudinary-client';
 
@@ -213,9 +214,11 @@ export function PhotoUploadManager({
              
              {profilePhoto ? (
                <div className="relative group">
-                 <img
+                 <Image
                    src={profilePhoto.url}
                    alt="Profile"
+                   width={200}
+                   height={200}
                    className="w-24 h-24 rounded-lg object-cover border-2 border-primary"
                  />
                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -312,9 +315,11 @@ export function PhotoUploadManager({
                     <X className="h-3 w-3" />
                   </Button>
                   <div className="flex items-center space-x-2">
-                    <img
+                    <Image
                       src={photo.url}
                       alt="Thumbnail"
+                      width={48}
+                      height={48}
                       className="w-12 h-12 rounded object-cover"
                     />
                     <div className="flex-1">

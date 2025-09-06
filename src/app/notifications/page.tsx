@@ -403,7 +403,7 @@ export default function NotificationsPage() {
             <Bell className="h-12 w-12 text-muted-foreground mb-4" />
             <h3 className="text-lg font-semibold mb-2">No notifications yet</h3>
             <p className="text-muted-foreground text-center mb-4">
-              You'll receive notifications for your contributions, approvals, and important updates.
+              You&apos;ll receive notifications for your contributions, approvals, and important updates.
             </p>
             <Button asChild>
               <Link href="/contribute">Start Contributing</Link>

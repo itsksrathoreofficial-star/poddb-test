@@ -77,7 +77,7 @@ export default function PodcastClientPage({ podcast: initialPodcast }: PodcastCl
       }));
       loadTrack(playlist[0], playlist);
     }
-  }, []);
+  }, [loadTrack, podcast]);
 
   // Refresh podcast data on mount to ensure latest ratings
   useEffect(() => {
@@ -306,7 +306,7 @@ export default function PodcastClientPage({ podcast: initialPodcast }: PodcastCl
               <Link key={member.id} href={`/people/${member.slug || member.person_slug || member.id}`}>
                 <Card className="group cursor-pointer card-hover">
                   <CardContent className="p-6 flex items-center space-x-4">
-                    <img src={member.photo_urls?.[0]} alt={member.name} className="w-16 h-16 rounded-full object-cover" />
+                    <Image src={member.photo_urls?.[0]} alt={member.name} width={64} height={64} className="w-16 h-16 rounded-full object-cover" />
                     <div>
                       <h3 className="font-semibold group-hover:text-primary transition-colors">{member.name}</h3>
                       <p className="text-sm text-muted-foreground">{member.role}</p>

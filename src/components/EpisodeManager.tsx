@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { PlayCircle, Upload, Clock, Eye, Heart, CheckCircle, XCircle } from 'lucide-react';
+import Image from 'next/image';
 import { uploadToCloudinary } from '@/lib/cloudinary-client';
 
 interface Episode {
@@ -113,9 +114,11 @@ export function EpisodeManager({
                   {/* Episode Thumbnail */}
                   <div className="space-y-4">
                     <div className="relative">
-                      <img
+                      <Image
                         src={episode.thumbnail_url}
                         alt={episode.title}
+                        width={300}
+                        height={200}
                         className="w-full aspect-video rounded-lg object-cover"
                       />
                       <div className="absolute bottom-2 right-2 bg-black/70 rounded px-2 py-1 text-xs text-white">

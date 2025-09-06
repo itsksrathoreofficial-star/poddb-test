@@ -108,7 +108,7 @@ export default async function LanguagePage({ params }: Props) {
             <Globe className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-xl font-semibold mb-2">No podcasts found</h3>
             <p className="text-muted-foreground mb-4">
-              We couldn't find any podcasts in {decodedLanguage} yet.
+              We couldn&apos;t find any podcasts in {decodedLanguage} yet.
             </p>
             <Button asChild>
               <Link href="/contribute">

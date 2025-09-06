@@ -48,6 +48,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   ArrowLeft, 
   MapPin, 
@@ -403,9 +404,11 @@ export default async function PersonDetailPage({ params }: Props) {
                                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                         {person.photo_urls.map((photoUrl, index) => (
                                             <div key={index} className="aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                                                <img 
+                                                <Image 
                                                     src={photoUrl} 
                                                     alt={`${person.full_name} - Photo ${index + 1}`}
+                                                    width={300}
+                                                    height={300}
                                                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-200"
                                                 />
                                             </div>
@@ -458,7 +461,7 @@ export default async function PersonDetailPage({ params }: Props) {
                                                         <CardContent className="p-12 text-center text-muted-foreground">
                                                             <Mic className="h-16 w-16 mx-auto mb-4 opacity-50" />
                                                             <p className="text-lg">No regular podcast appearances found</p>
-                                                            <p className="text-sm">This person hasn't been added to any podcast teams yet.</p>
+                                                            <p className="text-sm">This person hasn&apos;t been added to any podcast teams yet.</p>
                                                         </CardContent>
                                                     </Card>
                                                 ) : (
@@ -468,9 +471,11 @@ export default async function PersonDetailPage({ params }: Props) {
                                                                 <Card className="group cursor-pointer card-hover transition-all duration-200 hover:shadow-lg h-52">
                                                                     <CardContent className="p-4 h-full">
                                                                         <div className="flex items-start space-x-3 h-full">
-                                                                            <img 
+                                                                            <Image 
                                                                                 src={appearance.podcasts.cover_image_url || 'https://placehold.co/64x64.png'} 
                                                                                 alt={appearance.podcasts.title} 
+                                                                                width={64}
+                                                                                height={64}
                                                                                 className="w-16 h-16 rounded-lg object-cover shadow-md flex-shrink-0" 
                                                                                 data-ai-hint="podcast cover"
                                                                             />
@@ -520,7 +525,7 @@ export default async function PersonDetailPage({ params }: Props) {
                                                         <CardContent className="p-12 text-center text-muted-foreground">
                                                             <Play className="h-16 w-16 mx-auto mb-4 opacity-50" />
                                                             <p className="text-lg">No guest episode appearances found</p>
-                                                            <p className="text-sm">This person hasn't appeared as a guest on any episodes yet.</p>
+                                                            <p className="text-sm">This person hasn&apos;t appeared as a guest on any episodes yet.</p>
                                                         </CardContent>
                                                     </Card>
                                                 ) : (
@@ -530,9 +535,11 @@ export default async function PersonDetailPage({ params }: Props) {
                                                                 <Link href={`/episodes/${appearance.episodes.slug}`}>
                                                                     <CardContent className="p-6">
                                                                         <div className="flex items-start space-x-4">
-                                                                            <img 
+                                                                            <Image 
                                                                                 src={appearance.episodes.thumbnail_url || appearance.episodes.podcasts.cover_image_url || 'https://placehold.co/80x80.png'} 
                                                                                 alt={appearance.episodes.title} 
+                                                                                width={96}
+                                                                                height={96}
                                                                                 className="w-24 h-24 rounded-lg object-cover shadow-md flex-shrink-0" 
                                                                                 data-ai-hint="episode thumbnail" 
                                                                             />

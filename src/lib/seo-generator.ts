@@ -45,7 +45,7 @@ export async function generateSEOData(config: SEOConfig): Promise<SEOData> {
   const title = generateTitle(config, rankings?.length || 0);
   
   // Generate description
-  const description = generateDescription(config, rankings?.length || 0, rankings);
+  const description = generateDescription(config, rankings?.length || 0, rankings || []);
   
   // Generate keywords
   const keywords = generateKeywords(config, categories || [], languages || [], locations || []);
@@ -247,7 +247,7 @@ function generateStructuredData(config: SEOConfig, rankings: any[]): any {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": generateTitle(config, rankings?.length || 0),
-    "description": generateDescription(config, rankings?.length || 0, rankings),
+    "description": generateDescription(config, rankings?.length || 0, rankings || []),
     "url": generateCanonicalUrl(config),
     "numberOfItems": rankings?.length || 0,
     "itemListElement": rankings?.slice(0, 100).map((item, index) => ({

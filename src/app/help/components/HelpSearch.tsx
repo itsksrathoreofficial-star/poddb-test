@@ -104,7 +104,7 @@ export default function HelpSearch({ pages, categories }: HelpSearchProps) {
             </div>
             <h3 className="text-2xl font-semibold text-foreground mb-3">No articles found</h3>
             <p className="text-muted-foreground text-lg max-w-md mx-auto">
-              Try adjusting your search terms or browse by category to find what you're looking for.
+              Try adjusting your search terms or browse by category to find what you&apos;re looking for.
             </p>
           </div>
         ) : (

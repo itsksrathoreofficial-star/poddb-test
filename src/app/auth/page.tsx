@@ -1,6 +1,6 @@
 
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -16,7 +16,7 @@ import { useAuth } from '@/components/AuthProvider';
 import { toast } from '@/components/ui/sonner';
 import { useTheme } from 'next-themes';
 
-export default function Auth() {
+function AuthContent() {
   const searchParams = useSearchParams();
   const [isSignUp, setIsSignUp] = useState(searchParams.get('type') === 'signup');
   const [email, setEmail] = useState('');
@@ -255,5 +255,20 @@ export default function Auth() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Auth() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="flex items-center space-x-2">
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+          <span>Loading auth page...</span>
+        </div>
+      </div>
+    }>
+      <AuthContent />
+    </Suspense>
   );
 }

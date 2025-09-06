@@ -143,7 +143,7 @@ export default function SEODashboard({ isPending, startTransition }: SEODashboar
     useEffect(() => {
         setPages(defaultPages);
         setSelectedPage('home');
-    }, []); // Remove defaultPages dependency to prevent infinite loop
+    }, [defaultPages]); // Add defaultPages dependency
 
     // Get current page config
     const currentPage = pages.find(p => p.id === selectedPage);

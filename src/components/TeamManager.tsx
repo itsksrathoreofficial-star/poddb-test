@@ -27,6 +27,7 @@ import {
   Calendar,
   Edit
 } from 'lucide-react';
+import Image from 'next/image';
 import { TeamMemberSearch } from './TeamMemberSearch';
 import { PhotoUploadManager } from './PhotoUploadManager';
 import { SocialMediaInput } from './SocialMediaInput';
@@ -266,9 +267,11 @@ export function TeamManager({ teamMembers, episodes, onTeamUpdate, onPhotoUpload
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
                       {member.photo_urls.length > 0 ? (
-                        <img
+                        <Image
                           src={member.photo_urls[0]}
                           alt={member.name}
+                          width={48}
+                          height={48}
                           className="w-12 h-12 rounded-full object-cover"
                         />
                       ) : (

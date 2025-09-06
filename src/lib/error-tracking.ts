@@ -405,7 +405,7 @@ class ErrorTrackingService {
       (this as any)._method = method;
       (this as any)._url = url;
       (this as any)._startTime = Date.now();
-      return originalXHROpen.call(this, method, url, ...args);
+      return originalXHROpen.call(this, method, url, ...(args as [any, any, any]));
     };
 
     (XMLHttpRequest.prototype as any).send = function(...args: any[]) {
@@ -457,9 +457,7 @@ class ErrorTrackingService {
     // Handle unhandled JavaScript errors
     window.addEventListener('error', (event) => {
       this.logJSError(event.error || new Error(event.message), {
-        filePath: event.filename,
-        lineNumber: event.lineno,
-        columnNumber: event.colno
+        pageUrl: event.filename
       });
     });
 

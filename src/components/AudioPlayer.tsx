@@ -48,7 +48,7 @@ const AudioPlayer = ({ videoId }: { videoId: string }) => {
                 }
             }
         };
-    }, [videoId]);
+    }, [videoId, player]);
 
     const loadPlayer = (currentVideoId: string) => {
         if (player) {

@@ -102,7 +102,7 @@ export default function UserErrorPage({
                   Error Report Sent Automatically
                 </p>
                 <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
-                  We've automatically reported this error to our team. We'll fix it as soon as possible.
+                  We&apos;ve automatically reported this error to our team. We&apos;ll fix it as soon as possible.
                 </p>
                 {errorId && (
                   <p className="text-xs text-blue-600 dark:text-blue-400 mt-2 font-mono">

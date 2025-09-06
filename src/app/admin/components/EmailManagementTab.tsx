@@ -809,7 +809,7 @@ export default function EmailManagementTab({ users, isPending, startTransition }
                   <div className="space-y-2">
                     <p>Contact submissions table not available</p>
                     <p className="text-sm">This feature requires the database migration to be applied.</p>
-                    <p className="text-sm">Contact forms will still work and send emails, but submissions won't be stored in the database yet.</p>
+                    <p className="text-sm">Contact forms will still work and send emails, but submissions won&apos;t be stored in the database yet.</p>
                   </div>
                 ) : (
                   "No contact form submissions yet"

@@ -119,7 +119,7 @@ export default function AdvancedSeoQueueManager({
         }, 5000); // Refresh every 5 seconds
 
         return () => clearInterval(interval);
-    }, []);
+    }, [fetchQueueStats, fetchRecentJobs]);
 
     const handleQueueEpisodes = () => {
         startTransition(async () => {

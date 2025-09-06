@@ -179,7 +179,7 @@ export default function AutomaticAiSeoTab({
 
     useEffect(() => {
         fetchSeoJobs();
-    }, []);
+    }, [fetchSeoJobs]);
 
     const handleQueueSeoJobs = () => {
         startTransition(async () => {

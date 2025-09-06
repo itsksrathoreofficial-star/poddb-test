@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/components/AuthProvider';
 
@@ -71,9 +72,11 @@ const CustomAd: React.FC<{
       onClick={handleClick}
     >
       {ad.image_url ? (
-        <img 
+        <Image 
           src={ad.image_url} 
           alt={ad.alt_text || ad.name}
+          width={300}
+          height={200}
           style={{ 
             width: '100%', 
             height: '100%', 

@@ -186,7 +186,8 @@ export default function HomePageClient({ searchParams, initialData }: HomePageCl
           latest_episodes: episodesResult.data || [],
           featured_people: peopleResult.data || [],
           categories: categoriesResult.data || [],
-          news_articles: newsResult.data || []
+          news_articles: newsResult.data || [],
+          latest_news: newsResult.data || []
         };
         
         setHomepageData(fallbackData);

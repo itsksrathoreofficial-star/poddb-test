@@ -308,7 +308,7 @@ export default async function PrivacyPage() {
               <h2 className="text-2xl font-bold mb-4">Questions About Privacy?</h2>
               <p className="text-muted-foreground mb-6">
                 If you have any questions about this Privacy Policy or our data practices, 
-                please don't hesitate to contact us.
+                please don&apos;t hesitate to contact us.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

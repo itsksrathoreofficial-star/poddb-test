@@ -34,10 +34,6 @@ export const useAds = (pageName: string, deviceType: 'desktop' | 'mobile' | 'tab
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
 
-  useEffect(() => {
-    fetchAds();
-  }, [pageName, deviceType]);
-
   const fetchAds = async () => {
     try {
       setLoading(true);
@@ -58,6 +54,10 @@ export const useAds = (pageName: string, deviceType: 'desktop' | 'mobile' | 'tab
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchAds();
+  }, [pageName, deviceType, fetchAds]);
 
   const trackImpression = async (adId: string) => {
     try {
@@ -139,10 +139,6 @@ export const useAdStats = (adId: string) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchStats();
-  }, [adId]);
-
   const fetchStats = async () => {
     try {
       setLoading(true);
@@ -163,6 +159,10 @@ export const useAdStats = (adId: string) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchStats();
+  }, [adId, fetchStats]);
 
   return {
     stats,

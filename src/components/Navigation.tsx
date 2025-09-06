@@ -56,16 +56,6 @@ export function Navigation() {
   }, [theme]);
 
 
-  React.useEffect(() => {
-    if (user) {
-      fetchProfile();
-      fetchUnreadNotifications();
-    } else {
-      setProfile(null);
-      setUnreadNotifications(0);
-    }
-  }, [user]);
-
   const fetchProfile = async () => {
     try {
       setIsLoadingProfile(true);
@@ -94,6 +84,16 @@ export function Navigation() {
       console.error('Error fetching unread notifications:', error);
     }
   };
+
+  React.useEffect(() => {
+    if (user) {
+      fetchProfile();
+      fetchUnreadNotifications();
+    } else {
+      setProfile(null);
+      setUnreadNotifications(0);
+    }
+  }, [user, fetchUnreadNotifications]);
   
   useEffect(() => {
     if (searchTerm.length < 2) {
@@ -236,7 +236,7 @@ export function Navigation() {
                             )}
                             <div className="p-2 border-t">
                                  <Button variant="ghost" className="w-full justify-start" onClick={handleSearchSubmit}>
-                                    <Search className="mr-2 h-4 w-4"/> View all results for "{searchTerm}"
+                                    <Search className="mr-2 h-4 w-4"/> View all results for &quot;{searchTerm}&quot;
                                 </Button>
                             </div>
                         </div>

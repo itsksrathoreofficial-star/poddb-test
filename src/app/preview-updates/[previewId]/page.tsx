@@ -12,6 +12,7 @@ import { Separator } from '@/components/ui/separator';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 import { CheckCircle, XCircle, Loader2, Image as ImageIcon, Youtube, Users, AlertCircle, Save, Globe, ThumbsUp, ThumbsDown, Eye, Edit3, Upload, Plus, X, Search, ArrowLeft, RefreshCw } from 'lucide-react';
+import Image from 'next/image';
 import { supabase } from '@/integrations/supabase/client';
 import { getPreviewUpdateAction, approvePreviewUpdateAction, rejectPreviewUpdateAction } from '@/app/actions/preview-updates';
 
@@ -214,7 +215,7 @@ export default function PreviewUpdatePage() {
             <Label className="text-xs text-muted-foreground">Original</Label>
             <div className="aspect-square rounded-lg overflow-hidden bg-muted">
               {originalUrl ? (
-                <img src={originalUrl} alt="Original" className="w-full h-full object-cover" />
+                <Image src={originalUrl} alt="Original" width={200} height={200} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <span className="text-muted-foreground">No image</span>
@@ -226,7 +227,7 @@ export default function PreviewUpdatePage() {
             <Label className="text-xs text-muted-foreground">Updated</Label>
             <div className="aspect-square rounded-lg overflow-hidden bg-muted">
               {updatedUrl ? (
-                <img src={updatedUrl} alt="Updated" className="w-full h-full object-cover" />
+                <Image src={updatedUrl} alt="Updated" width={200} height={200} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <span className="text-muted-foreground">No image</span>

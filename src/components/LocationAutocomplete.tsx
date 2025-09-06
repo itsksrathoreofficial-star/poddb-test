@@ -326,7 +326,7 @@ export function LocationAutocomplete({
                 >
                   <div className="flex items-center space-x-2">
                     <Plus className="h-4 w-4 text-primary" />
-                    <span className="text-primary">Request "{inputValue.trim()}" to be added</span>
+                    <span className="text-primary">Request &quot;{inputValue.trim()}&quot; to be added</span>
                   </div>
                 </div>
               )}

@@ -11,7 +11,7 @@ export default function MaintenancePage() {
           Site Under Maintenance
         </h1>
         <p className="text-lg text-muted-foreground max-w-md mx-auto">
-          We're currently performing some scheduled maintenance. We should be back online shortly. Thank you for your patience!
+          We&apos;re currently performing some scheduled maintenance. We should be back online shortly. Thank you for your patience!
         </p>
       </div>
     </div>

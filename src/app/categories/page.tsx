@@ -1,6 +1,6 @@
 
 "use client";
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -33,7 +33,7 @@ interface Podcast {
   last_episode_date: string;
 }
 
-export default function CategoriesPage() {
+function CategoriesPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [allCategories, setAllCategories] = useState<Category[]>([]);
@@ -49,7 +49,7 @@ export default function CategoriesPage() {
     if (categoryFromUrl) {
       setSelectedCategory(categoryFromUrl);
     }
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     const categoryFromUrl = searchParams.get('name');
@@ -202,5 +202,20 @@ export default function CategoriesPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function CategoriesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>Loading categories...</span>
+        </div>
+      </div>
+    }>
+      <CategoriesPageContent />
+    </Suspense>
   );
 }

@@ -682,7 +682,7 @@ export default function EnhancedDataSyncTab({ isPending, startTransition }: Data
     loadData();
     const statusInterval = setInterval(fetchSyncStatus, 5000);
     return () => clearInterval(statusInterval);
-  }, []);
+  }, [fetchPodcasts]);
 
   // Update batch size when sync mode changes
   useEffect(() => {
