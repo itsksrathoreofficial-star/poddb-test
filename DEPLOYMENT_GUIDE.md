@@ -7,7 +7,7 @@
 ### 1. GitHub Repository Setup
 
 1. अपने GitHub account में जाएं
-2. Repository: `https://github.com/ksrathorefanpage-spec/dev-collaborate-space` को access करें
+2. Repository: `https://github.com/itsksrathore/guided-app-launch` को access करें
 3. अगर repository exist नहीं करती, तो इसे create करें
 
 ### 2. Code Upload
@@ -20,7 +20,7 @@ cd "D:\PodDb\Production\V 1.1\PodDB"
 git init
 
 # Remote repository add करें
-git remote add origin https://github.com/ksrathorefanpage-spec/dev-collaborate-space.git
+git remote add origin https://github.com/itsksrathore/guided-app-launch.git
 
 # सभी files को add करें
 git add .
@@ -63,7 +63,7 @@ Code push करने के बाद automatic deployment start हो जा
 Production deployment के लिए ये environment variables set हैं:
 
 ```env
-NEXT_PUBLIC_APP_URL=https://ksrathorefanpage-spec.github.io/dev-collaborate-space
+NEXT_PUBLIC_APP_URL=https://itsksrathore.github.io/guided-app-launch
 NODE_ENV=production
 ```
 
@@ -78,7 +78,7 @@ NODE_ENV=production
 
 Deployment के बाद आपका app यहाँ available होगा:
 ```
-https://ksrathorefanpage-spec.github.io/dev-collaborate-space
+https://itsksrathore.github.io/guided-app-launch
 ```
 
 ## 🚨 Important Notes

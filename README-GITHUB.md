@@ -1,8 +1,8 @@
 # 🎧 PodDB Pro - Podcast Database Application
 
-[![Deploy to GitHub Pages](https://github.com/ksrathorefanpage-spec/dev-collaborate-space/actions/workflows/deploy.yml/badge.svg)](https://github.com/ksrathorefanpage-spec/dev-collaborate-space/actions/workflows/deploy.yml)
+[![Deploy to GitHub Pages](https://github.com/itsksrathore/guided-app-launch/actions/workflows/deploy.yml/badge.svg)](https://github.com/itsksrathore/guided-app-launch/actions/workflows/deploy.yml)
 
-**Live Demo**: [https://ksrathorefanpage-spec.github.io/dev-collaborate-space](https://ksrathorefanpage-spec.github.io/dev-collaborate-space)
+**Live Demo**: [https://itsksrathore.github.io/guided-app-launch](https://itsksrathore.github.io/guided-app-launch)
 
 ## 📋 Overview
 
@@ -43,8 +43,8 @@ PodDB Pro एक comprehensive podcast database application है जो Next.j
 
 ```bash
 # Repository clone करें
-git clone https://github.com/ksrathorefanpage-spec/dev-collaborate-space.git
-cd dev-collaborate-space
+git clone https://github.com/itsksrathore/guided-app-launch.git
+cd guided-app-launch
 
 # Dependencies install करें
 npm install
@@ -112,7 +112,7 @@ npm run deploy:github # GitHub Pages पर deploy
 1. Code को main branch पर push करें
 2. GitHub Actions automatically build process start करेगी
 3. Build successful होने पर app GitHub Pages पर deploy हो जाएगी
-4. App यहाँ available होगी: `https://ksrathorefanpage-spec.github.io/dev-collaborate-space`
+4. App यहाँ available होगी: `https://itsksrathore.github.io/guided-app-launch`
 
 #### Required Secrets:
 Repository Settings > Secrets में ये secrets add करें:

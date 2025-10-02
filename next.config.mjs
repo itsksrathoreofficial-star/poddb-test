@@ -117,8 +117,8 @@ const nextConfig = {
   },
   // Static export for GitHub Pages deployment
   output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/dev-collaborate-space' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/dev-collaborate-space/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/guided-app-launch' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/guided-app-launch/' : '',
   // Trailing slash for better SEO
   trailingSlash: true,
   // Enable React strict mode (disabled for development to prevent double renders)

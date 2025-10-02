@@ -42,7 +42,7 @@ jobs:
         echo "CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}" >> .env.local
         echo "CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}" >> .env.local
         echo "YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}" >> .env.local
-        echo "NEXT_PUBLIC_APP_URL=https://ksrathorefanpage-spec.github.io/dev-collaborate-space" >> .env.local
+        echo "NEXT_PUBLIC_APP_URL=https://itsksrathore.github.io/guided-app-launch" >> .env.local
         echo "NODE_ENV=production" >> .env.local
         
     - name: Build application
