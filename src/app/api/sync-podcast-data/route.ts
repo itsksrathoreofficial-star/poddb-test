@@ -3,7 +3,8 @@ import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 import { withAPIErrorHandling, createErrorResponse, createSuccessResponse } from '@/lib/api-error-wrapper';
 
-export const runtime = 'edge';
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',

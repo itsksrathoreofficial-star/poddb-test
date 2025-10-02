@@ -118,6 +118,12 @@ All colors MUST be HSL for consistency and theming support.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    cursor: default;
+  }
+  
+  /* Prevent cursor flickering during rapid updates */
+  * {
+    cursor: inherit;
   }
 
   /* Professional typography */

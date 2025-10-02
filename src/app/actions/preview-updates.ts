@@ -1,7 +1,7 @@
-"use server";
+// "use server"; // Disabled for static export
 
-import { supabaseServer } from "@/integrations/supabase/server";
-import { revalidatePath } from "next/cache";
+import { supabaseServer } from "@/integrations/supabase/server-client";
+// import { revalidatePath } from "next/cache"; // Disabled for static export - use client-side refresh instead
 
 export async function createPreviewUpdateAction(
   targetTable: string,
@@ -41,7 +41,7 @@ export async function createPreviewUpdateAction(
       return { success: false, error: error.message };
     }
 
-    revalidatePath("/admin");
+    // revalidatePath("/admin"); // Disabled for static export - use client-side refresh instead
     return { success: true, previewId: previewData.id };
   } catch (error: any) {
     console.error("Error creating preview update:", error);
@@ -89,14 +89,100 @@ export async function approvePreviewUpdateAction(
       return { success: false, error: fetchError.message };
     }
 
-    // Update the target table with the new data
-    const { error: updateError } = await supabase
-      .from(previewData.target_table)
-      .update(previewData.updated_data)
-      .eq("id", previewData.target_id);
+    // Handle team members separately for podcasts
+    if (previewData.target_table === 'podcasts' && previewData.updated_data.team_members) {
+      const { team_members, ...podcastData } = previewData.updated_data;
+      
+      // Update the podcast data without team_members
+      const { error: updateError } = await supabase
+        .from(previewData.target_table)
+        .update(podcastData)
+        .eq("id", previewData.target_id);
 
-    if (updateError) {
-      return { success: false, error: updateError.message };
+      if (updateError) {
+        return { success: false, error: updateError.message };
+      }
+
+      // Handle team members
+      if (team_members && team_members.length > 0) {
+        // First, remove existing team members
+        const { error: deleteError } = await supabase
+          .from('podcast_people')
+          .delete()
+          .eq('podcast_id', previewData.target_id);
+
+        if (deleteError) {
+          console.error('Error deleting existing team members:', deleteError);
+          // Continue anyway, as this might not be critical
+        }
+
+        // Add new team members
+        for (const member of team_members) {
+          if (member.name) {
+            // Find or create the person
+            let { data: person, error: personError } = await supabase
+              .from('people')
+              .select('id')
+              .eq('full_name', member.name)
+              .single();
+
+            if (personError && personError.code !== 'PGRST116') { // 'PGRST116' is "No rows found"
+              console.error('Error finding person:', personError);
+              continue; // Skip to next member
+            }
+
+            if (!person) {
+              const { data: newPerson, error: newPersonError } = await supabase
+                .from('people')
+                .insert({
+                  full_name: member.name,
+                  bio: member.bio || '',
+                  photo_urls: member.photo_urls || [],
+                  social_links: member.social_links || {},
+                  is_verified: false,
+                  slug: member.name.toLowerCase().replace(/\s+/g, '-'),
+                })
+                .select('id')
+                .single();
+              
+              if (newPersonError) {
+                console.error('Error creating person:', newPersonError);
+                continue;
+              }
+              person = newPerson;
+            }
+
+            // Link person to podcast with role
+            if (person) {
+              const roles = Array.isArray(member.role) ? member.role : [member.role || 'Guest'];
+              
+              for (const role of roles) {
+                const { error: linkError } = await supabase
+                  .from('podcast_people')
+                  .insert({
+                    podcast_id: previewData.target_id,
+                    person_id: person.id,
+                    role: role,
+                  });
+
+                if (linkError) {
+                  console.error('Error linking person to podcast with role:', linkError);
+                }
+              }
+            }
+          }
+        }
+      }
+    } else {
+      // For non-podcast tables or podcasts without team members, update normally
+      const { error: updateError } = await supabase
+        .from(previewData.target_table)
+        .update(previewData.updated_data)
+        .eq("id", previewData.target_id);
+
+      if (updateError) {
+        return { success: false, error: updateError.message };
+      }
     }
 
     // Mark preview as approved
@@ -113,8 +199,8 @@ export async function approvePreviewUpdateAction(
       return { success: false, error: statusError.message };
     }
 
-    revalidatePath("/admin");
-    revalidatePath(`/preview-updates/${previewId}`);
+     // revalidatePath("/admin"); // Disabled for static export - use client-side refresh instead
+     // revalidatePath(`/admin-preview/${previewId}`); // Disabled for static export - use client-side refresh instead
     return { success: true };
   } catch (error: any) {
     return { success: false, error: error.message };
@@ -143,8 +229,8 @@ export async function rejectPreviewUpdateAction(
       return { success: false, error: error.message };
     }
 
-    revalidatePath("/admin");
-    revalidatePath(`/preview-updates/${previewId}`);
+     // revalidatePath("/admin"); // Disabled for static export - use client-side refresh instead
+     // revalidatePath(`/admin-preview/${previewId}`); // Disabled for static export - use client-side refresh instead
     return { success: true };
   } catch (error: any) {
     return { success: false, error: error.message };

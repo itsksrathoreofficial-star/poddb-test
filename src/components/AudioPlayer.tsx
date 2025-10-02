@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, Pause, Rewind, FastForward } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Slider } from '@/components/ui/slider';
 import { usePlayer } from './PlayerProvider';
 
 declare global {
@@ -48,7 +47,7 @@ const AudioPlayer = ({ videoId }: { videoId: string }) => {
                 }
             }
         };
-    }, [videoId, player]);
+    }, [videoId]); // Removed 'player' from dependency array to prevent infinite loop
 
     const loadPlayer = (currentVideoId: string) => {
         if (player) {
@@ -107,6 +106,22 @@ const AudioPlayer = ({ videoId }: { videoId: string }) => {
         player.seekTo(newTime, true);
         setProgress(newTime);
     };
+
+    const handleProgressClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (!isReady || !player) return;
+        
+        const rect = event.currentTarget.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        const newTime = percentage * duration;
+        
+        try {
+            player.seekTo(newTime, true);
+            setProgress(newTime);
+        } catch (error) {
+            console.error('Error seeking in YouTube player:', error);
+        }
+    };
     
     const formatTime = (time: number) => {
         if (isNaN(time) || time === 0) return '0:00';
@@ -118,13 +133,12 @@ const AudioPlayer = ({ videoId }: { videoId: string }) => {
     return (
         <div className="p-4 rounded-lg space-y-3">
              <div ref={playerContainerRef}></div>
-             <Slider
-                value={[progress]}
-                max={duration}
-                step={1}
-                onValueChange={handleSeek}
-                disabled={!isReady}
-             />
+             <div className="w-full h-2 bg-muted rounded-full cursor-pointer" onClick={handleProgressClick}>
+                <div 
+                    className="h-full bg-primary rounded-full transition-all duration-300" 
+                    style={{ width: `${duration > 0 ? (progress / duration) * 100 : 0}%` }}
+                />
+             </div>
              <div className="flex justify-between items-center text-xs">
                 <span>{formatTime(progress)}</span>
                 <span>{formatTime(duration)}</span>

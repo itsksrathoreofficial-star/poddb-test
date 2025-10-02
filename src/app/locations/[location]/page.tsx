@@ -7,8 +7,26 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, MapPin } from 'lucide-react';
 import Link from 'next/link';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 interface Props {
   params: Promise<{ location: string }>;
+}
+
+export async function generateStaticParams() {
+  // Get all unique locations from podcasts
+  const { data: podcasts } = await supabase
+    .from('podcasts')
+    .select('location')
+    .eq('submission_status', 'approved')
+    .not('location', 'is', null);
+
+  const locations = Array.from(new Set(podcasts?.map((p: any) => p.location).filter(Boolean) || []));
+  
+  return locations.map((location) => ({
+    location: encodeURIComponent(location),
+  }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

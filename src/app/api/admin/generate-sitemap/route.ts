@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export async function POST(request: NextRequest) {
     try {
         const { xmlContent, urls } = await request.json();

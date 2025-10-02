@@ -3,6 +3,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import type { Database, TablesInsert } from '@/integrations/supabase/types';
+import { generateSlug } from '@/lib/utils';
 
 // This function creates a Supabase client with the service role key,
 // which has admin privileges and can bypass RLS policies.
@@ -20,12 +21,6 @@ function createAdminClient() {
   );
 }
 
-function generateSlug(name: string) {
-  return name
-    .toLowerCase()
-    .replace(/ /g, '-')
-    .replace(/[^\w-]+/g, '');
-}
 
 interface SubmitPodcastPayload {
     podcast: Omit<TablesInsert<'podcasts'>, 'id' | 'created_at' | 'updated_at'> & { team_members?: any[] };
@@ -58,6 +53,29 @@ export async function submitPodcastAction(payload: SubmitPodcastPayload) {
     // Step 2: Separate team members from podcast data
     const { team_members, ...podcastData } = payload.podcast;
 
+    // Step 2.5: Generate slug for podcast if not provided
+    if (!podcastData.slug || podcastData.slug.trim() === '') {
+      const baseSlug = generateSlug(podcastData.title);
+      let slug = baseSlug;
+      let counter = 1;
+
+      // Check for uniqueness
+      while (true) {
+        const { data: existingPodcast } = await supabaseAdmin
+          .from('podcasts')
+          .select('id')
+          .eq('slug', slug)
+          .single();
+
+        if (!existingPodcast) break;
+        
+        slug = `${baseSlug}-${counter}`;
+        counter++;
+      }
+
+      podcastData.slug = slug;
+    }
+
     // Step 3: Insert the podcast data and get the new podcast's ID
     const { data: podcast, error: podcastError } = await supabaseAdmin
       .from('podcasts')
@@ -74,11 +92,46 @@ export async function submitPodcastAction(payload: SubmitPodcastPayload) {
         throw new Error('Failed to create podcast, no data returned.');
     }
 
-    // Step 4: Prepare episodes data with the new podcast_id
+    // Step 4: Prepare episodes data with the new podcast_id and generate slugs
     if (payload.episodes && payload.episodes.length > 0) {
-      const episodesData = payload.episodes.map(episode => ({
-        ...episode,
-        podcast_id: podcast.id,
+      // Sort episodes by published date (oldest first) for proper numbering
+      const sortedEpisodes = [...payload.episodes].sort((a, b) => {
+        const dateA = new Date(a.published_at || 0);
+        const dateB = new Date(b.published_at || 0);
+        return dateA.getTime() - dateB.getTime();
+      });
+
+      const episodesData = await Promise.all(sortedEpisodes.map(async (episode, index) => {
+        // Generate slug for episode if not provided
+        let episodeSlug = episode.slug;
+        if (!episodeSlug || episodeSlug.trim() === '') {
+          const baseSlug = generateSlug(episode.title);
+          let slug = baseSlug;
+          let counter = 1;
+
+          // Check for uniqueness
+          while (true) {
+            const { data: existingEpisode } = await supabaseAdmin
+              .from('episodes')
+              .select('id')
+              .eq('slug', slug)
+              .single();
+
+            if (!existingEpisode) break;
+            
+            slug = `${baseSlug}-${counter}`;
+            counter++;
+          }
+
+          episodeSlug = slug;
+        }
+
+        return {
+          ...episode,
+          podcast_id: podcast.id,
+          slug: episodeSlug,
+          episode_number: index + 1, // Assign episode number based on sorted order
+        };
       }));
 
       // Step 5: Insert the episodes data
@@ -129,7 +182,7 @@ export async function submitPodcastAction(payload: SubmitPodcastPayload) {
 
         // Link person to podcast with multiple roles
         if (person) {
-          const roles = Array.isArray(member.roles) ? member.roles : [member.roles];
+          const roles = Array.isArray(member.role) ? member.role : [member.role];
           
           for (const role of roles) {
             const { error: linkError } = await supabaseAdmin

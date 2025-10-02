@@ -2,9 +2,55 @@ import { Metadata } from 'next';
 import { generateHomeSEOData, HomeSEOConfig } from '@/lib/home-seo-generator';
 import HomePageClient from '../../HomePageClient';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 interface FeatureCategoryPageProps {
   params: Promise<{ feature: string; category: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export async function generateStaticParams() {
+  // Define the features and categories that should be statically generated
+  const features = [
+    'platform',
+    'database', 
+    'directory',
+    'discovery',
+    'analytics',
+    'search',
+    'browse',
+    'explore',
+    'find',
+    'discover'
+  ];
+
+  const categories = [
+    'technology',
+    'business',
+    'science',
+    'health',
+    'education',
+    'entertainment',
+    'news',
+    'sports',
+    'comedy',
+    'politics',
+    'culture',
+    'lifestyle'
+  ];
+
+  const params = [];
+  for (const feature of features) {
+    for (const category of categories) {
+      params.push({
+        feature,
+        category,
+      });
+    }
+  }
+
+  return params;
 }
 
 export async function generateMetadata({ params, searchParams }: FeatureCategoryPageProps): Promise<Metadata> {

@@ -68,8 +68,8 @@ import PodcastClientPage from './PodcastClientPage';
 import { getPodcast, PodcastWithEpisodesAndReviews } from '@/app/actions/podcasts';
 import { supabase } from '@/integrations/supabase/client';
 
-export const dynamicParams = true;
-export const revalidate = 3600; // Revalidate every hour
+export const dynamicParams = false; // Only pre-rendered pages allowed
+export const revalidate = false; // Fully static, no revalidation
 
 type Props = {
   params: Promise<{ slug: string }>;

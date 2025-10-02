@@ -1,19 +1,21 @@
-"use server";
+// "use server"; // Disabled for static export
 
-import { supabaseServer } from '@/integrations/supabase/server';
+import { supabaseServer } from '@/integrations/supabase/server-client';
 
 export async function createTestNotification(userId: string) {
   try {
     const supabase = await supabaseServer();
     
-    const { data, error } = await supabase.rpc('create_notification', {
-      p_user_id: userId,
-      p_title: 'Test Notification 🧪',
-      p_message: 'This is a test notification to verify the notifications system is working correctly.',
-      p_type: 'system',
-      p_target_url: '/notifications',
-      p_metadata: { is_test: true, created_at: new Date().toISOString() }
-    });
+    const { data, error } = await supabase
+      .from('notifications')
+      .insert({
+        user_id: userId,
+        title: 'Test Notification 🧪',
+        message: 'This is a test notification to verify the notifications system is working correctly.',
+        type: 'system',
+        target_url: '/notifications',
+        metadata: { is_test: true, created_at: new Date().toISOString() }
+      });
 
     if (error) {
       console.error('Error creating test notification:', error);

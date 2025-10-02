@@ -68,6 +68,17 @@ export function EpisodeManager({
   const handleFileUpload = async (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      // Validate file before upload
+      if (!file.type.startsWith('image/')) {
+        console.error('Please select a valid image file.');
+        return;
+      }
+      
+      if (file.size > 10 * 1024 * 1024) {
+        console.error('File size too large. Please select an image smaller than 10MB.');
+        return;
+      }
+
       try {
         // Upload to Cloudinary first
         const result = await uploadToCloudinary(file, 'episode-thumbnails');
@@ -81,17 +92,22 @@ export function EpisodeManager({
     }
   };
 
-  // Sort episodes by published date (oldest first) and assign episode numbers
-  const sortedEpisodes = [...episodes].sort((a, b) => {
+  // Use episode numbers from database if available, otherwise sort by published date
+  const episodesWithNumbers = [...episodes].sort((a, b) => {
+    // If both have episode numbers, sort by episode number
+    if (a.episode_number && b.episode_number) {
+      return a.episode_number - b.episode_number;
+    }
+    // If only one has episode number, prioritize it
+    if (a.episode_number && !b.episode_number) return -1;
+    if (!a.episode_number && b.episode_number) return 1;
+    // If neither has episode number, sort by published date
     const dateA = new Date(a.published_at || 0);
     const dateB = new Date(b.published_at || 0);
     return dateA.getTime() - dateB.getTime();
-  });
-
-  // Assign episode numbers (oldest = 1, newest = highest number)
-  const episodesWithNumbers = sortedEpisodes.map((episode, index) => ({
+  }).map((episode, index) => ({
     ...episode,
-    episode_number: index + 1
+    episode_number: episode.episode_number || index + 1 // Use existing number or assign new one
   }));
 
   return (

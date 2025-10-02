@@ -4,6 +4,9 @@ import RankingsContent from '../page';
 import { generateSEOData, SEOConfig } from '@/lib/seo-generator';
 import { createServiceClient } from '@/integrations/supabase/service';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

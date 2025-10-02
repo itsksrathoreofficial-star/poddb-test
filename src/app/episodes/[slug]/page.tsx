@@ -50,7 +50,8 @@ import { Metadata } from 'next';
 import EpisodeClientPage from './EpisodeClientPage';
 import { type Tables } from '@/integrations/supabase/types';
 
-export const dynamicParams = true;
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 type EpisodeWithPodcastAndReviews = Tables<'episodes'> & {
   podcasts: Pick<Tables<'podcasts'>, 'id' | 'title' | 'cover_image_url' | 'slug' | 'is_verified'>;
@@ -76,6 +77,12 @@ export async function generateStaticParams() {
 
 async function getEpisode(slug: string): Promise<EpisodeWithPodcastAndReviews> {
   console.log(`[EpisodePage] Fetching episode data for slug/id: ${slug}`);
+
+  // Handle null or empty slug
+  if (!slug || slug === 'null' || slug.trim() === '') {
+    console.error(`[EpisodePage] Invalid slug provided: "${slug}"`);
+    throw new Error(`Invalid slug provided: "${slug}"`);
+  }
 
   // Check if slug is a valid UUID format
   const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(slug);
@@ -129,22 +136,53 @@ async function getEpisode(slug: string): Promise<EpisodeWithPodcastAndReviews> {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const episode = await getEpisode(slug);
-  if (!episode) {
-    return { title: 'Episode Not Found' };
+  
+  // Handle null or invalid slug
+  if (!slug || slug === 'null' || slug.trim() === '') {
+    return { 
+      title: 'Episode Not Found',
+      description: 'The requested episode could not be found.'
+    };
   }
+  
+  try {
+    const episode = await getEpisode(slug);
+    if (!episode) {
+      return { 
+        title: 'Episode Not Found',
+        description: 'The requested episode could not be found.'
+      };
+    }
 
-  const seo = episode.seo_metadata as any;
+    const seo = episode.seo_metadata as any;
 
-  return {
-    title: seo?.meta_title || `${episode.title} - ${episode.podcasts?.title}`,
-    description: seo?.meta_description || episode.description || `Listen to the episode "${episode.title}" from the podcast "${episode.podcasts?.title}".`,
-    keywords: seo?.keywords || [],
-  };
+    return {
+      title: seo?.meta_title || `${episode.title} - ${episode.podcasts?.title}`,
+      description: seo?.meta_description || episode.description || `Listen to the episode "${episode.title}" from the podcast "${episode.podcasts?.title}".`,
+      keywords: seo?.keywords || [],
+    };
+  } catch (error) {
+    console.error('[EpisodePage] Error generating metadata:', error);
+    return { 
+      title: 'Episode Not Found',
+      description: 'The requested episode could not be found.'
+    };
+  }
 }
 
 export default async function EpisodePage({ params }: Props) {
   const { slug } = await params;
-  const episode = await getEpisode(slug);
-  return <EpisodeClientPage episode={episode} />;
+  
+  // Handle null or invalid slug
+  if (!slug || slug === 'null' || slug.trim() === '') {
+    notFound();
+  }
+  
+  try {
+    const episode = await getEpisode(slug);
+    return <EpisodeClientPage episode={episode} />;
+  } catch (error) {
+    console.error('[EpisodePage] Error loading episode:', error);
+    notFound();
+  }
 }

@@ -1,4 +1,4 @@
-import { supabaseServer } from '@/integrations/supabase/server';
+import { supabaseServer } from '@/integrations/supabase/server-client';
 import { getFallbackEmailConfig, setFallbackEmailConfig } from './email-config-fallback';
 
 export interface EmailConfig {

@@ -165,36 +165,58 @@ export default function HomePageClient({ searchParams, initialData }: HomePageCl
     }
   }, [initialData]);
 
+  // Add periodic refresh for fresh data
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchHomepageData();
+    }, 5 * 60 * 1000); // Refresh every 5 minutes
+
+    return () => clearInterval(interval);
+  }, []);
+
+
   const fetchHomepageData = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase.rpc('get_homepage_data' as any);
       
-      if (error) {
-        console.warn('RPC call failed, trying fallback:', error.message);
-        // Fallback: fetch data directly from tables
-        const [podcastsResult, episodesResult, peopleResult, categoriesResult, newsResult] = await Promise.all([
-          supabase.from('podcasts').select('*').limit(10),
-          supabase.from('episodes').select('*, podcasts(title, cover_image_url)').limit(10),
-          supabase.from('people').select('*').limit(10),
-          supabase.from('categories').select('*').limit(10),
-          supabase.from('news_articles').select('*').limit(5)
-        ]);
-        
-        const fallbackData = {
-          top_podcasts: podcastsResult.data || [],
-          latest_episodes: episodesResult.data || [],
-          featured_people: peopleResult.data || [],
-          categories: categoriesResult.data || [],
-          news_articles: newsResult.data || [],
-          latest_news: newsResult.data || []
-        };
-        
-        setHomepageData(fallbackData);
-        return;
-      }
+      // Always fetch fresh data directly from tables to ensure latest data
+      const [podcastsResult, episodesResult, peopleResult, categoriesResult, newsResult] = await Promise.all([
+        supabase.from('podcasts')
+          .select('id, slug, title, description, cover_image_url, total_episodes, total_views, total_likes, categories, average_duration, last_episode_date, average_rating, rating_count, is_verified')
+          .eq('submission_status', 'approved')
+          .order('total_views', { ascending: false })
+          .limit(8),
+        supabase.from('episodes')
+          .select('id, slug, title, thumbnail_url, duration, published_at, podcasts(title, cover_image_url, is_verified)')
+          .eq('podcasts.submission_status', 'approved')
+          .order('published_at', { ascending: false })
+          .limit(8),
+        supabase.from('people')
+          .select('id, slug, full_name, photo_urls, total_appearances, is_verified')
+          .order('created_at', { ascending: false })
+          .limit(12),
+        supabase.from('categories')
+          .select('category')
+          .limit(10),
+        supabase.from('news_articles')
+          .select('id, title, slug, excerpt, featured_image_url, published_at')
+          .eq('published', true)
+          .order('published_at', { ascending: false })
+          .limit(3)
+      ]);
       
-      setHomepageData(data);
+      const freshData = {
+        top_podcasts: podcastsResult.data || [],
+        latest_episodes: episodesResult.data || [],
+        featured_people: peopleResult.data || [],
+        categories: categoriesResult.data || [],
+        news_articles: newsResult.data || [],
+        latest_news: newsResult.data || []
+      };
+      
+      
+      console.log('🔄 Fetched fresh homepage data:', freshData);
+      setHomepageData(freshData);
     } catch (error) {
       console.error('Error fetching homepage data:', error);
     } finally {
@@ -310,7 +332,7 @@ export default function HomePageClient({ searchParams, initialData }: HomePageCl
                           totalEpisodes={podcast.total_episodes}
                           totalViews={podcast.total_views}
                           totalLikes={podcast.total_likes}
-                          categories={podcast.categories}
+                          categories={podcast.categories || []}
                           averageDuration={podcast.average_duration}
                           lastEpisodeDate={podcast.last_episode_date}
                           isVerified={podcast.is_verified}

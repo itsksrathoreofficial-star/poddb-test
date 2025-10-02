@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import { generateSEOData, SEOConfig } from '@/lib/seo-generator';
 import { createServiceClient } from '@/integrations/supabase/service';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 interface CategoryLanguagePageProps {
   params: Promise<{ category: string; language: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

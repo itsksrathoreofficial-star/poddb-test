@@ -1,8 +1,8 @@
-"use server";
+// "use server"; // Disabled for static export
 
-import { supabaseServer } from '@/integrations/supabase/server';
+import { supabaseServer } from '@/integrations/supabase/server-client';
 import { sendEmail, getWelcomeEmailTemplate, getPasswordResetTemplate, getEmailConfig } from '@/lib/email-service-simple';
-import { revalidatePath } from 'next/cache';
+// import { revalidatePath } from 'next/cache'; // Disabled for static export - use client-side refresh instead
 
 export async function createNotification(
   userId: string,
@@ -17,23 +17,26 @@ export async function createNotification(
   const supabase = await supabaseServer();
   
   try {
-    const { data, error } = await supabase.rpc('create_notification', {
-      p_user_id: userId,
-      p_title: title,
-      p_message: message,
-      p_type: type,
-      p_target_table: targetTable,
-      p_target_id: targetId,
-      p_target_url: targetUrl,
-      p_metadata: metadata,
-    } as any);
+    const { data, error } = await supabase
+      .from('notifications')
+      .insert({
+        user_id: userId,
+        title: title,
+        message: message,
+        type: type,
+        target_table: targetTable,
+        target_id: targetId,
+        target_url: targetUrl,
+        metadata: metadata,
+      });
 
     if (error) throw error;
 
     // Send email notification
-    await sendEmailNotification(userId, data, type, title, message);
+    const notificationId = (data as any)?.[0]?.id || null;
+    await sendEmailNotification(userId, notificationId || '', type, title, message);
 
-    return { success: true, notificationId: data };
+    return { success: true, notificationId };
   } catch (error: any) {
     console.error('Error creating notification:', error);
     return { success: false, error: error.message };
@@ -209,7 +212,7 @@ export async function markNotificationAsRead(notificationId: string) {
 
     if (error) throw error;
 
-    revalidatePath('/notifications');
+     // revalidatePath('/notifications'); // Disabled for static export - use client-side refresh instead
     return { success: true };
   } catch (error: any) {
     console.error('Error marking notification as read:', error);
@@ -226,7 +229,7 @@ export async function markAllNotificationsAsRead(userId: string) {
 
     if (error) throw error;
 
-    revalidatePath('/notifications');
+     // revalidatePath('/notifications'); // Disabled for static export - use client-side refresh instead
     return { success: true };
   } catch (error: any) {
     console.error('Error marking all notifications as read:', error);

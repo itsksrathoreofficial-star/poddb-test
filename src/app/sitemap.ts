@@ -1,5 +1,8 @@
 import { MetadataRoute } from 'next'
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://poddb.pro'
   
@@ -39,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/people`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
-      priority: 0.8,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/rankings`,

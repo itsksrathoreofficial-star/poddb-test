@@ -1,7 +1,7 @@
-"use server";
+// "use server"; // Disabled for static export
 
-import { supabaseServer } from "@/integrations/supabase/server";
-import { revalidatePath } from "next/cache";
+import { supabaseServer } from "@/integrations/supabase/server-client";
+// import { revalidatePath } from "next/cache"; // Disabled for static export - use client-side refresh instead
 
 type ContributionData = {
   target_table: 'podcasts' | 'people';
@@ -60,6 +60,6 @@ export async function createContributionAction(
     }
   }
 
-  revalidatePath("/");
+   // revalidatePath("/"); // Disabled for static export - use client-side refresh instead
   return { success: true };
 }

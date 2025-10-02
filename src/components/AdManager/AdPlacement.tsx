@@ -40,7 +40,7 @@ const AdPlacement: React.FC<AdPlacementProps> = ({
     if (path.startsWith('/notifications')) return 'notifications';
     if (path.startsWith('/profile')) return 'profile';
     if (path.startsWith('/preview')) return 'preview';
-    if (path.startsWith('/preview-updates')) return 'preview-updates';
+    if (path.startsWith('/admin-preview')) return 'admin-preview';
     if (path.startsWith('/privacy')) return 'privacy';
     if (path.startsWith('/terms')) return 'terms';
     if (path.startsWith('/help')) return 'help';

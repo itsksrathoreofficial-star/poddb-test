@@ -1,510 +1,350 @@
-"use client";
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { useAuth } from '@/components/AuthProvider';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { toast } from 'sonner';
-import { CheckCircle, XCircle, Loader2, Image as ImageIcon, Youtube, Users, AlertCircle, Save, Globe, ThumbsUp, ThumbsDown, Eye, Edit3, Upload, Plus, X, Search, ArrowLeft, RefreshCw } from 'lucide-react';
-import Image from 'next/image';
-import { supabase } from '@/integrations/supabase/client';
-import { getPreviewUpdateAction, approvePreviewUpdateAction, rejectPreviewUpdateAction } from '@/app/actions/preview-updates';
+import { createServiceClient } from '@/integrations/supabase/service';
+import { notFound } from 'next/navigation';
 
-interface FieldChange {
-  field: string;
-  original: any;
-  updated: any;
-  hasChanged: boolean;
+export const dynamic = 'force-dynamic';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { 
+  Calendar, 
+  User, 
+  Clock, 
+  ArrowLeft,
+  Share2,
+  Bookmark,
+  Eye,
+  Tag,
+  TrendingUp,
+  MessageCircle,
+  Heart,
+  CheckCircle,
+  XCircle,
+  AlertCircle
+} from 'lucide-react';
+import { Metadata } from 'next';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { getSafeImageUrl, handleImageError } from '@/lib/image-utils';
+
+type Props = {
+  params: Promise<{ previewId: string }>;
+};
+
+// This function generates the static pages at build time
+export async function generateStaticParams() {
+  // For now, return empty array to avoid build errors
+  // TODO: Implement proper static generation when database is available
+  return [];
 }
 
-export default function PreviewUpdatePage() {
-  const { user } = useAuth();
-  const params = useParams();
-  const previewId = params.previewId as string;
-  const router = useRouter();
-  const [previewData, setPreviewData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false);
-  const [activeSection, setActiveSection] = useState('overview');
-  const [showRejectionModal, setShowRejectionModal] = useState(false);
-  const [rejectionReason, setRejectionReason] = useState('');
-  const [fieldChanges, setFieldChanges] = useState<FieldChange[]>([]);
-  const topRef = useRef<HTMLDivElement>(null);
+// This function fetches the preview data
+async function getPreview(previewId: string) {
+  const supabase = createServiceClient();
+  const { data, error } = await supabase
+    .from('preview_updates')
+    .select(`
+      *,
+      profiles ( display_name, avatar_url )
+    `)
+    .eq('id', previewId)
+    .single();
 
-  useEffect(() => {
-    if (user) {
-      fetchPreviewData();
-    } else {
-      router.push('/auth');
-    }
-  }, [user, router, previewId]);
-
-  const fetchPreviewData = async () => {
-    if (!previewId) return;
-    setLoading(true);
-    try {
-      const result = await getPreviewUpdateAction(previewId);
-      if (!result.success) {
-        throw new Error(result.error);
-      }
-      
-      setPreviewData(result.data);
-      
-      // Calculate field changes
-      const changes = calculateFieldChanges(result.data.original_data, result.data.updated_data);
-      setFieldChanges(changes);
-      
-    } catch (error: any) {
-      toast.error("Failed to fetch preview data", { description: error.message });
-      router.push('/admin');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const calculateFieldChanges = (original: any, updated: any): FieldChange[] => {
-    const changes: FieldChange[] = [];
-    const fieldsToCheck = [
-      'title', 'description', 'categories', 'languages', 'location',
-      'social_links', 'platform_links', 'official_website', 'cover_image_url',
-      'team_members', 'episodes'
-    ];
-
-    fieldsToCheck.forEach(field => {
-      const originalValue = original?.[field];
-      const updatedValue = updated?.[field];
-      const hasChanged = JSON.stringify(originalValue) !== JSON.stringify(updatedValue);
-      
-      changes.push({
-        field,
-        original: originalValue,
-        updated: updatedValue,
-        hasChanged
-      });
-    });
-
-    return changes;
-  };
-
-  const getChangeIndicator = (hasChanged: boolean) => {
-    if (hasChanged) {
-      return (
-        <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          <span className="text-green-600 text-sm font-medium">Changed</span>
-        </div>
-      );
-    }
-    return (
-      <div className="flex items-center space-x-2">
-        <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-        <span className="text-gray-500 text-sm">No changes</span>
-      </div>
-    );
-  };
-
-  const handleApprove = async () => {
-    if (!user?.id) return;
-    setSubmitting(true);
-    try {
-      const result = await approvePreviewUpdateAction(previewId, user.id);
-      if (result.success) {
-        toast.success('Preview update approved successfully');
-        router.push('/admin');
-      } else {
-        throw new Error(result.error);
-      }
-    } catch (error: any) {
-      toast.error('Failed to approve preview update', { description: error.message });
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handleReject = async () => {
-    if (!user?.id || !rejectionReason.trim()) return;
-    setSubmitting(true);
-    try {
-      const result = await rejectPreviewUpdateAction(previewId, rejectionReason, user.id);
-      if (result.success) {
-        toast.success('Preview update rejected');
-        router.push('/admin');
-      } else {
-        throw new Error(result.error);
-      }
-    } catch (error: any) {
-      toast.error('Failed to reject preview update', { description: error.message });
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const renderFieldComparison = (change: FieldChange) => {
-    if (!change.hasChanged) {
-      return (
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <Label className="text-sm font-medium capitalize">
-              {change.field.replace(/_/g, ' ')}
-            </Label>
-            {getChangeIndicator(false)}
-          </div>
-          <div className="p-3 bg-muted rounded-md text-sm">
-            {typeof change.updated === 'object' 
-              ? JSON.stringify(change.updated, null, 2) 
-              : String(change.updated || 'Not set')
-            }
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <Label className="text-sm font-medium capitalize">
-            {change.field.replace(/_/g, ' ')}
-          </Label>
-          {getChangeIndicator(true)}
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label className="text-xs text-muted-foreground">Original</Label>
-            <div className="p-3 bg-red-50 border border-red-200 rounded-md text-sm">
-              {typeof change.original === 'object' 
-                ? JSON.stringify(change.original, null, 2) 
-                : String(change.original || 'Not set')
-              }
-            </div>
-          </div>
-          <div className="space-y-2">
-            <Label className="text-xs text-muted-foreground">Updated</Label>
-            <div className="p-3 bg-green-50 border border-green-200 rounded-md text-sm">
-              {typeof change.updated === 'object' 
-                ? JSON.stringify(change.updated, null, 2) 
-                : String(change.updated || 'Not set')
-              }
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const renderImageComparison = (field: string, originalUrl: string, updatedUrl: string) => {
-    const hasChanged = originalUrl !== updatedUrl;
-    
-    return (
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <Label className="text-sm font-medium capitalize">
-            {field.replace(/_/g, ' ')}
-          </Label>
-          {getChangeIndicator(hasChanged)}
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label className="text-xs text-muted-foreground">Original</Label>
-            <div className="aspect-square rounded-lg overflow-hidden bg-muted">
-              {originalUrl ? (
-                <Image src={originalUrl} alt="Original" width={200} height={200} className="w-full h-full object-cover" />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-muted-foreground">No image</span>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="space-y-2">
-            <Label className="text-xs text-muted-foreground">Updated</Label>
-            <div className="aspect-square rounded-lg overflow-hidden bg-muted">
-              {updatedUrl ? (
-                <Image src={updatedUrl} alt="Updated" width={200} height={200} className="w-full h-full object-cover" />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-muted-foreground">No image</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  if (loading) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-center h-96">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        </div>
-      </div>
-    );
+  if (error || !data) {
+    return null;
   }
 
-  if (!previewData) {
-    return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <h2 className="text-2xl font-bold">Preview not found</h2>
-        <p>The requested preview update could not be found.</p>
-        <Button onClick={() => router.push('/admin')} className="mt-4">
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Admin
-        </Button>
-      </div>
-    );
+  return data;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { previewId } = await params;
+  const preview = await getPreview(previewId);
+
+  if (!preview) {
+    return {
+      title: 'Preview Not Found | PodDB Updates',
+      description: 'The requested preview could not be found.',
+    };
   }
 
-  const hasChanges = fieldChanges.some(change => change.hasChanged);
+  return {
+    title: `${preview.title} | PodDB Updates Preview`,
+    description: preview.description || 'Preview the latest updates from PodDB.',
+    openGraph: {
+      title: preview.title,
+      description: preview.description,
+      images: preview.image_url ? [preview.image_url] : [],
+      type: 'article',
+      publishedTime: preview.created_at,
+      authors: preview.author_name ? [preview.author_name] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: preview.title,
+      description: preview.description,
+      images: preview.image_url ? [preview.image_url] : [],
+    },
+  };
+}
 
-  return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <div ref={topRef} />
-      
+export default async function PreviewUpdatePage({ params }: Props) {
+  const { previewId } = await params;
+  const preview = await getPreview(previewId);
+
+  if (!preview) {
+    notFound();
+  }
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'approved':
+        return <CheckCircle className="h-5 w-5 text-green-500" />;
+      case 'rejected':
+        return <XCircle className="h-5 w-5 text-red-500" />;
+      case 'pending':
+        return <AlertCircle className="h-5 w-5 text-yellow-500" />;
+      default:
+        return <AlertCircle className="h-5 w-5 text-gray-500" />;
+    }
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'approved':
+        return 'bg-green-100 text-green-800';
+      case 'rejected':
+        return 'bg-red-100 text-red-800';
+      case 'pending':
+        return 'bg-yellow-100 text-yellow-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+      return (
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="space-y-4 mb-8">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="bg-primary text-primary-foreground p-3 rounded-lg">
-              <RefreshCw className="h-8 w-8" />
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold">Preview Update</h1>
-              <p className="text-muted-foreground text-lg">
-                Review changes for {previewData.updated_data.title || 'Untitled'}
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-2">
-            <Badge variant={previewData.status === 'pending' ? 'default' : previewData.status === 'approved' ? 'secondary' : 'destructive'}>
-              {previewData.status.toUpperCase()}
-            </Badge>
-          </div>
-        </div>
-        
-        {/* Summary */}
-        <div className="p-4 bg-muted rounded-lg">
+      <div className="border-b">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div>
-              <h3 className="font-semibold">Change Summary</h3>
-              <p className="text-sm text-muted-foreground">
-                {fieldChanges.filter(c => c.hasChanged).length} fields changed out of {fieldChanges.length} total fields
-              </p>
-            </div>
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/preview-updates">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Previews
+              </Link>
+            </Button>
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-green-600 text-sm font-medium">
-                {fieldChanges.filter(c => c.hasChanged).length} Changes
-              </span>
+              <Button variant="outline" size="sm">
+                <Share2 className="h-4 w-4 mr-2" />
+                Share
+              </Button>
+              <Button variant="outline" size="sm">
+                <Bookmark className="h-4 w-4 mr-2" />
+                Save
+              </Button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Navigation Menu */}
-      <div className="flex flex-wrap gap-2 mb-8 p-4 bg-muted rounded-lg">
-        {[
-          { id: 'overview', label: 'Overview', icon: Eye },
-          { id: 'images', label: 'Images', icon: ImageIcon },
-          { id: 'details', label: 'Details', icon: Globe },
-          { id: 'social', label: 'Social Links', icon: Globe },
-          { id: 'platforms', label: 'Platforms', icon: Youtube },
-          { id: 'team', label: 'Team', icon: Users }
-        ].map((section) => (
-          <Button
-            key={section.id}
-            variant={activeSection === section.id ? 'default' : 'outline'}
-            onClick={() => setActiveSection(section.id)}
-            className="flex items-center gap-2"
-          >
-            <section.icon className="h-4 w-4" />
-            {section.label}
-          </Button>
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Preview Header */}
+          <header className="mb-8">
+            <div className="flex items-center space-x-4 mb-4">
+              <Badge variant="secondary">Preview</Badge>
+              <Badge className={getStatusColor(preview.status)}>
+                {getStatusIcon(preview.status)}
+                <span className="ml-1 capitalize">{preview.status}</span>
+            </Badge>
+              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                <Calendar className="h-4 w-4" />
+                <span>{new Date(preview.created_at).toLocaleDateString()}</span>
+          </div>
+        </div>
+        
+            <h1 className="text-4xl font-bold tracking-tight mb-4">
+              {preview.title}
+            </h1>
+
+            {preview.description && (
+              <p className="text-xl text-muted-foreground mb-6">
+                {preview.description}
+              </p>
+            )}
+
+            <div className="flex items-center space-x-4 mb-6">
+            <div className="flex items-center space-x-2">
+                <User className="h-5 w-5 text-muted-foreground" />
+                <span className="font-medium">{preview.author_name || 'PodDB Team'}</span>
+            </div>
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <Eye className="h-4 w-4" />
+                <span>{preview.views || 0} views</span>
+        </div>
+      </div>
+
+            {preview.image_url && (
+              <div className="relative w-full h-96 mb-8 rounded-lg overflow-hidden">
+                <Image
+                  src={getSafeImageUrl(preview.image_url)}
+                  alt={preview.title}
+                  fill
+                  className="object-cover"
+                  onError={handleImageError}
+                />
+              </div>
+            )}
+          </header>
+
+          {/* Preview Content */}
+          <article className="prose prose-lg max-w-none mb-12">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: ({ children }) => (
+                  <h1 className="text-3xl font-bold mb-6 text-foreground">
+                    {children}
+                  </h1>
+                ),
+                h2: ({ children }) => (
+                  <h2 className="text-2xl font-semibold mb-4 text-foreground">
+                    {children}
+                  </h2>
+                ),
+                h3: ({ children }) => (
+                  <h3 className="text-xl font-semibold mb-3 text-foreground">
+                    {children}
+                  </h3>
+                ),
+                p: ({ children }) => (
+                  <p className="mb-4 text-foreground leading-relaxed">
+                    {children}
+                  </p>
+                ),
+                a: ({ href, children }) => (
+                  <a
+                    href={href}
+                    className="text-primary hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {children}
+                  </a>
+                ),
+                img: ({ src, alt }) => (
+                  <div className="my-6">
+                    <Image
+                      src={getSafeImageUrl(src || '')}
+                      alt={alt || ''}
+                      width={800}
+                      height={400}
+                      className="rounded-lg w-full h-auto"
+                      onError={handleImageError}
+                    />
+                  </div>
+                ),
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-6">
+                    {children}
+                  </blockquote>
+                ),
+                code: ({ children }) => (
+                  <code className="bg-muted px-2 py-1 rounded text-sm font-mono">
+                    {children}
+                  </code>
+                ),
+                pre: ({ children }) => (
+                  <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-6">
+                    {children}
+                  </pre>
+                ),
+              }}
+            >
+              {preview.content || preview.description || ''}
+            </ReactMarkdown>
+          </article>
+
+          {/* Preview Tags */}
+          {preview.tags && preview.tags.length > 0 && (
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-3 flex items-center">
+                <Tag className="h-5 w-5 mr-2" />
+                Tags
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {preview.tags.map((tag: string, index: number) => (
+                  <Badge key={index} variant="outline">
+                    {tag}
+                  </Badge>
         ))}
       </div>
-
-      {/* Content Sections */}
-      <div className="space-y-8">
-        {activeSection === 'overview' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>All Changes Overview</CardTitle>
-              <CardDescription>Review all field changes in this update</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {fieldChanges.map((change, index) => (
-                <div key={index}>
-                  {renderFieldComparison(change)}
                 </div>
-              ))}
-            </CardContent>
-          </Card>
-        )}
+          )}
 
-        {activeSection === 'images' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Image Changes</CardTitle>
-              <CardDescription>Review image updates</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {renderImageComparison(
-                'cover_image_url',
-                previewData.original_data.cover_image_url,
-                previewData.updated_data.cover_image_url
-              )}
-            </CardContent>
-          </Card>
-        )}
-
-        {activeSection === 'details' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Basic Details</CardTitle>
-              <CardDescription>Review basic information changes</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {fieldChanges
-                .filter(change => ['title', 'description', 'categories', 'languages', 'location'].includes(change.field))
-                .map((change, index) => (
-                  <div key={index}>
-                    {renderFieldComparison(change)}
+          {/* Preview Stats */}
+          <div className="flex items-center justify-between py-6 border-t border-b mb-8">
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-2">
+                <Heart className="h-5 w-5 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">
+                  {preview.likes || 0} likes
+                </span>
                   </div>
-                ))}
-            </CardContent>
-          </Card>
-        )}
-
-        {activeSection === 'social' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Social Media Links</CardTitle>
-              <CardDescription>Review social media changes</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {fieldChanges
-                .filter(change => ['social_links', 'official_website'].includes(change.field))
-                .map((change, index) => (
-                  <div key={index}>
-                    {renderFieldComparison(change)}
+              <div className="flex items-center space-x-2">
+                <MessageCircle className="h-5 w-5 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">
+                  {preview.comments || 0} comments
+                </span>
                   </div>
-                ))}
-            </CardContent>
-          </Card>
-        )}
-
-        {activeSection === 'platforms' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Platform Links</CardTitle>
-              <CardDescription>Review platform link changes</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {fieldChanges
-                .filter(change => change.field === 'platform_links')
-                .map((change, index) => (
-                  <div key={index}>
-                    {renderFieldComparison(change)}
+              <div className="flex items-center space-x-2">
+                <TrendingUp className="h-5 w-5 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">
+                  {preview.views || 0} views
+                </span>
                   </div>
-                ))}
-            </CardContent>
-          </Card>
-        )}
-
-        {activeSection === 'team' && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Team Members</CardTitle>
-              <CardDescription>Review team member changes</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {fieldChanges
-                .filter(change => change.field === 'team_members')
-                .map((change, index) => (
-                  <div key={index}>
-                    {renderFieldComparison(change)}
                   </div>
-                ))}
-            </CardContent>
-          </Card>
-        )}
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex justify-between items-center mt-8 p-6 bg-muted rounded-lg">
-        <Button
-          variant="outline"
-          onClick={() => router.push('/admin')}
-          className="flex items-center gap-2"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to Admin
+            <div className="flex items-center space-x-2">
+              <Button variant="outline" size="sm">
+                <Share2 className="h-4 w-4 mr-2" />
+                Share
         </Button>
-        
-        <div className="flex gap-4">
-          <Button
-            variant="destructive"
-            onClick={() => setShowRejectionModal(true)}
-            disabled={submitting || previewData.status !== 'pending'}
-            className="flex items-center gap-2"
-          >
-            <XCircle className="h-4 w-4" />
-            Reject Changes
-          </Button>
-          <Button
-            onClick={handleApprove}
-            disabled={submitting || previewData.status !== 'pending' || !hasChanges}
-            className="flex items-center gap-2"
-          >
-            <CheckCircle className="h-4 w-4" />
-            Approve Changes
+              <Button variant="outline" size="sm">
+                <Bookmark className="h-4 w-4 mr-2" />
+                Save
           </Button>
         </div>
       </div>
 
-      {/* Rejection Modal */}
-      <Dialog open={showRejectionModal} onOpenChange={setShowRejectionModal}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Reject Changes</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            <Textarea
-              placeholder="Enter reason for rejection..."
-              value={rejectionReason}
-              onChange={(e) => setRejectionReason(e.target.value)}
-              className="min-h-[100px]"
-            />
-            <div className="flex justify-end gap-2">
-              <Button variant="outline" onClick={() => setShowRejectionModal(false)}>
-                Cancel
+          {/* Admin Actions */}
+          {preview.status === 'pending' && (
+            <div className="mb-8 p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4 text-yellow-800">
+                Admin Actions Required
+              </h3>
+              <div className="flex space-x-4">
+                <Button className="bg-green-600 hover:bg-green-700">
+                  <CheckCircle className="h-4 w-4 mr-2" />
+                  Approve
+                </Button>
+                <Button variant="destructive">
+                  <XCircle className="h-4 w-4 mr-2" />
+                  Reject
               </Button>
-              <Button
-                variant="destructive"
-                onClick={handleReject}
-                disabled={!rejectionReason.trim() || submitting}
-              >
-                {submitting ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Rejecting...
-                  </>
-                ) : (
-                  'Reject Changes'
-                )}
+                <Button variant="outline">
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  Add Comment
               </Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
+
+

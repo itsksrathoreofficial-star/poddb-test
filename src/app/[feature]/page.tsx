@@ -2,9 +2,32 @@ import { Metadata } from 'next';
 import { generateHomeSEOData, HomeSEOConfig } from '@/lib/home-seo-generator';
 import HomePageClient from '../HomePageClient';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 interface FeaturePageProps {
   params: Promise<{ feature: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export async function generateStaticParams() {
+  // Define the features that should be statically generated
+  const features = [
+    'platform',
+    'database', 
+    'directory',
+    'discovery',
+    'analytics',
+    'search',
+    'browse',
+    'explore',
+    'find',
+    'discover'
+  ];
+
+  return features.map((feature) => ({
+    feature,
+  }));
 }
 
 export async function generateMetadata({ params, searchParams }: FeaturePageProps): Promise<Metadata> {

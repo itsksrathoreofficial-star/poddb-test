@@ -18,7 +18,7 @@
     "setup-sync-server": "node scripts/setup-sync-server.js",
     "build:fast": "next build --no-lint",
     "build:analyze": "ANALYZE=true next build",
-    "build:static": "next build && next export",
+    "build:static": "next build",
     "build:production": "node scripts/optimize-production.js && next build",
     "preview": "next build && next start",
     "optimize": "node scripts/optimize-production.js",
@@ -29,7 +29,10 @@
     "performance:check": "node scripts/performance-check.js",
     "performance:monitor": "node scripts/performance-monitor.js",
     "fix-supabase": "node scripts/fix-supabase-client.js",
-    "production:setup": "npm run fix-supabase && npm run generate-static && npm run optimize"
+    "production:setup": "npm run fix-supabase && npm run generate-static && npm run optimize",
+    "build:github": "next build",
+    "export": "next export",
+    "deploy:github": "npm run build:github && npm run export"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.1.0",

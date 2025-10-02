@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, User, Calendar, FileText, Globe, Users, Play, Image as ImageIcon, Link as LinkIcon } from 'lucide-react';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {
   params: Promise<{ id: string }>;
 }

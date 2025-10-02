@@ -1,6 +1,6 @@
-"use server";
+// "use server"; // Disabled for static export
 
-import { supabaseServer } from "@/integrations/supabase/server";
+import { supabaseServer } from "@/integrations/supabase/server-client";
 import { EmailConfig } from "@/lib/email-service-simple";
 import { getFallbackEmailConfig, setFallbackEmailConfig } from "@/lib/email-config-fallback";
 

@@ -421,6 +421,12 @@ class AnalyticsService {
             // This is expected - duplicate event, ignore silently
             return;
           }
+          // Also ignore 409 errors from the response status
+          if (error && typeof error === 'object' && 'message' in error && 
+              typeof error.message === 'string' &&
+              (error.message.includes('409') || error.message.includes('Conflict'))) {
+            return;
+          }
           // Silent mode - don't log any analytics errors
           if (SILENT_MODE) {
             return;
@@ -525,6 +531,12 @@ class AnalyticsService {
           // Silently ignore 409 conflicts (duplicate data) - this is expected
           if (error && typeof error === 'object' && 'code' in error && error.code === '409') {
             // This is expected - duplicate event, ignore silently
+            return;
+          }
+          // Also ignore 409 errors from the response status
+          if (error && typeof error === 'object' && 'message' in error && 
+              typeof error.message === 'string' &&
+              (error.message.includes('409') || error.message.includes('Conflict'))) {
             return;
           }
           // Silent mode - don't log any analytics errors

@@ -138,6 +138,8 @@ function ContributeContent() {
             setCategories(data.categories || []);
             setEpisodes(data.episodes || []);
             setTeamMembers(data.team_members || []);
+            setLanguages(data.languages || (data.language ? [data.language] : []));
+            setPodcastLocation(data.podcastLocation || data.location || '');
             setPlatformLinks(data.platform_links || { spotify: '', apple: '', jiosaavn: '', amazon: '', other: [{ title: '', url: '' }] });
             setSocialLinks(data.social_links || { instagram: '', youtube: '', x: '', facebook: '', linkedin: '', threads: '', pinterest: '', other: [{ title: '', url: '' }] });
             setOfficialWebsite(data.official_website || '');
@@ -259,7 +261,7 @@ function ContributeContent() {
         return dateA.getTime() - dateB.getTime();
       }).map((episode: any, index: number) => ({
         ...episode,
-        episode_number: index + 1
+        episode_number: episode.episode_number || index + 1 // Use existing number or assign new one
       }));
       setEpisodes(sortedEpisodes);
       setPlatformLinks({
@@ -350,7 +352,7 @@ function ContributeContent() {
 
       if (result.success && result.previewId) {
         toast.success("Preview created successfully!");
-        router.push(`/preview-updates/${result.previewId}`);
+        router.push(`/admin-preview/${result.previewId}`);
       } else {
         throw new Error(result.error);
       }
@@ -580,7 +582,7 @@ function ContributeContent() {
         average_duration: podcastData.average_duration || 0,
         first_episode_date: podcastData.first_episode_date || null,
         last_episode_date: podcastData.last_episode_date || null,
-        languages: languages.length > 0 ? languages : ['en'],
+        language: languages.length > 0 ? languages[0] : 'en',
         location: podcastLocation || undefined,
         submission_status: 'pending' as 'pending' | 'approved' | 'rejected' | 'partial',
         submitted_by: user.id

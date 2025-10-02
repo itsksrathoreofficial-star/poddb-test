@@ -1,6 +1,9 @@
 import { MetadataRoute } from 'next';
 import { createServiceClient } from '@/integrations/supabase/service';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://poddb.pro';
   const sitemap: MetadataRoute.Sitemap = [];

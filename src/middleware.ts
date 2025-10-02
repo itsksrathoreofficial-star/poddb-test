@@ -1,9 +1,14 @@
 import { createClient } from '@/integrations/supabase/middleware';
 import { NextResponse, type NextRequest } from 'next/server';
-import { errorTracker } from '@/lib/error-tracking';
+// import { errorTracker } from '@/lib/error-tracking';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  
+  // Skip middleware for build process
+  if (process.env.NEXT_BUILD) {
+    return NextResponse.next();
+  }
   
   // Skip middleware for static assets, API routes, and public files
   if (
@@ -122,21 +127,21 @@ export async function middleware(request: NextRequest) {
     console.error('Middleware error:', error);
     
     // Try to log the error (but don't fail if logging fails)
-    try {
-      await errorTracker.logServerError(error, {
-        pageUrl: request.url,
-        userAgent: request.headers.get('user-agent') || undefined,
-        ipAddress: request.headers.get('x-forwarded-for')?.split(',')[0] || 
-                   request.headers.get('x-real-ip') || 
-                   '127.0.0.1',
-        additionalData: {
-          middleware: true,
-          pathname: pathname
-        }
-      });
-    } catch (loggingError) {
-      console.error('Failed to log middleware error:', loggingError);
-    }
+    // try {
+    //   await errorTracker.logServerError(error, {
+    //     pageUrl: request.url,
+    //     userAgent: request.headers.get('user-agent') || undefined,
+    //     ipAddress: request.headers.get('x-forwarded-for')?.split(',')[0] || 
+    //                request.headers.get('x-real-ip') || 
+    //                '127.0.0.1',
+    //     additionalData: {
+    //       middleware: true,
+    //       pathname: pathname
+    //     }
+    //   });
+    // } catch (loggingError) {
+    //   console.error('Failed to log middleware error:', loggingError);
+    // }
     
     // Return a basic response even if middleware fails
     return NextResponse.next();
@@ -148,9 +153,11 @@ export const config = {
     /*
      * Match all request paths except for the ones starting with:
      * - _next/static (static files)
-     * - _next/image (image optimization files)
+     * - _next/image (image optimization files)  
      * - favicon.ico (favicon file)
+     * - api/ (API routes)
+     * - Static assets
      */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/((?!_next/static|_next/image|favicon.ico|robots.txt|manifest.json|sw.js|.*\\..*).*)',
   ],
 }

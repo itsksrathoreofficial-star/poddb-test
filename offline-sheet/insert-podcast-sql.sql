@@ -98,7 +98,7 @@ INSERT INTO podcasts (
     0, -- average_duration (will be updated by YouTube API)
     NULL, -- first_episode_date (will be updated by YouTube API)
     NULL, -- last_episode_date (will be updated by YouTube API)
-    'pending'::submission_status, -- submission_status
+    'approved'::submission_status, -- submission_status (set to approved for immediate sync)
     'your-user-id-here', -- Replace with actual user ID
     false, -- is_verified
     0.0, -- average_rating

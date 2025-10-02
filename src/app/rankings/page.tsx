@@ -3,13 +3,28 @@ import { Loader2 } from 'lucide-react';
 import RankingsClient from './RankingsClient';
 import { createClient } from '@/integrations/supabase/server';
 
-// Enable static generation with ISR
+// Enable static generation
 export const dynamic = 'force-static';
-export const revalidate = 1800; // Revalidate every 30 minutes
+export const revalidate = false; // Fully static, no revalidation
 
 // Pre-fetch rankings data at build time
 async function getRankingsData() {
   try {
+    // Check if we're in build mode - if so, return empty data to avoid API calls
+    if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_SITE_URL) {
+      return {
+        overallRankings: [],
+        weeklyRankings: [],
+        monthlyRankings: [],
+        episodesOverallRankings: [],
+        episodesWeeklyRankings: [],
+        episodesMonthlyRankings: [],
+        categories: [],
+        languages: [],
+        locations: []
+      };
+    }
+
     // Fetch all rankings data
       const [overallRes, weeklyRes, monthlyRes, episodesOverallRes, episodesWeeklyRes, episodesMonthlyRes] = await Promise.all([
       fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/rankings/overall`),
@@ -19,6 +34,25 @@ async function getRankingsData() {
       fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/rankings/episodes-weekly`),
       fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/rankings/episodes-monthly`)
       ]);
+
+      // Check if all responses are ok
+      const responses = [overallRes, weeklyRes, monthlyRes, episodesOverallRes, episodesWeeklyRes, episodesMonthlyRes];
+      const failedResponses = responses.filter(res => !res.ok);
+      
+      if (failedResponses.length > 0) {
+        console.warn('Some ranking API calls failed, returning empty data');
+        return {
+          overallRankings: [],
+          weeklyRankings: [],
+          monthlyRankings: [],
+          episodesOverallRankings: [],
+          episodesWeeklyRankings: [],
+          episodesMonthlyRankings: [],
+          categories: [],
+          languages: [],
+          locations: []
+        };
+      }
 
       const [overall, weekly, monthly, episodesOverall, episodesWeekly, episodesMonthly] = await Promise.all([
         overallRes.json(),
@@ -65,7 +99,7 @@ async function getRankingsData() {
               };
             } catch (error) {
     console.error('Error fetching rankings data:', error);
-              return {
+    return {
       overallRankings: [],
       weeklyRankings: [],
       monthlyRankings: [],

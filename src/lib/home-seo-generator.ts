@@ -1,4 +1,4 @@
-import { supabaseServer } from '@/integrations/supabase/server';
+import { supabaseServer } from '@/integrations/supabase/server-client';
 
 export interface HomeSEOConfig {
   type?: 'platform' | 'database' | 'directory' | 'discovery' | 'analytics';

@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir, readFile } from 'fs/promises';
 import { join } from 'path';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 // GET method to fetch existing SEO combinations
 export async function GET() {
   try {

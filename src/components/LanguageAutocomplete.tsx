@@ -53,20 +53,21 @@ export function LanguageAutocomplete({
 
       try {
         setLoading(true);
-        const { data, error } = await supabase.rpc('get_language_suggestions', {
-          search_term: inputValue.trim()
-        } as any);
+        const { data, error } = await supabase
+          .from('languages')
+          .select('name')
+          .ilike('name', `%${inputValue.trim()}%`)
+          .limit(10);
 
         if (error) throw error;
 
         const languages = (data || []) as Language[];
         setSuggestions(languages);
         setShowCreateNew(languages.length === 0 || !languages.some(lang => 
-          lang.name.toLowerCase() === inputValue.toLowerCase() || 
-          lang.code.toLowerCase() === inputValue.toLowerCase()
+          lang.name && lang.name.toLowerCase() === inputValue.toLowerCase()
         ));
-      } catch (error) {
-        console.error('Error fetching language suggestions:', error);
+      } catch (error: any) {
+        console.error('Error fetching language suggestions:', error?.message || error);
         setSuggestions([]);
         setShowCreateNew(true);
       } finally {
@@ -248,7 +249,7 @@ export function LanguageAutocomplete({
               ) : suggestions.length > 0 ? (
                 suggestions.map((language, index) => (
                   <div
-                    key={language.code}
+                    key={language.name || index}
                     className={cn(
                       'px-4 py-2 cursor-pointer text-sm hover:bg-accent',
                       highlightedIndex === index && 'bg-accent'

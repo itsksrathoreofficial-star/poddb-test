@@ -311,7 +311,7 @@ export default function PreviewUpdatesTab() {
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => router.push(`/preview-updates/${update.id}`)}
+                        onClick={() => router.push(`/admin-preview/${update.id}`)}
                       >
                         <Eye className="h-4 w-4 mr-1" />
                         Preview

@@ -4,6 +4,9 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export async function POST(request: Request) {
   const cookieStore = await cookies();
 

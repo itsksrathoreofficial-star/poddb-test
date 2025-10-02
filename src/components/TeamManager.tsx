@@ -31,7 +31,7 @@ import Image from 'next/image';
 import { TeamMemberSearch } from './TeamMemberSearch';
 import { PhotoUploadManager } from './PhotoUploadManager';
 import { SocialMediaInput } from './SocialMediaInput';
-import { uploadToCloudinary } from '@/lib/cloudinary-client';
+import { uploadToCloudinaryWithProgress, uploadToCloudinaryViaAPI } from '@/lib/cloudinary-client';
 
 interface TeamMember {
   id: string;
@@ -99,6 +99,16 @@ export function TeamManager({ teamMembers, episodes, onTeamUpdate, onPhotoUpload
     episodes: [],
     isExistingUser: false // New members are not existing users
   });
+
+  // Ensure existing team members have proper structure
+  const processedTeamMembers = teamMembers.map(member => ({
+    ...member,
+    role: Array.isArray(member.role) ? member.role : [member.role || 'Guest'],
+    photo_urls: member.photo_urls || [],
+    social_links: member.social_links || {},
+    episodes: member.episodes || [],
+    isExistingUser: member.isExistingUser !== undefined ? member.isExistingUser : true
+  }));
 
   const addMember = () => {
     const newMember = createNewMember();
@@ -179,8 +189,30 @@ export function TeamManager({ teamMembers, episodes, onTeamUpdate, onPhotoUpload
   const handlePhotoUploadNew = async (file: File, type: 'profile' | 'additional') => {
     if (editingMember) {
       try {
+        // Validate file before upload
+        if (!file || !file.type.startsWith('image/')) {
+          toast.error("Please select a valid image file.");
+          return;
+        }
+
+        if (file.size > 10 * 1024 * 1024) {
+          toast.error("File size too large. Please select an image smaller than 10MB.");
+          return;
+        }
+
         toast.info("Uploading photo...");
-        const result = await uploadToCloudinary(file, 'team-photos');
+        
+        let result;
+        try {
+          // Try server-side upload first (more reliable)
+          result = await uploadToCloudinaryViaAPI(file, 'team-photos');
+        } catch (apiError) {
+          console.warn('API upload failed, trying direct upload:', apiError);
+          // Fallback to direct upload with progress tracking
+          result = await uploadToCloudinaryWithProgress(file, 'team-photos', (progress) => {
+            console.log(`Upload progress: ${progress}%`);
+          });
+        }
         
         const member = teamMembers.find(m => m.id === editingMember);
         if (member) {
@@ -190,7 +222,11 @@ export function TeamManager({ teamMembers, episodes, onTeamUpdate, onPhotoUpload
         }
       } catch (error: any) {
         console.error('Error uploading photo:', error);
-        toast.error("Failed to upload photo", { description: error.message });
+        const errorMessage = error.message || 'Failed to upload photo';
+        toast.error(errorMessage.includes('Cloudinary cloud name') 
+          ? 'Image upload service not configured. Please contact administrator.'
+          : errorMessage
+        );
       }
     }
   };
@@ -221,7 +257,7 @@ export function TeamManager({ teamMembers, episodes, onTeamUpdate, onPhotoUpload
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Users className="h-6 w-6 text-primary" />
-            <span>Team Members ({teamMembers.length})</span>
+            <span>Team Members ({processedTeamMembers.length})</span>
           </div>
           {!readOnly && (
             <div className="flex space-x-2">
@@ -260,7 +296,7 @@ export function TeamManager({ teamMembers, episodes, onTeamUpdate, onPhotoUpload
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
-          {teamMembers.map((member) => (
+          {processedTeamMembers.map((member) => (
             <Card key={member.id} className="border border-border/50">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between mb-4">
@@ -520,10 +556,11 @@ export function TeamManager({ teamMembers, episodes, onTeamUpdate, onPhotoUpload
                           </Label>
                         </div>
                         
-                        {filteredEpisodes.map((episode) => {
+                        {filteredEpisodes.map((episode, index) => {
                           const episodeId = episode.youtube_video_id;
+                          const uniqueKey = `${member.id}-${episodeId}-${index}`;
                           return (
-                            <div key={episodeId} className="flex items-center space-x-2 p-2 hover:bg-muted/30 rounded">
+                            <div key={uniqueKey} className="flex items-center space-x-2 p-2 hover:bg-muted/30 rounded">
                               <Checkbox
                                 id={`episode-${member.id}-${episodeId}`}
                                 checked={member.episodes.includes(episodeId) || member.episodes.includes('all')}

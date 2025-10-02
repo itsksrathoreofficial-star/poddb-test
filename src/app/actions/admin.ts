@@ -8,6 +8,7 @@ import type { TablesInsert, Json } from '@/integrations/supabase/types';
 import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
 import { subDays, startOfDay, endOfDay } from 'date-fns';
+import { generateSlug } from '@/lib/utils';
 
 // This function creates a Supabase client with the service role key,
 // which has admin privileges and can bypass RLS policies.
@@ -85,9 +86,48 @@ export async function getAllPeopleAction() {
 export async function getPendingPodcastsAction() {
     const supabaseAdmin = createAdminClient();
     try {
-        const { data, error } = await supabaseAdmin.rpc('get_pending_podcasts_with_profiles');
-        if (error) throw error;
-        return { success: true, data };
+        // Fetch pending podcasts without join
+        const { data: podcasts, error: podcastError } = await supabaseAdmin
+            .from('podcasts')
+            .select(`
+                id,
+                title,
+                description,
+                cover_image_url,
+                total_episodes,
+                categories,
+                submission_status,
+                created_at,
+                submitted_by
+            `)
+            .eq('submission_status', 'pending')
+            .order('created_at', { ascending: true });
+        
+        if (podcastError) throw podcastError;
+        
+        // Fetch profiles separately
+        const userIds = Array.from(new Set((podcasts || []).map((p: any) => p.submitted_by).filter(Boolean)));
+        const { data: profiles, error: profileError } = await supabaseAdmin
+            .from('profiles')
+            .select('id, display_name, email')
+            .in('id', userIds);
+        
+        if (profileError) throw profileError;
+        
+        // Create a map of user profiles
+        const profileMap = new Map((profiles || []).map((p: any) => [p.id, p]));
+        
+        // Format data with profile information
+        const formattedData = (podcasts || []).map((podcast: any) => {
+            const profile = profileMap.get(podcast.submitted_by);
+            return {
+                ...podcast,
+                display_name: profile?.display_name || 'N/A',
+                email: profile?.email || 'N/A'
+            };
+        });
+        
+        return { success: true, data: formattedData };
     } catch (error: any) {
         return { success: false, error: error.message };
     }
@@ -96,40 +136,130 @@ export async function getPendingPodcastsAction() {
 export async function updatePodcastStatusAction(podcastId: string, status: 'approved' | 'rejected', userId: string) {
   const supabaseAdmin = createAdminClient();
   try {
-    const { error } = await supabaseAdmin
+    console.log('Starting podcast approval process for:', podcastId, 'Status:', status, 'User:', userId);
+    
+    // First get the podcast data to generate slug
+    const { data: podcastData, error: fetchError } = await supabaseAdmin
       .from('podcasts')
-      .update({ submission_status: status, approved_by: userId })
-      .eq('id', podcastId);
+      .select('id, title, description, categories, slug, submitted_by')
+      .eq('id', podcastId)
+      .single();
 
-    if (error) throw error;
+    if (fetchError) {
+      console.error('Error fetching podcast data:', fetchError);
+      throw fetchError;
+    }
+
+    console.log('Podcast data fetched:', podcastData);
+
+    // Prepare update data
+    const updateData: any = {
+      submission_status: status,
+      approved_by: userId
+    };
+
+    // Generate slug if approved and no slug exists
+    if (status === 'approved' && (!podcastData.slug || podcastData.slug.trim() === '')) {
+      const baseSlug = generateSlug(podcastData.title);
+      let slug = baseSlug;
+      let counter = 1;
+
+      // Check for uniqueness
+      while (true) {
+        const { data: existingPodcast } = await supabaseAdmin
+          .from('podcasts')
+          .select('id')
+          .eq('slug', slug)
+          .neq('id', podcastId)
+          .single();
+
+        if (!existingPodcast) break;
+        
+        slug = `${baseSlug}-${counter}`;
+        counter++;
+      }
+
+      updateData.slug = slug;
+    }
+
+    // Update the podcast
+    console.log('Updating podcast with data:', updateData);
+    const { data: updateResult, error } = await supabaseAdmin
+      .from('podcasts')
+      .update(updateData)
+      .eq('id', podcastId)
+      .select();
+
+    if (error) {
+      console.error('Error updating podcast:', error);
+      throw error;
+    }
+
+    console.log('Podcast update result:', updateResult);
 
     if (status === 'approved') {
-      const { data: podcast, error: podcastError } = await supabaseAdmin
-        .from('podcasts')
-        .select('id, title, description, categories')
-        .eq('id', podcastId)
-        .single();
+      const job = {
+        target_id: podcastData.id,
+        target_table: 'podcasts',
+        status: 'pending',
+        context: {
+          title: podcastData.title,
+          description: podcastData.description,
+          contentType: 'podcast',
+          relatedInfo: podcastData.categories?.join(', ') || ''
+        }
+      };
+      
+      const { error: insertError } = await supabaseAdmin
+        .from('seo_jobs')
+        .upsert(job, { onConflict: 'target_id, target_table', ignoreDuplicates: true });
+          
+      if (insertError) throw insertError;
 
-      if (podcastError) throw podcastError;
-
-      if (podcast) {
-        const job: TablesInsert<'seo_jobs'> = {
-          target_id: podcast.id,
-          target_table: 'podcasts',
-          status: 'pending',
-          context: {
-            title: podcast.title,
-            description: podcast.description,
-            contentType: 'podcast',
-            relatedInfo: podcast.categories?.join(', ') || ''
-          }
-        };
+      // Send approval notification
+      try {
+        const { error: notificationError } = await supabaseAdmin
+          .from('notifications')
+          .insert({
+            user_id: podcastData.submitted_by,
+            title: 'Podcast Approved! 🎉',
+            message: `Your podcast "${podcastData.title}" has been approved and is now live on PodDB Pro!`,
+            type: 'approval',
+            metadata: {
+              podcast_id: podcastData.id,
+              podcast_title: podcastData.title,
+              approved_by: userId
+            }
+          });
         
-        const { error: insertError } = await supabaseAdmin
-          .from('seo_jobs')
-          .upsert(job, { onConflict: 'target_id, target_table', ignoreDuplicates: true });
-            
-        if (insertError) throw insertError;
+        if (notificationError) {
+          console.error('Failed to send approval notification:', notificationError);
+        }
+      } catch (notificationError) {
+        console.error('Failed to send approval notification:', notificationError);
+      }
+    } else if (status === 'rejected') {
+      // Send rejection notification
+      try {
+        const { error: notificationError } = await supabaseAdmin
+          .from('notifications')
+          .insert({
+            user_id: podcastData.submitted_by,
+            title: 'Podcast Update Required',
+            message: `Your podcast "${podcastData.title}" needs some adjustments. Please review and resubmit.`,
+            type: 'rejection',
+            metadata: {
+              podcast_id: podcastData.id,
+              podcast_title: podcastData.title,
+              rejected_by: userId
+            }
+          });
+        
+        if (notificationError) {
+          console.error('Failed to send rejection notification:', notificationError);
+        }
+      } catch (notificationError) {
+        console.error('Failed to send rejection notification:', notificationError);
       }
     }
     
@@ -1404,78 +1534,293 @@ export async function handleVerificationAction(requestId: string, status: 'appro
 }
 
 export async function approveContribution(contributionId: string, reviewerId: string) {
+  console.log('[approveContribution] Starting approval process:', { contributionId, reviewerId });
   const supabaseAdmin = createAdminClient();
   
-  // First get the contribution details
-  const { data: contribution, error: fetchError } = await supabaseAdmin
-    .from('contributions')
-    .select('user_id, target_table, target_id, data')
-    .eq('id', contributionId)
-    .single();
-
-  if (fetchError) throw new Error(fetchError.message);
-
-  // Check if reviewer is admin
-  const { data: profile, error: profileError } = await supabaseAdmin
-    .from('profiles')
-    .select('role')
-    .eq('user_id', reviewerId)
-    .single();
-
-  if (profileError || profile?.role !== 'admin') {
-    throw new Error('Only admins can approve contributions.');
-  }
-
-  // Approve the contribution using direct table update
-  const { error: updateError } = await supabaseAdmin
-    .from('contributions')
-    .update({
-      status: 'approved',
-      reviewed_by: reviewerId,
-      reviewed_at: new Date().toISOString()
-    })
-    .eq('id', contributionId)
-    .eq('status', 'pending');
-
-  if (updateError) throw new Error(updateError.message);
-
-  // Apply the changes to the target table
-  const targetTable = contribution.target_table;
-  const targetId = contribution.target_id;
-  const data = contribution.data;
-
-  // Update the target record with the contribution data
-  const { error: targetUpdateError } = await supabaseAdmin
-    .from(targetTable)
-    .update(data)
-    .eq('id', targetId);
-
-  if (targetUpdateError) throw new Error(targetUpdateError.message);
-
-  // Send notification to the user
   try {
-    const { error: notificationError } = await supabaseAdmin.rpc('create_notification', {
-      p_user_id: contribution.user_id,
-      p_title: 'Contribution Approved',
-      p_message: `Your contribution for ${contribution.data.title || 'the item'} has been approved and is now live!`,
-      p_type: 'contribution_approved',
-      p_metadata: {
-        contribution_id: contributionId,
-        target_table: contribution.target_table,
-        target_id: contribution.target_id
-      }
-    });
+    // Convert contributionId to number since it's BIGINT in database
+    const contributionIdNum = parseInt(contributionId, 10);
+    if (isNaN(contributionIdNum)) {
+      throw new Error('Invalid contribution ID');
+    }
+    
+    // First get the contribution details
+    const { data: contribution, error: fetchError } = await supabaseAdmin
+      .from('contributions')
+      .select('user_id, target_table, target_id, data, target_title')
+      .eq('id', contributionIdNum)
+      .single();
 
-    if (notificationError) {
+    if (fetchError) {
+      console.error('[approveContribution] Error fetching contribution:', fetchError);
+      throw new Error(`Failed to fetch contribution: ${fetchError.message}`);
+    }
+
+    console.log('[approveContribution] Contribution data:', contribution);
+    console.log('[approveContribution] Target table:', contribution.target_table);
+    console.log('[approveContribution] Target ID:', contribution.target_id);
+    console.log('[approveContribution] Data to apply:', contribution.data);
+
+    // Check if reviewer is admin
+    const { data: profile, error: profileError } = await supabaseAdmin
+      .from('profiles')
+      .select('role')
+      .eq('user_id', reviewerId)
+      .single();
+
+    if (profileError || profile?.role !== 'admin') {
+      throw new Error('Only admins can approve contributions.');
+    }
+
+    // Approve the contribution using direct table update
+    const { error: updateError } = await supabaseAdmin
+      .from('contributions')
+      .update({
+        status: 'approved',
+        reviewed_by: reviewerId,
+        reviewed_at: new Date().toISOString()
+      })
+      .eq('id', contributionIdNum)
+      .eq('status', 'pending');
+
+    if (updateError) {
+      console.error('[approveContribution] Error updating contribution status:', updateError);
+      throw new Error(`Failed to update contribution status: ${updateError.message}`);
+    }
+
+    // Apply the actual data changes to the target table
+    if (contribution.target_table && contribution.target_id) {
+      console.log(`[approveContribution] Applying ${contribution.target_table} changes:`, contribution.data);
+      console.log(`[approveContribution] Target ID type:`, typeof contribution.target_id);
+      console.log(`[approveContribution] Target ID value:`, contribution.target_id);
+      
+      // First, let's test if we can find the target record
+      const { data: targetRecord, error: fetchError } = await supabaseAdmin
+        .from(contribution.target_table)
+        .select('*')
+        .eq('id', contribution.target_id)
+        .single();
+
+      if (fetchError) {
+        console.error(`[approveContribution] Error fetching target record:`, fetchError);
+        throw new Error(`Target record not found: ${fetchError.message}`);
+      }
+
+      console.log(`[approveContribution] Target record found:`, targetRecord);
+      
+      // Prepare update data from contribution.data
+      const updateData: any = {
+        updated_at: new Date().toISOString()
+      };
+
+      // Add table-specific fields
+      if (contribution.target_table === 'podcasts') {
+        updateData.submission_status = 'approved';
+        updateData.approved_by = reviewerId;
+      }
+
+      // Apply all the changes from contribution.data
+      if (contribution.data) {
+        console.log(`[approveContribution] Raw contribution data:`, contribution.data);
+        
+        // Handle each field specifically based on the contribution structure
+        if (contribution.data.title) {
+          updateData.title = contribution.data.title;
+          // Auto-generate slug when title changes
+          const { generateSlug } = await import('@/lib/utils');
+          updateData.slug = generateSlug(contribution.data.title);
+        }
+        
+        // Handle people table - full_name changes should update slug
+        if (contribution.data.full_name) {
+          updateData.full_name = contribution.data.full_name;
+          // Auto-generate slug when full_name changes
+          const { generateSlug } = await import('@/lib/utils');
+          updateData.slug = generateSlug(contribution.data.full_name);
+        }
+        if (contribution.data.description) {
+          updateData.description = contribution.data.description;
+        }
+        if (contribution.data.categories && Array.isArray(contribution.data.categories)) {
+          updateData.categories = contribution.data.categories; // Already an array
+        }
+        if (contribution.data.platform_links) {
+          updateData.platform_links = contribution.data.platform_links;
+        }
+        if (contribution.data.social_links) {
+          updateData.social_links = contribution.data.social_links;
+        }
+        if (contribution.data.official_website) {
+          updateData.official_website = contribution.data.official_website;
+        }
+        if (contribution.data.team_members) {
+          updateData.team_members = contribution.data.team_members;
+          
+          // Also add team members to people table and link them
+          if (Array.isArray(contribution.data.team_members)) {
+            for (const member of contribution.data.team_members) {
+              if (member.name) {
+                // Find or create the person
+                let { data: person, error: personError } = await supabaseAdmin
+                  .from('people')
+                  .select('id')
+                  .eq('full_name', member.name)
+                  .single();
+
+                if (personError && personError.code !== 'PGRST116') { // 'PGRST116' is "No rows found"
+                  console.error('Error finding person:', personError);
+                  continue; // Skip to next member
+                }
+
+                if (!person) {
+                  const { data: newPerson, error: newPersonError } = await supabaseAdmin
+                    .from('people')
+                    .insert({
+                      full_name: member.name,
+                      bio: member.bio || '',
+                      photo_urls: member.photo_urls || [],
+                      social_links: member.social_links || {},
+                      is_verified: false,
+                      slug: member.name.toLowerCase().replace(/\s+/g, '-'),
+                    })
+                    .select('id')
+                    .single();
+                  
+                  if (newPersonError) {
+                    console.error('Error creating person:', newPersonError);
+                    continue;
+                  }
+                  person = newPerson;
+                }
+
+                // Link person to podcast with role
+                if (person) {
+                  const roles = Array.isArray(member.role) ? member.role : [member.role || 'Team Member'];
+                  
+                  for (const role of roles) {
+                    const { error: linkError } = await supabaseAdmin
+                      .from('podcast_people')
+                      .upsert({
+                        podcast_id: contribution.target_id,
+                        person_id: person.id,
+                        role: role,
+                      }, {
+                        onConflict: 'podcast_id,person_id'
+                      });
+
+                    if (linkError) {
+                      console.error('Error linking person to podcast with role:', linkError);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        // Handle episodes separately if this is a podcast contribution
+        if (contribution.target_table === 'podcasts' && contribution.data.episodes && Array.isArray(contribution.data.episodes)) {
+          for (const episode of contribution.data.episodes) {
+            if (episode.id && episode.title) {
+              // Generate slug for episode if title changed
+              const { generateSlug } = await import('@/lib/utils');
+              const episodeSlug = generateSlug(episode.title);
+              
+              // Update episode with new slug
+              const { error: episodeUpdateError } = await supabaseAdmin
+                .from('episodes')
+                .update({
+                  title: episode.title,
+                  slug: episodeSlug,
+                  ...(episode.description && { description: episode.description }),
+                  ...(episode.published_at && { published_at: episode.published_at }),
+                  ...(episode.duration && { duration: episode.duration }),
+                  ...(episode.views && { views: episode.views }),
+                  ...(episode.likes && { likes: episode.likes }),
+                  ...(episode.comments && { comments: episode.comments }),
+                  ...(episode.tags && { tags: episode.tags }),
+                  ...(episode.youtube_video_id && { youtube_video_id: episode.youtube_video_id }),
+                  ...(episode.youtube_url && { youtube_url: episode.youtube_url }),
+                  ...(episode.thumbnail_url && { thumbnail_url: episode.thumbnail_url }),
+                })
+                .eq('id', episode.id);
+
+              if (episodeUpdateError) {
+                console.error('Error updating episode:', episodeUpdateError);
+              }
+            }
+          }
+        }
+        
+        // Handle any other fields that might be present
+        Object.keys(contribution.data).forEach(key => {
+          if (!['title', 'description', 'categories', 'platform_links', 'social_links', 'official_website', 'team_members', 'episodes'].includes(key)) {
+            if (contribution.data[key] !== null && contribution.data[key] !== undefined) {
+              updateData[key] = contribution.data[key];
+            }
+          }
+        });
+      }
+
+      console.log(`[approveContribution] ${contribution.target_table} update data:`, updateData);
+
+      const { error: updateError } = await supabaseAdmin
+        .from(contribution.target_table)
+        .update(updateData)
+        .eq('id', contribution.target_id);
+
+      if (updateError) {
+        console.error(`[approveContribution] Error updating ${contribution.target_table}:`, updateError);
+        throw new Error(`Failed to apply ${contribution.target_table} changes: ${updateError.message}`);
+      } else {
+        console.log(`[approveContribution] ${contribution.target_table} changes applied successfully`);
+        
+        // Verify the update
+        const { data: updatedRecord, error: verifyError } = await supabaseAdmin
+          .from(contribution.target_table)
+          .select('*')
+          .eq('id', contribution.target_id)
+          .single();
+          
+        if (verifyError) {
+          console.error(`[approveContribution] Error verifying update:`, verifyError);
+        } else {
+          console.log(`[approveContribution] Updated record:`, updatedRecord);
+        }
+      }
+    }
+
+    // Send notification to the user (using direct insert instead of RPC)
+    try {
+      const { error: notificationError } = await supabaseAdmin
+        .from('notifications')
+        .insert({
+          user_id: contribution.user_id,
+          title: 'Contribution Approved',
+          message: `Your ${contribution.target_table || 'contribution'} "${contribution.target_title || 'item'}" has been approved and is now live!`,
+          type: 'approval',
+          metadata: {
+            contribution_id: contributionId,
+            target_table: contribution.target_table,
+            target_id: contribution.target_id
+          }
+        });
+      
+      if (notificationError) {
+        console.error('Failed to send notification:', notificationError);
+      } else {
+        console.log('Notification sent successfully');
+      }
+    } catch (notificationError) {
       console.error('Failed to send notification:', notificationError);
       // Don't fail the main operation if notification fails
     }
-  } catch (notificationError) {
-    console.error('Failed to send notification:', notificationError);
-    // Don't fail the main operation if notification fails
-  }
 
-  revalidatePath('/admin');
+    revalidatePath('/admin');
+    return { success: true };
+  } catch (error: any) {
+    console.error('[approveContribution] Error:', error);
+    return { success: false, error: error.message };
+  }
 }
 
 export async function rejectContribution(contributionId: string, reviewerNotes: string, reviewerId: string) {
@@ -1515,24 +1860,27 @@ export async function rejectContribution(contributionId: string, reviewerNotes: 
 
   if (updateError) throw new Error(updateError.message);
 
-  // Send notification to the user
+  // Send notification to the user (using direct insert instead of RPC)
   try {
-    const { error: notificationError } = await supabaseAdmin.rpc('create_notification', {
-      p_user_id: contribution.user_id,
-      p_title: 'Contribution Rejected',
-      p_message: `Your contribution for ${contribution.data.title || 'the item'} has been rejected. ${reviewerNotes ? `Reason: ${reviewerNotes}` : ''}`,
-      p_type: 'contribution_rejected',
-      p_metadata: {
-        contribution_id: contributionId,
-        target_table: contribution.target_table,
-        target_id: contribution.target_id,
-        reviewer_notes: reviewerNotes
-      }
-    });
+    const { error: notificationError } = await supabaseAdmin
+      .from('notifications')
+      .insert({
+        user_id: contribution.user_id,
+        title: 'Contribution Rejected',
+        message: `Your contribution for ${contribution.data.title || 'the item'} has been rejected. ${reviewerNotes ? `Reason: ${reviewerNotes}` : ''}`,
+        type: 'contribution_rejected',
+        metadata: {
+          contribution_id: contributionId,
+          target_table: contribution.target_table,
+          target_id: contribution.target_id,
+          reviewer_notes: reviewerNotes
+        }
+      });
 
     if (notificationError) {
       console.error('Failed to send notification:', notificationError);
-      // Don't fail the main operation if notification fails
+    } else {
+      console.log('Rejection notification sent successfully');
     }
   } catch (notificationError) {
     console.error('Failed to send notification:', notificationError);
@@ -1572,4 +1920,10 @@ export async function getOriginalDataAction(targetTable: string, targetId: strin
   } catch (error: any) {
     return { success: false, error: error.message };
   }
+}
+
+// Re-export generateEpisodeSlugsAction from generate-slugs.ts
+export async function generateEpisodeSlugsAction() {
+  const { generateEpisodeSlugsAction: originalFunction } = await import('./generate-slugs');
+  return originalFunction();
 }

@@ -26,7 +26,8 @@ import { toast, toastErrorWithCopy } from '@/components/ui/sonner';
 import { 
     generateSingleSeoMetadataAction,
     getAllEpisodesAction,
-    getAllPeopleAction
+    getAllPeopleAction,
+    generateEpisodeSlugsAction
 } from '@/app/actions/admin';
 import ComprehensiveSeoDisplay from './ComprehensiveSeoDisplay';
 
@@ -72,6 +73,24 @@ export default function ContentManagementTab({ allPodcasts, fetchAllPodcasts }: 
                 toastErrorWithCopy("Failed to fetch people", result.error);
             }
             setLoadingPeople(false);
+        });
+    };
+
+    // Generate episode slugs
+    const handleGenerateEpisodeSlugs = async () => {
+        startTransition(async () => {
+            try {
+                const result = await generateEpisodeSlugsAction();
+                if (result.success) {
+                    toast.success(result.message || 'Episode slugs generated successfully!');
+                    // Refresh episodes data
+                    fetchAllEpisodes();
+                } else {
+                    toast.error(result.error || 'Failed to generate episode slugs');
+                }
+            } catch (error: any) {
+                toast.error(`Error generating episode slugs: ${error.message}`);
+            }
         });
     };
 
@@ -373,6 +392,21 @@ export default function ContentManagementTab({ allPodcasts, fetchAllPodcasts }: 
 
                             {/* Episodes Tab */}
                             <TabsContent value="episodes" className="space-y-4">
+                                <div className="flex justify-between items-center">
+                                    <h3 className="text-lg font-semibold">Episodes Management</h3>
+                                    <Button 
+                                        onClick={handleGenerateEpisodeSlugs}
+                                        disabled={isPending}
+                                        className="flex items-center gap-2"
+                                    >
+                                        {isPending ? (
+                                            <Loader2 className="h-4 w-4 animate-spin" />
+                                        ) : (
+                                            <RefreshCw className="h-4 w-4" />
+                                        )}
+                                        Generate Episode Slugs
+                                    </Button>
+                                </div>
                                 {loadingEpisodes ? (
                                     <div className="flex items-center justify-center p-8">
                                         <Loader2 className="h-6 w-6 animate-spin mr-2" />

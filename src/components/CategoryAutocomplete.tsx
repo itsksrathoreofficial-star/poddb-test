@@ -58,9 +58,11 @@ export function CategoryAutocomplete({
 
       try {
         setLoading(true);
-        const { data, error } = await supabase.rpc('get_category_suggestions', {
-          search_term: inputValue.trim()
-        } as any);
+        const { data, error } = await supabase
+          .from('podcast_categories')
+          .select('name')
+          .ilike('name', `%${inputValue.trim()}%`)
+          .limit(10);
 
         if (error) throw error;
 
@@ -69,11 +71,11 @@ export function CategoryAutocomplete({
         setShowCreateNew(
           canAddMore && 
           (categories.length === 0 || !categories.some(cat => 
-            cat.name.toLowerCase() === inputValue.toLowerCase()
+            cat.name && cat.name.toLowerCase() === inputValue.toLowerCase()
           ))
         );
-      } catch (error) {
-        console.error('Error fetching category suggestions:', error);
+      } catch (error: any) {
+        console.error('Error fetching category suggestions:', error?.message || error);
         setSuggestions([]);
         setShowCreateNew(canAddMore);
       } finally {

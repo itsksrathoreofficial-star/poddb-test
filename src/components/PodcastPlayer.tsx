@@ -3,7 +3,6 @@ import React from 'react';
 import { usePlayer } from '@/components/PlayerProvider';
 import { Play, Pause, SkipBack, SkipForward } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Slider } from '@/components/ui/slider';
 import Image from 'next/image';
 
 export default function PodcastPlayer() {
@@ -48,7 +47,12 @@ export default function PodcastPlayer() {
                 </div>
                 <div className="w-full max-w-xl flex items-center gap-2 mt-2">
                     <span className="text-xs text-muted-foreground">{formatTime(progress)}</span>
-                    <Slider value={[progress]} max={duration} step={1} disabled />
+                    <div className="flex-1 h-2 bg-muted rounded-full">
+                        <div 
+                            className="h-full bg-primary rounded-full transition-all duration-300" 
+                            style={{ width: `${duration > 0 ? (progress / duration) * 100 : 0}%` }}
+                        />
+                    </div>
                     <span className="text-xs text-muted-foreground">{formatTime(duration)}</span>
                 </div>
             </div>

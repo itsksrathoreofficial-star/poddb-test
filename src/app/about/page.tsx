@@ -2,7 +2,7 @@ import { supabase } from '@/integrations/supabase/client';
 
 // Enable static generation for maximum performance
 export const dynamic = 'force-static';
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = false; // Fully static, no revalidation
 
 import { notFound } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

@@ -44,8 +44,13 @@ class ErrorTrackingService {
   private consoleLogs: any[] = [];
   private networkLogs: any[] = [];
   private maxLogs = 50; // Maximum number of logs to keep in memory
+  private isLogging = false; // Flag to prevent recursive logging
 
   private constructor() {
+    // Completely disable error tracking to prevent interference
+    // TODO: Re-enable with better implementation in the future
+    return;
+    
     try {
       this.setupConsoleInterception();
       this.setupNetworkInterception();
@@ -69,69 +74,8 @@ class ErrorTrackingService {
    * Log an error to the database and notify admins
    */
   public async logError(error: ErrorLog): Promise<string | null> {
-    try {
-      // Generate unique error ID
-      const errorId = this.generateErrorId();
-      
-      // Get current user context
-      const context = await this.enrichContext(error.context);
-      
-      // Prepare error data
-      const errorData = {
-        error_id: errorId,
-        error_type: error.errorType,
-        severity: error.severity,
-        title: error.title,
-        message: error.message,
-        stack_trace: error.stackTrace,
-        file_path: error.filePath,
-        line_number: error.lineNumber,
-        function_name: error.functionName,
-        component_name: error.componentName,
-        page_url: context.pageUrl || window.location.href,
-        user_id: context.userId,
-        session_id: context.sessionId,
-        user_agent: context.userAgent || navigator.userAgent,
-        ip_address: context.ipAddress,
-        country_code: context.countryCode,
-        browser: context.browser,
-        browser_version: context.browserVersion,
-        os: context.os,
-        device_type: context.deviceType,
-        screen_resolution: context.screenResolution,
-        viewport_size: context.viewportSize,
-        console_logs: this.consoleLogs.slice(-20), // Last 20 console logs
-        network_logs: this.networkLogs.slice(-10), // Last 10 network logs
-        performance_metrics: context.performanceMetrics || {},
-        error_context: context.additionalData || {}
-      };
-
-      // Insert error into database
-      const { data, error: dbError } = await supabase
-        .from('error_logs')
-        .insert([errorData] as any)
-        .select('id')
-        .single();
-
-      if (dbError) {
-        // Use a different method to avoid console interception
-        if (typeof window !== 'undefined') {
-          console.warn('Failed to log error to database:', dbError);
-        }
-        return null;
-      }
-
-      // Clear logs after successful logging
-      this.clearLogs();
-      
-      return errorId;
-    } catch (err) {
-      // Use a different method to avoid console interception
-      if (typeof window !== 'undefined') {
-        console.warn('Error in logError:', err);
-      }
-      return null;
-    }
+    // Completely disabled to prevent interference
+    return null;
   }
 
   /**
@@ -141,22 +85,8 @@ class ErrorTrackingService {
     error: Error,
     context: Partial<ErrorContext> = {}
   ): Promise<string | null> {
-    const errorLog: ErrorLog = {
-      errorType: 'javascript',
-      severity: this.determineSeverity(error),
-      title: error.name || 'JavaScript Error',
-      message: error.message,
-      stackTrace: error.stack,
-      filePath: this.extractFilePath(error.stack),
-      lineNumber: this.extractLineNumber(error.stack),
-      functionName: this.extractFunctionName(error.stack),
-      context: {
-        ...context,
-        pageUrl: context.pageUrl || window.location.href
-      }
-    };
-
-    return this.logError(errorLog);
+    // Completely disabled to prevent interference
+    return null;
   }
 
   /**
@@ -166,19 +96,8 @@ class ErrorTrackingService {
     error: any,
     context: Partial<ErrorContext> = {}
   ): Promise<string | null> {
-    const errorLog: ErrorLog = {
-      errorType: 'server',
-      severity: this.determineSeverity(error),
-      title: error.title || 'Server Error',
-      message: error.message || String(error),
-      stackTrace: error.stack,
-      context: {
-        ...context,
-        pageUrl: context.pageUrl || window.location.href
-      }
-    };
-
-    return this.logError(errorLog);
+    // Completely disabled to prevent interference
+    return null;
   }
 
   /**
@@ -188,19 +107,8 @@ class ErrorTrackingService {
     error: any,
     context: Partial<ErrorContext> = {}
   ): Promise<string | null> {
-    const errorLog: ErrorLog = {
-      errorType: 'database',
-      severity: this.determineSeverity(error),
-      title: 'Database Error',
-      message: error.message || String(error),
-      stackTrace: error.stack,
-      context: {
-        ...context,
-        pageUrl: context.pageUrl || window.location.href
-      }
-    };
-
-    return this.logError(errorLog);
+    // Completely disabled to prevent interference
+    return null;
   }
 
   /**
@@ -210,19 +118,8 @@ class ErrorTrackingService {
     error: any,
     context: Partial<ErrorContext> = {}
   ): Promise<string | null> {
-    const errorLog: ErrorLog = {
-      errorType: 'api',
-      severity: this.determineSeverity(error),
-      title: 'API Error',
-      message: error.message || String(error),
-      stackTrace: error.stack,
-      context: {
-        ...context,
-        pageUrl: context.pageUrl || window.location.href
-      }
-    };
-
-    return this.logError(errorLog);
+    // Completely disabled to prevent interference
+    return null;
   }
 
   /**
@@ -232,19 +129,8 @@ class ErrorTrackingService {
     error: any,
     context: Partial<ErrorContext> = {}
   ): Promise<string | null> {
-    const errorLog: ErrorLog = {
-      errorType: 'permission',
-      severity: 'medium',
-      title: 'Permission Error',
-      message: error.message || 'Access denied',
-      stackTrace: error.stack,
-      context: {
-        ...context,
-        pageUrl: context.pageUrl || window.location.href
-      }
-    };
-
-    return this.logError(errorLog);
+    // Completely disabled to prevent interference
+    return null;
   }
 
   /**
@@ -254,19 +140,8 @@ class ErrorTrackingService {
     error: any,
     context: Partial<ErrorContext> = {}
   ): Promise<string | null> {
-    const errorLog: ErrorLog = {
-      errorType: 'validation',
-      severity: 'low',
-      title: 'Validation Error',
-      message: error.message || 'Invalid input',
-      stackTrace: error.stack,
-      context: {
-        ...context,
-        pageUrl: context.pageUrl || window.location.href
-      }
-    };
-
-    return this.logError(errorLog);
+    // Completely disabled to prevent interference
+    return null;
   }
 
   /**
@@ -276,19 +151,8 @@ class ErrorTrackingService {
     error: any,
     context: Partial<ErrorContext> = {}
   ): Promise<string | null> {
-    const errorLog: ErrorLog = {
-      errorType: 'network',
-      severity: 'medium',
-      title: 'Network Error',
-      message: error.message || 'Network request failed',
-      stackTrace: error.stack,
-      context: {
-        ...context,
-        pageUrl: context.pageUrl || window.location.href
-      }
-    };
-
-    return this.logError(errorLog);
+    // Completely disabled to prevent interference
+    return null;
   }
 
   /**
@@ -314,13 +178,17 @@ class ErrorTrackingService {
           const originalMethod = originalConsole[level as keyof typeof originalConsole];
           if (originalMethod && typeof originalMethod === 'function') {
             try {
-              originalMethod.call(console, ...args);
+              originalMethod.apply(console, args);
             } catch (e) {
               // Fallback to basic console method
-              if (level === 'error') console.error(...args);
-              else if (level === 'warn') console.warn(...args);
-              else if (level === 'log') console.log(...args);
-              else if (level === 'info') console.info(...args);
+              try {
+                if (level === 'error') console.error(...args);
+                else if (level === 'warn') console.warn(...args);
+                else if (level === 'log') console.log(...args);
+                else if (level === 'info') console.info(...args);
+              } catch (fallbackError) {
+                // Ultimate fallback - just ignore
+              }
             }
           }
           
@@ -358,6 +226,10 @@ class ErrorTrackingService {
     // Check if required APIs exist
     if (!window.fetch || !XMLHttpRequest) return;
 
+    // Temporarily disable fetch interception to prevent issues
+    // TODO: Re-enable with better error handling in the future
+    return;
+
     const originalFetch = window.fetch;
     const originalXHROpen = XMLHttpRequest.prototype.open;
     const originalXHRSend = XMLHttpRequest.prototype.send;
@@ -366,6 +238,17 @@ class ErrorTrackingService {
     window.fetch = async (...args) => {
       const startTime = Date.now();
       const url = args[0] as string;
+      
+      // Skip interception for error tracking API calls to prevent infinite loops
+      if (typeof url === 'string' && (
+        url.includes('/api/error-logs') || 
+        url.includes('/api/sync-status') ||
+        url.includes('/api/rankings/daily-gain') ||
+        url.includes('supabase') ||
+        url.includes('error_tracking')
+      )) {
+        return originalFetch(...args);
+      }
       
       try {
         const response = await originalFetch(...args);

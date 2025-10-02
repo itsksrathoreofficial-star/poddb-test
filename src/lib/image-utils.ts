@@ -14,6 +14,11 @@ export const getSafeImageUrl = (url: string | null | undefined, fallback: string
     return fallback;
   }
   
+  // Handle invalid YouTube thumbnail URLs with hqdefault
+  if (trimmedUrl.includes('hqdefault') && trimmedUrl.includes('i.ytimg.com')) {
+    return fallback;
+  }
+  
   // Handle localhost URLs by converting them to proper format
   if (trimmedUrl.includes('localhost:3000')) {
     return trimmedUrl.replace('localhost:3000', 'localhost:3001');
@@ -82,6 +87,11 @@ export const normalizeImageUrl = (url: string | null | undefined): string => {
   
   // Handle invalid URLs that are just random strings
   if (trimmedUrl.length < 4 || (!trimmedUrl.startsWith('http') && !trimmedUrl.startsWith('/'))) {
+    return '/placeholder.svg';
+  }
+  
+  // Handle invalid YouTube thumbnail URLs with hqdefault
+  if (trimmedUrl.includes('hqdefault') && trimmedUrl.includes('i.ytimg.com')) {
     return '/placeholder.svg';
   }
   

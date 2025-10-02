@@ -1,4 +1,4 @@
-"use server";
+// "use server"; // Disabled for static export
 
 import { supabase } from '@/integrations/supabase/client';
 

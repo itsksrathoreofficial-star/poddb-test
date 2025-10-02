@@ -1,4 +1,4 @@
-"use server";
+// "use server"; // Disabled for static export
 
 import { supabase } from '@/integrations/supabase/client';
 import { notFound } from 'next/navigation';
@@ -29,9 +29,77 @@ export async function getPodcast(slug: string): Promise<PodcastWithEpisodesAndRe
     console.error(`[getPodcast Action] No data returned for slug "${slug}". Triggering 404.`);
     notFound();
   }
+
+  // Fetch reviews separately since there's no direct relationship
+  const { data: reviewsData, error: reviewsError } = await supabase
+    .from('reviews')
+    .select(`
+      id,
+      rating,
+      review_title,
+      review_text,
+      created_at,
+      upvotes,
+      downvotes,
+      profiles (
+        display_name,
+        avatar_url
+      )
+    `)
+    .eq('target_id', (data as any).id)
+    .eq('target_table', 'podcasts');
+
+  if (reviewsError) {
+    console.error(`[getPodcast Action] Error fetching reviews for slug "${slug}":`, JSON.stringify(reviewsError, null, 2));
+    // Don't fail if reviews can't be fetched
+  }
   
-  console.log(`[getPodcast Action] Successfully fetched data for slug "${slug}":`, JSON.stringify(data, null, 2));
-  return data as unknown as PodcastWithEpisodesAndReviews;
+  // Fetch team members from podcast_people table
+  const { data: teamMembers, error: teamError } = await supabase
+    .from("podcast_people")
+    .select(`
+      role,
+      people (
+        id,
+        full_name,
+        bio,
+        photo_urls,
+        social_links,
+        is_verified,
+        slug
+      )
+    `)
+    .eq("podcast_id", (data as any).id);
+
+  let teamData: any[] = [];
+  if (teamError) {
+    console.error("Error fetching team members:", teamError);
+  } else {
+    // Transform the data to match the expected format
+    teamData = teamMembers?.map((tm: any) => ({
+      id: tm.people?.id,
+      name: tm.people?.full_name,
+      full_name: tm.people?.full_name,
+      bio: tm.people?.bio,
+      photo_urls: tm.people?.photo_urls,
+      social_links: tm.people?.social_links,
+      is_verified: tm.people?.is_verified,
+      slug: tm.people?.slug,
+      role: tm.role
+    })) || [];
+  }
+
+  // Add reviews and team members to the data
+  const podcastWithReviews = {
+    ...(data as any),
+    reviews: reviewsData || [],
+    team_members: teamData
+  };
+  
+  console.log(`[getPodcast Action] Successfully fetched data for slug "${slug}":`, JSON.stringify(podcastWithReviews, null, 2));
+  console.log(`[getPodcast Action] Team members count: ${teamData.length}`);
+  console.log(`[getPodcast Action] Team members data:`, teamData);
+  return podcastWithReviews as unknown as PodcastWithEpisodesAndReviews;
 }
 
 export async function getPodcastById(id: string): Promise<PodcastWithEpisodesAndReviews> {
@@ -42,7 +110,75 @@ export async function getPodcastById(id: string): Promise<PodcastWithEpisodesAnd
   
   if (!slugError && slugData) {
     console.log(`[getPodcastById Action] Found by slug "${id}":`, JSON.stringify(slugData, null, 2));
-    return slugData as unknown as PodcastWithEpisodesAndReviews;
+    
+    // Fetch reviews and team members for slug-based result
+    const { data: reviewsData, error: reviewsError } = await supabase
+      .from('reviews')
+      .select(`
+        id,
+        rating,
+        review_title,
+        review_text,
+        created_at,
+        upvotes,
+        downvotes,
+        profiles (
+          display_name,
+          avatar_url
+        )
+      `)
+      .eq('target_id', (slugData as any).id)
+      .eq('target_table', 'podcasts');
+
+    if (reviewsError) {
+      console.error(`[getPodcastById Action] Error fetching reviews for slug "${id}":`, JSON.stringify(reviewsError, null, 2));
+    }
+
+    // Fetch team members from podcast_people table
+    const { data: teamMembers, error: teamError } = await supabase
+      .from("podcast_people")
+      .select(`
+        role,
+        people (
+          id,
+          full_name,
+          bio,
+          photo_urls,
+          social_links,
+          is_verified,
+          slug
+        )
+      `)
+      .eq("podcast_id", (slugData as any).id);
+
+    let teamData: any[] = [];
+    if (teamError) {
+      console.error("Error fetching team members:", teamError);
+    } else {
+      // Transform the data to match the expected format
+      teamData = teamMembers?.map((tm: any) => ({
+        id: tm.people?.id,
+        name: tm.people?.full_name,
+        full_name: tm.people?.full_name,
+        bio: tm.people?.bio,
+        photo_urls: tm.people?.photo_urls,
+        social_links: tm.people?.social_links,
+        is_verified: tm.people?.is_verified,
+        slug: tm.people?.slug,
+        role: tm.role
+      })) || [];
+    }
+
+    // Add reviews and team members to the data
+    const podcastWithReviews = {
+      ...(slugData as any),
+      reviews: reviewsData || [],
+      team_members: teamData
+    };
+    
+    console.log(`[getPodcastById Action] Team members count: ${teamData.length}`);
+    console.log(`[getPodcastById Action] Team members data:`, teamData);
+    return podcastWithReviews as unknown as PodcastWithEpisodesAndReviews;
   }
   
   // If not found by slug, try to get by ID
@@ -102,32 +238,50 @@ export async function getPodcastById(id: string): Promise<PodcastWithEpisodesAnd
     // Don't fail if reviews can't be fetched
   }
 
-  // Fetch team members separately since there's no direct relationship
-  const { data: teamData, error: teamError } = await supabase
-    .from('team_members')
+  // Fetch team members from podcast_people table
+  const { data: teamMembers, error: teamError } = await supabase
+    .from("podcast_people")
     .select(`
-      id,
-      full_name,
-      bio,
-      photo_urls,
-      social_links,
-      is_verified,
-      role
+      role,
+      people (
+        id,
+        full_name,
+        bio,
+        photo_urls,
+        social_links,
+        is_verified,
+        slug
+      )
     `)
-    .eq('podcast_id', (data as any).id);
+    .eq("podcast_id", (data as any).id);
 
+  let teamData: any[] = [];
   if (teamError) {
-    console.error(`[getPodcastById Action] Error fetching team members for ID "${id}":`, JSON.stringify(teamError, null, 2));
-    // Don't fail if team members can't be fetched
+    console.error("Error fetching team members:", teamError);
+  } else {
+    // Transform the data to match the expected format
+    teamData = teamMembers?.map((tm: any) => ({
+      id: tm.people?.id,
+      name: tm.people?.full_name,
+      full_name: tm.people?.full_name,
+      bio: tm.people?.bio,
+      photo_urls: tm.people?.photo_urls,
+      social_links: tm.people?.social_links,
+      is_verified: tm.people?.is_verified,
+      slug: tm.people?.slug,
+      role: tm.role
+    })) || [];
   }
 
   // Add reviews and team members to the data
   const podcastWithReviews = {
     ...(data as any),
     reviews: reviewsData || [],
-    team_members: teamData || []
+    team_members: teamData
   };
   
   console.log(`[getPodcastById Action] Successfully fetched data for ID "${id}":`, JSON.stringify(podcastWithReviews, null, 2));
+  console.log(`[getPodcastById Action] Team members count: ${teamData.length}`);
+  console.log(`[getPodcastById Action] Team members data:`, teamData);
   return podcastWithReviews as unknown as PodcastWithEpisodesAndReviews;
 }

@@ -1,8 +1,8 @@
-"use server";
+// "use server"; // Disabled for static export
 
 import { getEmailConfig } from '@/app/actions/email-config';
 import { sendEmail } from '@/lib/email-service-simple';
-import { supabaseServer } from '@/integrations/supabase/server';
+import { supabaseServer } from '@/integrations/supabase/server-client';
 
 export async function submitContactForm(formData: FormData) {
     const name = formData.get('name') as string;

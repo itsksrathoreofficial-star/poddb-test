@@ -107,7 +107,7 @@ const AdManagerTab = () => {
     { value: 'notifications', label: 'Notifications Page' },
     { value: 'profile', label: 'Profile Page' },
     { value: 'preview', label: 'Preview Page' },
-    { value: 'preview-updates', label: 'Preview Updates Page' },
+    { value: 'admin-preview', label: 'Admin Preview Page' },
     { value: 'privacy', label: 'Privacy Page' },
     { value: 'terms', label: 'Terms Page' },
     { value: 'help', label: 'Help Page' },

@@ -6,6 +6,9 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export async function GET(request: NextRequest) {
   try {
     // Get weekly data from podcast_daily_stats

@@ -57,16 +57,31 @@ export function Navigation() {
 
 
   const fetchProfile = async () => {
+    if (!user) return;
     try {
       setIsLoadingProfile(true);
-      // Use the secure RPC function to get the current user's profile
-      const { data, error } = await supabase.rpc('get_user_profile');
-
-      if (error) throw error;
-      // The function returns an array, so we take the first element
-      setProfile(data && (data as any[]).length > 0 ? data[0] : null);
+      
+      // Use direct table query with timeout
+      const { data: fallbackData, error: fallbackError } = await Promise.race([
+        supabase
+          .from('profiles')
+          .select('user_id, display_name, bio, avatar_url, social_links, role, created_at, updated_at')
+          .eq('user_id', user.id)
+          .single(),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Request timeout')), 10000)
+        )
+      ]) as any;
+      
+      if (fallbackError) {
+        console.warn('Error fetching profile:', fallbackError);
+        setProfile(null);
+      } else {
+        setProfile(fallbackData);
+      }
     } catch (error: any) {
-      console.error('Error fetching profile:', error);
+      console.warn('Error fetching profile:', error);
+      setProfile(null);
     } finally {
       setIsLoadingProfile(false);
     }
@@ -75,13 +90,27 @@ export function Navigation() {
   const fetchUnreadNotifications = async () => {
     if (!user) return;
     try {
-      const { data, error } = await supabase.rpc('get_unread_notification_count', {
-        p_user_id: user.id
-      } as any);
-      if (error) throw error;
-      setUnreadNotifications(data || 0);
+      // Use direct table query with timeout
+      const { data: fallbackData, error: fallbackError } = await Promise.race([
+        supabase
+          .from('notifications')
+          .select('id')
+          .eq('user_id', user.id)
+          .eq('is_read', false),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Request timeout')), 10000)
+        )
+      ]) as any;
+      
+      if (fallbackError) {
+        console.warn('Error fetching unread notifications:', fallbackError);
+        setUnreadNotifications(0);
+      } else {
+        setUnreadNotifications(Array.isArray(fallbackData) ? fallbackData.length : 0);
+      }
     } catch (error: any) {
-      console.error('Error fetching unread notifications:', error);
+      console.warn('Error fetching unread notifications:', error);
+      setUnreadNotifications(0);
     }
   };
 
@@ -93,7 +122,7 @@ export function Navigation() {
       setProfile(null);
       setUnreadNotifications(0);
     }
-  }, [user, fetchUnreadNotifications]);
+  }, [user]); // Removed fetchUnreadNotifications from dependency array to prevent infinite loop
   
   useEffect(() => {
     if (searchTerm.length < 2) {

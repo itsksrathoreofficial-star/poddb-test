@@ -403,7 +403,7 @@ serve(async (req) => {
           duration: parseDuration(video.contentDetails?.duration || 'PT0S'),
           youtube_url: `https://www.youtube.com/watch?v=${video.id}`,
           youtube_video_id: video.id,
-          thumbnail_url: video.snippet?.thumbnails?.maxres?.url || video.snippet?.thumbnails?.high?.url || video.snippet?.thumbnails?.medium?.url || '',
+          thumbnail_url: video.snippet?.thumbnails?.maxres?.url || video.snippet?.thumbnails?.high?.url || video.snippet?.thumbnails?.medium?.url || video.snippet?.thumbnails?.default?.url || '',
           published_at: video.snippet?.publishedAt || new Date().toISOString(),
           views: parseInt(video.statistics?.viewCount || '0'),
           likes: parseInt(video.statistics?.likeCount || '0'),

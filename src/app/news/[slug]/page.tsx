@@ -26,20 +26,28 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getSafeImageUrl, handleImageError } from '@/lib/image-utils';
 
+export const dynamic = 'force-dynamic';
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 // This function generates the static pages at build time
 export async function generateStaticParams() {
-  const { data: articles } = await supabase
-    .from('news_articles')
-    .select('slug')
-    .eq('published', true);
+  try {
+    const { data: articles } = await supabase
+      .from('news_articles')
+      .select('slug')
+      .eq('published', true)
+      .limit(100); // Limit to avoid excessive build time
 
-  return articles?.map(({ slug }) => ({
-    slug,
-  })) || [];
+    return articles?.map(({ slug }) => ({
+      slug,
+    })) || [];
+  } catch (error) {
+    console.warn('Warning: Could not generate static params for news articles:', error);
+    return [];
+  }
 }
 
 // This function fetches the article data
@@ -58,7 +66,7 @@ async function getArticle(slug: string) {
     notFound();
   }
 
-  return data;
+  return data as any;
 }
 
 // This function generates SEO metadata for the page
@@ -73,29 +81,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: (article as any).meta_title || (article as any).social_title || (article as any).title,
-    description: (article as any).meta_description || (article as any).social_description || (article as any).excerpt,
-    keywords: (article as any).meta_keywords || (article as any).tags || [],
-    authors: (article as any).author_name ? [{ name: (article as any).author_name }] : undefined,
+    title: article.meta_title || article.social_title || article.title,
+    description: article.meta_description || article.social_description || article.excerpt,
+    keywords: article.meta_keywords || article.tags || [],
+    authors: article.author_name ? [{ name: article.author_name }] : undefined,
     openGraph: {
-      title: (article as any).social_title || (article as any).title,
-      description: (article as any).social_description || (article as any).excerpt,
-      images: (article as any).social_image_url ? [(article as any).social_image_url] : 
-              (article as any).featured_image_url ? [(article as any).featured_image_url] : [],
+      title: article.social_title || article.title,
+      description: article.social_description || article.excerpt,
+      images: article.social_image_url ? [article.social_image_url] : 
+              article.featured_image_url ? [article.featured_image_url] : [],
       type: 'article',
-      publishedTime: (article as any).published_at || undefined,
-      authors: (article as any).author_name ? [(article as any).author_name] : undefined,
-      tags: (article as any).tags || [],
+      publishedTime: article.published_at || undefined,
+      authors: article.author_name ? [article.author_name] : undefined,
+      tags: article.tags || [],
     },
     twitter: {
       card: 'summary_large_image',
-      title: (article as any).social_title || (article as any).title,
-      description: (article as any).social_description || (article as any).excerpt,
-      images: (article as any).social_image_url ? [(article as any).social_image_url] : 
-              (article as any).featured_image_url ? [(article as any).featured_image_url] : [],
+      title: article.social_title || article.title,
+      description: article.social_description || article.excerpt,
+      images: article.social_image_url ? [article.social_image_url] : 
+              article.featured_image_url ? [article.featured_image_url] : [],
     },
     alternates: {
-      canonical: (article as any).canonical_url || `https://poddb.pro/news/${slug}`,
+      canonical: article.canonical_url || `https://poddb.pro/news/${slug}`,
     },
   };
 }
@@ -123,7 +131,7 @@ export default async function NewsArticlePage({ params }: Props) {
     .from('news_articles')
     .select('id, title, slug, excerpt, featured_image_url, published_at, author_name, reading_time')
     .eq('published', true)
-    .neq('id', (article as any).id)
+    .neq('id', article.id)
     .limit(3)
     .order('published_at', { ascending: false });
 
@@ -147,35 +155,35 @@ export default async function NewsArticlePage({ params }: Props) {
             <header className="space-y-6">
               {/* Category and Tags */}
               <div className="flex flex-wrap gap-2">
-                {(article as any).category && (
+                {article.category && (
                   <Badge variant="default" className="gap-1">
                     <Tag className="h-3 w-3" />
-                    {(article as any).category}
+                    {article.category}
                   </Badge>
                 )}
-                {(article as any).featured && (
+                {article.featured && (
                   <Badge variant="outline" className="gap-1">
                     <Star className="h-3 w-3" />
                     Featured
                   </Badge>
                 )}
-                {(article as any).seo_score && (article as any).seo_score > 80 && (
+                {article.seo_score && article.seo_score > 80 && (
                   <Badge variant="secondary" className="gap-1">
                     <Zap className="h-3 w-3" />
-                    SEO: {(article as any).seo_score}
+                    SEO: {article.seo_score}
                   </Badge>
                 )}
               </div>
 
               {/* Title */}
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
-                {(article as any).title}
+                {article.title}
               </h1>
 
               {/* Excerpt */}
-              {(article as any).excerpt && (
+              {article.excerpt && (
                 <p className="text-xl text-muted-foreground leading-relaxed">
-                  {(article as any).excerpt}
+                  {article.excerpt}
                 </p>
               )}
 
@@ -186,21 +194,21 @@ export default async function NewsArticlePage({ params }: Props) {
                     <User className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground">{(article as any).author_name || 'PodDB Team'}</p>
-                    {(article as any).author_bio && (
-                      <p className="text-xs text-muted-foreground">{(article as any).author_bio}</p>
+                    <p className="font-semibold text-foreground">{article.author_name || 'PodDB Team'}</p>
+                    {article.author_bio && (
+                      <p className="text-xs text-muted-foreground">{article.author_bio}</p>
                     )}
                   </div>
                 </div>
                 
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
-                  <time dateTime={(article as any).published_at || ''}>{formatDate((article as any).published_at)}</time>
+                  <time dateTime={article.published_at || ''}>{formatDate(article.published_at)}</time>
                 </div>
                 
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  <span>{formatReadingTime((article as any).reading_time)}</span>
+                  <span>{formatReadingTime(article.reading_time)}</span>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -210,9 +218,9 @@ export default async function NewsArticlePage({ params }: Props) {
               </div>
 
               {/* Tags */}
-              {(article as any).tags && (article as any).tags.length > 0 && (
+              {article.tags && article.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {(article as any).tags.map((tag: any) => (
+                  {article.tags.map((tag: string) => (
                     <Badge key={tag} variant="outline" className="text-xs">
                       {tag}
                     </Badge>
@@ -238,11 +246,11 @@ export default async function NewsArticlePage({ params }: Props) {
             </header>
             
             {/* Featured Image */}
-            {(article as any).featured_image_url && (
+            {article.featured_image_url && (
               <div className="relative aspect-video overflow-hidden rounded-xl">
                 <Image 
-                  src={getSafeImageUrl((article as any).featured_image_url, '/placeholder.svg')} 
-                  alt={(article as any).title}
+                  src={getSafeImageUrl(article.featured_image_url, '/placeholder.svg')} 
+                  alt={article.title}
                   fill
                   className="object-cover"
                   priority
@@ -254,27 +262,27 @@ export default async function NewsArticlePage({ params }: Props) {
             {/* Article Content */}
             <div className="prose prose-invert prose-lg max-w-none prose-headings:text-foreground prose-a:text-primary prose-strong:text-foreground prose-blockquote:border-primary prose-blockquote:bg-muted/50 prose-blockquote:p-4 prose-blockquote:rounded-lg">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {(article as any).content}
+                {article.content}
               </ReactMarkdown>
             </div>
 
             {/* Author Bio */}
-            {(article as any).author_name && (article as any).author_bio && (
+            {article.author_name && article.author_bio && (
               <Card className="bg-card/50 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    {(article as any).author_photo_url && (
+                    {article.author_photo_url && (
                       <Image
-                        src={getSafeImageUrl((article as any).author_photo_url, '/placeholder.svg')}
-                        alt={(article as any).author_name}
+                        src={getSafeImageUrl(article.author_photo_url, '/placeholder.svg')}
+                        alt={article.author_name}
                         width={80}
                         height={80}
                         className="rounded-full"
                       />
                     )}
                     <div className="space-y-2">
-                      <h3 className="text-lg font-semibold">About {(article as any).author_name}</h3>
-                      <p className="text-muted-foreground">{(article as any).author_bio}</p>
+                      <h3 className="text-lg font-semibold">About {article.author_name}</h3>
+                      <p className="text-muted-foreground">{article.author_bio}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -282,11 +290,11 @@ export default async function NewsArticlePage({ params }: Props) {
             )}
 
             {/* Schema Markup */}
-            {(article as any).schema_markup && (
+            {article.schema_markup && (
               <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
-                  __html: JSON.stringify((article as any).schema_markup),
+                  __html: JSON.stringify(article.schema_markup),
                 }}
               />
             )}
@@ -305,23 +313,23 @@ export default async function NewsArticlePage({ params }: Props) {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {relatedArticles.map((relatedArticle: any) => (
-                    <Link key={(relatedArticle as any).id} href={`/news/${(relatedArticle as any).slug}`}>
+                    <Link key={relatedArticle.id} href={`/news/${relatedArticle.slug}`}>
                       <div className="group cursor-pointer space-y-2">
                         <div className="aspect-video relative overflow-hidden rounded-lg">
                           <Image
-                            src={getSafeImageUrl((relatedArticle as any).featured_image_url, '/placeholder.svg')}
-                            alt={(relatedArticle as any).title}
+                            src={getSafeImageUrl(relatedArticle.featured_image_url, '/placeholder.svg')}
+                            alt={relatedArticle.title}
                             fill
                             className="object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                         </div>
                         <h4 className="font-semibold line-clamp-2 group-hover:text-primary transition-colors">
-                          {(relatedArticle as any).title}
+                          {relatedArticle.title}
                         </h4>
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <span>{(relatedArticle as any).author_name || 'PodDB Team'}</span>
+                          <span>{relatedArticle.author_name || 'PodDB Team'}</span>
                           <span>•</span>
-                          <span>{formatDate((relatedArticle as any).published_at)}</span>
+                          <span>{formatDate(relatedArticle.published_at)}</span>
                         </div>
                       </div>
                     </Link>
@@ -349,7 +357,7 @@ export default async function NewsArticlePage({ params }: Props) {
             </Card>
 
             {/* SEO Stats */}
-            {(article as any).seo_score && (
+            {article.seo_score && (
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -361,17 +369,17 @@ export default async function NewsArticlePage({ params }: Props) {
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm">Overall Score</span>
-                      <span className="font-semibold">{(article as any).seo_score}/100</span>
+                      <span className="font-semibold">{article.seo_score}/100</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
                       <div 
                         className="bg-primary h-2 rounded-full transition-all duration-500"
-                        style={{ width: `${(article as any).seo_score}%` }}
+                        style={{ width: `${article.seo_score}%` }}
                       />
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      {(article as any).seo_score > 80 ? 'Excellent SEO optimization' :
-                       (article as any).seo_score > 60 ? 'Good SEO optimization' :
+                      {article.seo_score > 80 ? 'Excellent SEO optimization' :
+                       article.seo_score > 60 ? 'Good SEO optimization' :
                        'Needs SEO improvement'}
                     </p>
                   </div>

@@ -1,6 +1,9 @@
 "use client";
+
 import React, { useState, useEffect, useTransition } from 'react';
-import dynamic from 'next/dynamic';
+import nextDynamic from 'next/dynamic';
+
+export const dynamic = 'force-dynamic';
 import { useAuth } from '@/components/AuthProvider';
 import { useRouter } from 'next/navigation';
 import { Loader2, LayoutDashboard, Podcast, FileText, Newspaper, Users, UserCheck, Key, Cpu, Settings, Trophy, Vote, MessageSquare, BarChart3, RefreshCw, MapPin, Mail, Eye, AlertTriangle, Square } from 'lucide-react';
@@ -13,28 +16,28 @@ import { supabase } from '@/integrations/supabase/client';
 import { exportSettingsAction, getContributionsAction } from '@/app/actions/admin';
 
 // Temporary fix for missing Supabase types
-const OverviewTab = dynamic(() => import('./components/OverviewTab'), { loading: () => <Loader2 className="animate-spin" /> });
-const ContentManagementTab = dynamic(() => import('./components/ContentManagementTab'), { loading: () => <Loader2 className="animate-spin" /> });
-const PagesTab = dynamic(() => import('./components/PagesTab'), { loading: () => <Loader2 className="animate-spin" /> });
+const OverviewTab = nextDynamic(() => import('./components/OverviewTab'), { loading: () => <Loader2 className="animate-spin" /> });
+const ContentManagementTab = nextDynamic(() => import('./components/ContentManagementTab'), { loading: () => <Loader2 className="animate-spin" /> });
+const PagesTab = nextDynamic(() => import('./components/PagesTab'), { loading: () => <Loader2 className="animate-spin" /> });
 
-const UsersTab = dynamic(() => import('./components/UsersTab'), { loading: () => <Loader2 className="animate-spin" /> });
+const UsersTab = nextDynamic(() => import('./components/UsersTab'), { loading: () => <Loader2 className="animate-spin" /> });
 
-const AwardsTab = dynamic(() => import('./components/AwardsTab'), { loading: () => <Loader2 className="animate-spin" /> });
-
-
-
-const AiSeoTab = dynamic(() => import('./components/AiSeoTab'), { loading: () => <Loader2 className="animate-spin" /> });
-const AnalyticsTab = dynamic(() => import('./components/AnalyticsTab'), { loading: () => <Loader2 className="animate-spin" /> });
+const AwardsTab = nextDynamic(() => import('./components/AwardsTab'), { loading: () => <Loader2 className="animate-spin" /> });
 
 
-const SettingsTab = dynamic(() => import('./components/SettingsTab'), { loading: () => <Loader2 className="animate-spin" /> });
-const DataSyncTab = dynamic(() => import('./components/EnhancedDataSyncTab'), { loading: () => <Loader2 className="animate-spin" /> });
-const SyncServerManager = dynamic(() => import('./components/SyncServerManager'), { loading: () => <Loader2 className="animate-spin" /> });
 
-const EmailManagementTab = dynamic(() => import('./components/EmailManagementTab'), { loading: () => <Loader2 className="animate-spin" /> });
-const PreviewUpdatesTab = dynamic(() => import('./components/PreviewUpdatesTab'), { loading: () => <Loader2 className="animate-spin" /> });
-// const ErrorTrackingTab = dynamic(() => import('./components/ErrorTrackingTab'), { loading: () => <Loader2 className="animate-spin" /> }); // Temporarily disabled
-const AdManagerTab = dynamic(() => import('@/components/AdManager/AdManager'), { loading: () => <Loader2 className="animate-spin" /> });
+const AiSeoTab = nextDynamic(() => import('./components/AiSeoTab'), { loading: () => <Loader2 className="animate-spin" /> });
+const AnalyticsTab = nextDynamic(() => import('./components/AnalyticsTab'), { loading: () => <Loader2 className="animate-spin" /> });
+
+
+const SettingsTab = nextDynamic(() => import('./components/SettingsTab'), { loading: () => <Loader2 className="animate-spin" /> });
+const DataSyncTab = nextDynamic(() => import('./components/EnhancedDataSyncTab'), { loading: () => <Loader2 className="animate-spin" /> });
+const SyncServerManager = nextDynamic(() => import('./components/SyncServerManager'), { loading: () => <Loader2 className="animate-spin" /> });
+
+const EmailManagementTab = nextDynamic(() => import('./components/EmailManagementTab'), { loading: () => <Loader2 className="animate-spin" /> });
+const PreviewUpdatesTab = nextDynamic(() => import('./components/PreviewUpdatesTab'), { loading: () => <Loader2 className="animate-spin" /> });
+// const ErrorTrackingTab = nextDynamic(() => import('./components/ErrorTrackingTab'), { loading: () => <Loader2 className="animate-spin" /> }); // Temporarily disabled
+const AdManagerTab = nextDynamic(() => import('@/components/AdManager/AdManager'), { loading: () => <Loader2 className="animate-spin" /> });
 
 
 type NewsArticle = Tables<'news_articles'> & { profiles: { display_name: string } | null };
@@ -164,9 +167,49 @@ export default function Admin() {
 
   const fetchPendingPodcasts = async () => {
     try {
-      // Fetch pending podcasts using the original, working RPC
-      const { data: podcasts, error: podcastError } = await supabase.rpc('get_pending_podcasts_with_profiles');
+      // Fetch pending podcasts using direct query without join
+      const { data: podcasts, error: podcastError } = await supabase
+        .from('podcasts')
+        .select(`
+          id,
+          title,
+          description,
+          cover_image_url,
+          total_episodes,
+          categories,
+          submission_status,
+          created_at,
+          submitted_by
+        `)
+        .eq('submission_status', 'pending')
+        .order('created_at', { ascending: true });
+      
       if (podcastError) throw podcastError;
+      
+      // Fetch profiles separately for each submitted_by user
+      const userIds = Array.from(new Set((podcasts || []).map((p: any) => p.submitted_by).filter(Boolean)));
+      const { data: profiles, error: profileError } = await supabase
+        .from('profiles')
+        .select('user_id, display_name, email')
+        .in('user_id', userIds);
+      
+      if (profileError) throw profileError;
+      
+      // Create a map of user profiles
+      const profileMap = new Map((profiles || []).map((p: any) => [p.user_id, p]));
+      
+      // Format podcasts data to match expected structure
+      const formattedPodcasts = ((podcasts as any[]) || []).map((podcast: any) => {
+        const profile = profileMap.get(podcast.submitted_by);
+        return {
+          id: podcast.id,
+          title: podcast.title,
+          display_name: profile?.display_name || 'N/A',
+          email: profile?.email || 'N/A',
+          type: 'podcast',
+          submission_status: podcast.submission_status
+        };
+      });
 
       // Fetch pending contributions using the secure server action
       const contributionsResult = await getContributionsAction();
@@ -197,7 +240,7 @@ export default function Admin() {
       }));
 
       // Combine the two lists
-      setPendingPodcasts([...(podcasts || []), ...formattedContributions]);
+      setPendingPodcasts([...formattedPodcasts, ...formattedContributions]);
     } catch (error: any) {
       toast.error(`Failed to fetch pending submissions: ${error.message}`);
     }

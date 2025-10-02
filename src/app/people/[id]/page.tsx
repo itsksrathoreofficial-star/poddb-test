@@ -80,6 +80,9 @@ import { VerifiedBadge } from '@/components/VerifiedBadge';
 import { AwardsAndNominations } from '@/components/AwardsAndNominations';
 import { Tables } from '@/integrations/supabase/types';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 type PodcastAppearance = Tables<'podcast_people'> & {
     podcasts: Tables<'podcasts'>;
 };

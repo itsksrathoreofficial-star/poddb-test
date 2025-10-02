@@ -1,5 +1,8 @@
 import { supabase } from '@/integrations/supabase/client';
 import { notFound } from 'next/navigation';
+
+export const dynamic = 'force-static';
+export const revalidate = false;
 import { Metadata } from 'next';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';

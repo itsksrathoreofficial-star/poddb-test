@@ -96,17 +96,31 @@ export default function RankingsClient({ initialData }: RankingsClientProps) {
     }
   }, [selectedType, selectedPeriod, selectedCategory, selectedLanguage, selectedLocation, selectedState]);
 
+  // Add periodic refresh for fresh data
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (selectedType !== 'podcasts' || selectedPeriod !== 'weekly') {
+        fetchRankings();
+      }
+    }, 5 * 60 * 1000); // Refresh every 5 minutes
+
+    return () => clearInterval(interval);
+  }, [selectedType, selectedPeriod]);
+
   const fetchRankings = async () => {
     setLoading(true);
     try {
-      // Fetch all rankings from API routes
+      // Add cache busting to ensure fresh data
+      const cacheBuster = `?t=${Date.now()}`;
+      
+      // Fetch all rankings from API routes with cache busting
       const [overallRes, weeklyRes, monthlyRes, episodesOverallRes, episodesWeeklyRes, episodesMonthlyRes] = await Promise.all([
-        fetch('/api/rankings/overall'),
-        fetch('/api/rankings/weekly-chart'),
-        fetch('/api/rankings/monthly-chart'),
-        fetch('/api/rankings/episodes-overall'),
-        fetch('/api/rankings/episodes-weekly'),
-        fetch('/api/rankings/episodes-monthly')
+        fetch(`/api/rankings/overall${cacheBuster}`),
+        fetch(`/api/rankings/weekly-chart${cacheBuster}`),
+        fetch(`/api/rankings/monthly-chart${cacheBuster}`),
+        fetch(`/api/rankings/episodes-overall${cacheBuster}`),
+        fetch(`/api/rankings/episodes-weekly${cacheBuster}`),
+        fetch(`/api/rankings/episodes-monthly${cacheBuster}`)
       ]);
 
       const [overall, weekly, monthly, episodesOverall, episodesWeekly, episodesMonthly] = await Promise.all([

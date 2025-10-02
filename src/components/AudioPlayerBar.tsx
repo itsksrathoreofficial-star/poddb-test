@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { usePlayer } from '@/components/PlayerProvider';
 import { Play, Pause, SkipBack, SkipForward, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Slider } from '@/components/ui/slider';
 import Image from 'next/image';
 
 declare global {
@@ -22,82 +21,7 @@ export default function AudioPlayerBar() {
     const intervalRef = useRef<any>();
     const playerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (currentTrack) {
-            if (!window.YT) {
-                // Check if script is already being loaded
-                const existingScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
-                if (!existingScript) {
-                    const tag = document.createElement('script');
-                    tag.src = 'https://www.youtube.com/iframe_api';
-                    tag.async = true;
-                    window.onYouTubeIframeAPIReady = () => {
-                        console.log('YouTube API loaded');
-                        loadPlayer(currentTrack.youtube_video_id);
-                    };
-                    const firstScriptTag = document.getElementsByTagName('script')[0];
-                    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-                } else {
-                    // Script is loading, wait for it
-                    const checkYT = setInterval(() => {
-                        if (window.YT) {
-                            clearInterval(checkYT);
-                            loadPlayer(currentTrack.youtube_video_id);
-                        }
-                    }, 100);
-                    
-                    // Cleanup interval after 10 seconds
-                    setTimeout(() => clearInterval(checkYT), 10000);
-                }
-            } else {
-                loadPlayer(currentTrack.youtube_video_id);
-            }
-        }
-
-        return () => {
-            clearInterval(intervalRef.current);
-            if (player) {
-                try {
-                    player.destroy();
-                } catch (e) {
-                    console.error("Error destroying YouTube player", e);
-                }
-            }
-        };
-    }, [currentTrack, player]);
-
-    const loadPlayer = (videoId: string) => {
-        // Reset player state first
-        setPlayer(null);
-        setIsReady(false);
-        
-        if (player) {
-            try {
-                player.destroy();
-            } catch (e) {
-                console.error("Error destroying previous player instance", e);
-            }
-        }
-        
-        if (playerRef.current && window.YT) {
-            try {
-                new window.YT.Player(playerRef.current, {
-                    height: '0',
-                    width: '0',
-                    videoId: videoId,
-                    playerVars: { 'autoplay': 1, 'controls': 0, 'origin': window.location.origin },
-                    events: {
-                        'onReady': onPlayerReady,
-                        'onStateChange': onPlayerStateChange
-                    }
-                });
-            } catch (error) {
-                console.error('Error creating YouTube player:', error);
-            }
-        }
-    };
-
-    const onPlayerReady = (event: any) => {
+    const onPlayerReady = React.useCallback((event: any) => {
         const playerInstance = event.target;
         if (playerInstance && typeof playerInstance.getDuration === 'function') {
             setPlayer(playerInstance);
@@ -111,9 +35,9 @@ export default function AudioPlayerBar() {
                 }
             }
         }
-    };
+    }, [isPlaying]);
 
-    const onPlayerStateChange = (event: any) => {
+    const onPlayerStateChange = React.useCallback((event: any) => {
         if (event.data === window.YT.PlayerState.PLAYING) {
             if (!isPlaying) play(currentTrack!);
             clearInterval(intervalRef.current);
@@ -134,10 +58,87 @@ export default function AudioPlayerBar() {
         } else if (event.data === window.YT.PlayerState.ENDED) {
             playNext();
         }
-    };
+    }, [isPlaying, currentTrack, play, pause, playNext]);
+
+    const loadPlayer = React.useCallback((videoId: string) => {
+        // Reset player state first
+        setPlayer(null);
+        setIsReady(false);
+        
+        // Get current player reference without causing dependency issues
+        const currentPlayer = player;
+        if (currentPlayer) {
+            try {
+                currentPlayer.destroy();
+            } catch (e) {
+                console.error("Error destroying previous player instance", e);
+            }
+        }
+        
+        if (playerRef.current && window.YT && window.YT.Player) {
+            try {
+                const playerInstance = new window.YT.Player(playerRef.current, {
+                    height: '0',
+                    width: '0',
+                    videoId: videoId,
+                    playerVars: { 'autoplay': 1, 'controls': 0, 'origin': window.location.origin },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+                setPlayer(playerInstance);
+            } catch (error) {
+                console.error('Error creating YouTube player:', error);
+            }
+        } else {
+            console.warn('YouTube API not ready or Player constructor not available');
+        }
+    }, [onPlayerReady, onPlayerStateChange]); // Removed 'player' from dependencies
 
     useEffect(() => {
-        if (isReady && player && typeof player.playVideo === 'function' && typeof player.pauseVideo === 'function') {
+        // Only run when currentTrack changes and exists
+        if (!currentTrack) {
+            return;
+        }
+
+        if (!window.YT) {
+            // Check if script is already being loaded
+            const existingScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+            if (!existingScript) {
+                const tag = document.createElement('script');
+                tag.src = 'https://www.youtube.com/iframe_api';
+                tag.async = true;
+                window.onYouTubeIframeAPIReady = () => {
+                    console.log('YouTube API loaded');
+                    loadPlayer(currentTrack.youtube_video_id);
+                };
+                const firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+            } else {
+                // Script is loading, wait for it
+                const checkYT = setInterval(() => {
+                    if (window.YT) {
+                        clearInterval(checkYT);
+                        loadPlayer(currentTrack.youtube_video_id);
+                    }
+                }, 100);
+                
+                // Cleanup interval after 10 seconds
+                setTimeout(() => clearInterval(checkYT), 10000);
+            }
+        } else {
+            loadPlayer(currentTrack.youtube_video_id);
+        }
+
+        return () => {
+            clearInterval(intervalRef.current);
+            // Cleanup will be handled by the next effect
+        };
+    }, [currentTrack?.youtube_video_id, loadPlayer]); // Only depend on video ID and loadPlayer
+
+    useEffect(() => {
+        if (isReady && player && player !== null && typeof player.playVideo === 'function' && typeof player.pauseVideo === 'function') {
             try {
                 if (isPlaying) {
                     player.playVideo();
@@ -150,9 +151,39 @@ export default function AudioPlayerBar() {
         }
     }, [isPlaying, isReady, player]);
 
+    // Cleanup effect - runs when component unmounts or currentTrack becomes null
+    useEffect(() => {
+        return () => {
+            clearInterval(intervalRef.current);
+            if (player) {
+                try {
+                    player.destroy();
+                } catch (e) {
+                    console.error("Error destroying YouTube player", e);
+                }
+            }
+        };
+    }, [player]);
+
     const handleSeek = (value: number[]) => {
         if (!isReady || !player || typeof player.seekTo !== 'function') return;
         const newTime = value[0];
+        try {
+            player.seekTo(newTime, true);
+            setProgress(newTime);
+        } catch (error) {
+            console.error('Error seeking in YouTube player:', error);
+        }
+    };
+
+    const handleProgressClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (!isReady || !player || typeof player.seekTo !== 'function') return;
+        
+        const rect = event.currentTarget.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        const newTime = percentage * duration;
+        
         try {
             player.seekTo(newTime, true);
             setProgress(newTime);
@@ -168,7 +199,8 @@ export default function AudioPlayerBar() {
         return `${minutes}:${seconds}`;
     };
 
-    if (!currentTrack) {
+    // Only show AudioPlayerBar when there's a current track AND it's playing
+    if (!currentTrack || !isPlaying) {
         return null;
     }
 
@@ -195,7 +227,12 @@ export default function AudioPlayerBar() {
                 </div>
                 <div className="w-full max-w-xl flex items-center gap-2 mt-2">
                     <span className="text-xs text-muted-foreground">{formatTime(progress)}</span>
-                    <Slider value={[progress]} max={duration} step={1} onValueChange={handleSeek} disabled={!isReady} />
+                    <div className="flex-1 h-2 bg-muted rounded-full cursor-pointer" onClick={handleProgressClick}>
+                        <div 
+                            className="h-full bg-primary rounded-full transition-all duration-300" 
+                            style={{ width: `${duration > 0 ? (progress / duration) * 100 : 0}%` }}
+                        />
+                    </div>
                     <span className="text-xs text-muted-foreground">{formatTime(duration)}</span>
                 </div>
             </div>

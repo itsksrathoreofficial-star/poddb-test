@@ -93,7 +93,7 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [isPlaying]);
 
-  const loadTrack = (track: Track, newPlaylist?: Track[]) => {
+  const loadTrack = React.useCallback((track: Track, newPlaylist?: Track[]) => {
     setCurrentTrack(track);
     if (newPlaylist) {
       setPlaylist(newPlaylist);
@@ -101,9 +101,9 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
       setPlaylist([track]);
     }
     setIsPlaying(false);
-  };
+  }, [playlist.length]);
 
-  const play = (track: Track, newPlaylist?: Track[]) => {
+  const play = React.useCallback((track: Track, newPlaylist?: Track[]) => {
     setCurrentTrack(track);
     if (newPlaylist) {
       setPlaylist(newPlaylist);
@@ -111,7 +111,7 @@ export const PlayerProvider = ({ children }: { children: ReactNode }) => {
       setPlaylist([track]);
     }
     setIsPlaying(true);
-  };
+  }, [playlist.length]);
 
   const pause = () => {
     setIsPlaying(false);

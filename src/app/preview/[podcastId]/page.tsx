@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import PodcastClientPage from '@/app/podcasts/[slug]/PodcastClientPage';
 import { getPodcastById } from '@/app/actions/podcasts';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {
   params: Promise<{ podcastId: string }>;
 }

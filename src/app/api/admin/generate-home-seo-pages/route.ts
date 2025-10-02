@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { generateHomeSEOCombinations } from '@/lib/home-seo-generator';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export async function GET() {
   try {
     const combinations = await generateHomeSEOCombinations();

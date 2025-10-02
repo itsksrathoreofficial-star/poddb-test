@@ -7,8 +7,26 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Globe } from 'lucide-react';
 import Link from 'next/link';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 interface Props {
   params: Promise<{ language: string }>;
+}
+
+export async function generateStaticParams() {
+  // Get all unique languages from podcasts
+  const { data: podcasts } = await supabase
+    .from('podcasts')
+    .select('language')
+    .eq('submission_status', 'approved')
+    .not('language', 'is', null);
+
+  const languages = Array.from(new Set(podcasts?.map((p: any) => p.language).filter(Boolean) || []));
+  
+  return languages.map((language) => ({
+    language: encodeURIComponent(language),
+  }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

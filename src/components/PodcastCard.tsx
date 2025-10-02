@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -20,7 +21,7 @@ interface PodcastCardProps {
   totalEpisodes: number;
   totalViews: number;
   totalLikes: number;
-  categories: string[];
+  categories?: string[];
   averageDuration: number;
   lastEpisodeDate: string;
   averageRating?: number;
@@ -110,12 +111,12 @@ export function PodcastCard({
           </div>
 
           <div className="flex flex-wrap gap-1 justify-center h-6">
-            {categories.slice(0, 2).map((category) => (
+            {categories && Array.isArray(categories) && categories.slice(0, 2).map((category) => (
               <Badge key={category} variant="outline" className="text-xs">
                 {category}
               </Badge>
             ))}
-            {categories.length > 2 && (
+            {categories && Array.isArray(categories) && categories.length > 2 && (
               <Badge variant="outline" className="text-xs">
                 +{categories.length - 2}
               </Badge>

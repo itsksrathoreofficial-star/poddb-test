@@ -8,7 +8,8 @@ import { Separator } from '@/components/ui/separator';
 import { Upload, X, Image as ImageIcon, User, Images } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { uploadToCloudinary } from '@/lib/cloudinary-client';
+import { toast } from '@/components/ui/sonner';
+import { uploadToCloudinaryWithProgress, uploadToCloudinaryViaAPI } from '@/lib/cloudinary-client';
 
 interface Photo {
   id: string;
@@ -83,7 +84,17 @@ export function PhotoUploadManager({
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file && file.type.startsWith('image/')) {
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast.error("Please select a valid image file.");
+        return;
+      }
+      
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error("File size too large. Please select an image smaller than 10MB.");
+        return;
+      }
+      
       onPhotoUpload(file, uploadType);
     }
   };
