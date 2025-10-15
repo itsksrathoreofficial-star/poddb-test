@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "source": "https://test-source.supabase.co",
+    "timestamp": "2025-10-04T11:47:34.267Z",
+    "version": "1.0"
+  },
+  "tables": {
+    "categories": {
+      "data": [
+        {
+          "id": 1,
+          "name": "Technology",
+          "slug": "technology"
+        },
+        {
+          "id": 2,
+          "name": "Business",
+          "slug": "business"
+        }
+      ],
+      "count": 2
+    },
+    "podcasts": {
+      "data": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440000",
+          "title": "Test Podcast",
+          "description": "Test Description"
+        }
+      ],
+      "count": 1
+    }
+  }
+}

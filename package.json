@@ -32,7 +32,12 @@
     "production:setup": "npm run fix-supabase && npm run generate-static && npm run optimize",
     "build:github": "next build",
     "export": "next export",
-    "deploy:github": "npm run build:github && npm run export"
+    "deploy:github": "npm run build:github && npm run export",
+    "migrate:backup": "node migrate-supabase.js backup",
+    "migrate:schema": "node migrate-supabase.js schema",
+    "migrate:data": "node migrate-supabase.js data",
+    "migrate:full": "node migrate-supabase.js full",
+    "migrate:verify": "node migrate-supabase.js verify"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.1.0",
@@ -64,7 +69,7 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@supabase/ssr": "^0.4.1",
-    "@supabase/supabase-js": "^2.44.4",
+    "@supabase/supabase-js": "^2.38.4",
     "@tanstack/react-query": "^5.51.1",
     "@types/nodemailer": "^7.0.1",
     "@types/react-youtube": "^7.6.2",
